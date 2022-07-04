@@ -74,27 +74,29 @@ class _RegistrationPageState extends State<RegistrationPage>{
                           Container(
                               alignment: Alignment.center,
                               child: ToggleSwitch(
-                                customTextStyles: const [
-                                  TextStyle(
-                                    fontFamily: '.SF UI Display',
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                  TextStyle(
-                                    fontFamily: '.SF UI Display',
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ],
-                                inactiveBgColor: Colors.lightBlue,
+                                inactiveBgColor: Colors.white,
                                 borderWidth: 1.2,
-                                activeBgColor: const [Colors.white],
+                                activeBgColor: const [Colors.lightBlue],
                                 borderColor: const [Colors.lightBlue],
                                 minWidth: MediaQuery.of(context).size.width/2 - 30,
                                 minHeight: 50,
-                                initialLabelIndex: 1,
+                                initialLabelIndex: 0,
                                 totalSwitches: 2,
+                                activeFgColor: Colors.white,
                                 labels: const ['Работодатель','Соискатель'],
+                                /*customTextStyles: const [
+                                  TextStyle(
+                                    fontFamily: '.SF UI Display',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                  TextStyle(
+                                    fontFamily: '.SF UI Display',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+
+                                ],*/
                               )
                           ),
                           const SizedBox(
@@ -250,9 +252,11 @@ class _RegistrationPageState extends State<RegistrationPage>{
                         const SizedBox(
                           height: 25,
                         ),
-                      const TextButton(
-                        onPressed: null,
-                        child: Text(
+                      TextButton(
+                        onPressed: (){
+                          Navigator.pop(context);
+                        },
+                        child: const Text(
                           'У вас уже есть аккаунт? Войти',
                           style: TextStyle(
                             fontSize: 13,

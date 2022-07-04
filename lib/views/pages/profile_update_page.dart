@@ -12,8 +12,8 @@ class ProfilePageUpdate extends StatefulWidget{
 
 class _ProfilePageUpdateState extends State<ProfilePageUpdate>{
   final _api = ApiSingleTon.instance;
-  final _headers = ['ФИО', 'Названия организации', 'E-mail', 'Номер телефона', 'Юридический адрес', 'Фактический адрес', 'О компании', 'Должность'];
-  final List<TextEditingController> _controllers = List.generate(8, (i) => TextEditingController());
+  final _headers = ['ФИО', 'Названия организации', 'E-mail', 'Юридический адрес', 'Фактический адрес', 'О компании', 'Должность'];
+  final List<TextEditingController> _controllers = List.generate(7, (i) => TextEditingController());
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +25,7 @@ class _ProfilePageUpdateState extends State<ProfilePageUpdate>{
           builder: (context, snapshot){
             if(snapshot.hasData) {
               Employer employer = snapshot.data!;
+              var s = [employer.name, employer.orgName, employer.email, employer.legalAddress, employer.actualAddress, employer.companyDescription, employer.post];
               return Scaffold(
                   backgroundColor: const Color(0xFFFAFAFB),
                   body: ListView(
@@ -149,7 +150,7 @@ class _ProfilePageUpdateState extends State<ProfilePageUpdate>{
                                 height: 25,
                               ),
                               SizedBox(
-                                  height: 730,
+                                  height: 630,
                                   child: ListView.builder(
                                       physics: const NeverScrollableScrollPhysics(),
                                       itemCount: _headers.length,
@@ -171,8 +172,9 @@ class _ProfilePageUpdateState extends State<ProfilePageUpdate>{
                                                 const SizedBox(
                                                   height: 6.0,
                                                 ),
-                                                TextField(
+                                                TextFormField(
                                                   controller: _controllers[i],
+                                                  //initialValue: s[i],
                                                   decoration: InputDecoration(
                                                     enabledBorder:  OutlineInputBorder(
                                                       borderRadius: BorderRadius.circular(10.0),
@@ -210,10 +212,10 @@ class _ProfilePageUpdateState extends State<ProfilePageUpdate>{
                                                       orgName: _controllers[1].text,
                                                       name: _controllers[0].text,
                                                       email: _controllers[2].text,
-                                                      legalAddress: _controllers[4].text,
-                                                      actualAddress: _controllers[5].text,
-                                                      companyDescription: _controllers[6].text,
-                                                      post: _controllers[7].text
+                                                      legalAddress: _controllers[3].text,
+                                                      actualAddress: _controllers[4].text,
+                                                      companyDescription: _controllers[5].text,
+                                                      post: _controllers[6].text
                                                   );
                                                   if(await _api.saveData(employer) == 200){
                                                     Navigator.of(context).pop();

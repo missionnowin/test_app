@@ -66,5 +66,9 @@ import '../../components/models/sign_up.dart';
     );
     return response.data['msg'];
   }
+
+  void logout() {
+    _accessToken = null;
+  }
 }
 

@@ -5,6 +5,7 @@ import 'package:test_app/views/pages/profile_update_page.dart';
 import '../../components/models/employer.dart';
 import '../../service/api/api_singleton.dart';
 import '../../service/icons.dart';
+import 'login/auth_page.dart';
 
 class ProfilePage extends StatefulWidget{
   const ProfilePage({Key? key}) : super(key: key);
@@ -225,11 +226,15 @@ class _ProfilePageState extends State<ProfilePage>{
                         ),
                         child: TextButton(
                           onPressed: (){
+                            _api.logout();
+                            Navigator.popUntil(context, (route) => route.isFirst);
+                            Navigator.pushReplacement(context,
+                                MaterialPageRoute(builder: (BuildContext context) => const AuthPage()));
                           },
                           child: SizedBox(
                             width: MediaQuery.of(context).size.width - 50,
                             child: const Text(
-                              'Удалить необязательные поля',
+                              'Выйти',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Color(0xFFD1003F),

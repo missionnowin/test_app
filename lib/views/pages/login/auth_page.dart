@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:test_app/service/api/api_service.dart';
 import 'package:test_app/service/api/api_singleton.dart';
 import 'package:test_app/views/pages/login/registration_page.dart';
-import '../../main_page.dart';
+import '../main_page.dart';
 
 class AuthPage extends StatefulWidget{
   const AuthPage({Key? key}) : super(key: key);
