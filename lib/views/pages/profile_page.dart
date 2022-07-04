@@ -16,18 +16,30 @@ class ProfilePage extends StatefulWidget{
 class _ProfilePageState extends State<ProfilePage>{
   final _api = ApiSingleTon.instance;
   final _headers = ['Dashboard', 'Настройки профиля', 'Мои документы', 'Рейтинги', 'Тестирование','Поиск вакансий', 'Мои отклики', 'Рекомендации', 'Тарифы', 'FAQ'];
-  final List<IconData> _icons = [TabIcons.vector, TabIcons.profile_settings, TabIcons.documents, TabIcons.rating, TabIcons.tests, TabIcons.vacancies, TabIcons.replies, TabIcons.recs,TabIcons.fee, TabIcons.faq];
-
+  final List<AssetImage> _tabImages = const [AssetImage('assets/menu_icons/DashBoard.png'),
+    AssetImage('assets/menu_icons/Settings.png'),
+    AssetImage('assets/menu_icons/Documents.png'),
+    AssetImage('assets/menu_icons/Rating.png'),
+    AssetImage('assets/menu_icons/Tests.png'),
+    AssetImage('assets/menu_icons/Vacancies.png'),
+    AssetImage('assets/menu_icons/Replies.png'),
+    AssetImage('assets/menu_icons/Recs.png'),
+    AssetImage('assets/menu_icons/Fees.png'),
+    AssetImage('assets/menu_icons/Faq.png'),
+  ];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         top: true,
         bottom: true,
         child: Scaffold(
-            backgroundColor: Colors.white,
+            backgroundColor: const Color(0xFFFAFAFB),
             body: ListView(
                 children: <Widget>[
-                    SizedBox(
+                    Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white
+                      ),
                       height: 106,
                       child: Row(
                         children: <Widget>[
@@ -39,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage>{
                                 return Container(
                                     margin: const EdgeInsets.all(12.0),
                                     padding: const EdgeInsets.all(8.0),
-                                    child:Row(
+                                    child: Row(
                                       children: <Widget>[
                                         CircleAvatar(
                                           backgroundImage: NetworkImage(employer!.logoPath),
@@ -55,6 +67,7 @@ class _ProfilePageState extends State<ProfilePage>{
                                             const Text('Работодатель',
                                               style: TextStyle(
                                                 fontSize: 13.0,
+                                                fontFamily: '.SF UI Display',
                                                 color: Color(0xFF009ED1)
                                               ),
                                             ),
@@ -64,7 +77,8 @@ class _ProfilePageState extends State<ProfilePage>{
                                             Text(employer.name,
                                               style: const TextStyle(
                                                 color: Color(0xFF3F4554),
-                                                fontWeight: FontWeight.bold,
+                                                fontFamily: '.SF UI Display',
+                                                fontWeight: FontWeight.w700,
                                                 fontSize: 18.0
                                               ),
                                             ),
@@ -77,7 +91,7 @@ class _ProfilePageState extends State<ProfilePage>{
                                                         0x333DD598),
                                                     borderRadius: BorderRadius.circular(5.0)
                                                 ),
-                                                child: Container(
+                                                child: SizedBox(
                                                   height: 24,
                                                   width: 51,
                                                   child: Row(
@@ -115,56 +129,73 @@ class _ProfilePageState extends State<ProfilePage>{
                         ],
                       ),
                     ),
+                  const SizedBox(
+                    height: 21,
+                  ),
                   Container(
-                    margin: const EdgeInsets.all(12.0),
-                    padding: const EdgeInsets.all(8.0),
-                    height: 472,
+                    margin: const EdgeInsets.symmetric(horizontal: 11.0),
+                    height: 45.0 * _headers.length,
                     child: ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: _headers.length,
                       itemBuilder: (BuildContext context, int index){
-                        return InkWell(
-                          onTap: (){
-                            if(_headers[index] == 'Настройки профиля'){
-                              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const ProfilePageUpdate()));
-                            }
-                          },
-                          child: Column(
-                            children: <Widget>[
-                              const SizedBox(
-                                height: 10.0,
-                              ),
-                              Row(children: <Widget>[
-                                Icon(_icons[index]),
-                                const SizedBox(width: 30.0,),
-                                Text(_headers[index],
-                                style: const TextStyle(
-                                  color: Color(0xFF44444F),
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14,
-                                )
+                        return SizedBox(
+                          height: 45,
+                          child: InkWell(
+                            onTap: (){
+                              if(_headers[index] == 'Настройки профиля'){
+                                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const ProfilePageUpdate()));
+                              }
+                            },
+                            child: Column(
+                              children: <Widget>[
+                                const SizedBox(
+                                  height: 9.0,
                                 ),
+                                Row(children: <Widget>[
+                                  Container(
+                                    height: 22,
+                                    width: 22,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: _tabImages[index],
+                                        fit: BoxFit.fill
+                                      )
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 23.0,
+                                  ),
+                                  Text(_headers[index],
+                                  style: const TextStyle(
+                                    color: Color(0xFF44444F),
+                                    fontFamily: '.SF UI Display',
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15,
+                                  )
+                                  ),
+                                ],
+                                ),
+                                const SizedBox(
+                                  height: 8.0,
+                                )
                               ],
-                              ),
-                              const SizedBox(
-                                height: 13.0,
-                              )
-                            ],
-                          ),
+                            ),
+                          )
                         );
                       }
                       )
                   ),
                   const SizedBox(
-                    height: 10.0,
+                    height: 50.0,
                   ),
                   Container(
                     alignment: Alignment.center,
                     child: DecoratedBox(
                         decoration: BoxDecoration(
                             border: Border.all(color: const Color(0xFF009ED1)),
-                            borderRadius: BorderRadius.circular(5.0),
-                          color: Colors.white,
+                            borderRadius: BorderRadius.circular(10.0),
+                          color: const Color(0xFFEEF5F9),
                         ),
                         child: TextButton(
                           onPressed: () {
@@ -190,7 +221,7 @@ class _ProfilePageState extends State<ProfilePage>{
                       child: DecoratedBox(
                         decoration: BoxDecoration(
                             color: const Color(0xFFF8EEF2),
-                            borderRadius: BorderRadius.circular(5.0)
+                            borderRadius: BorderRadius.circular(10.0)
                         ),
                         child: TextButton(
                           onPressed: (){
@@ -209,14 +240,14 @@ class _ProfilePageState extends State<ProfilePage>{
                       )
                   ),
                   const SizedBox(
-                    height: 7,
+                    height: 5,
                   ),
                   const TextButton(
                     onPressed: null,
                     child: Text(
                       'Нужна помощь',
                       style: TextStyle(
-                        color: Color(0xFF617088),
+                        color: Color(0xFF009ED1),
                       ),
                     ),
                   ),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:test_app/service/api/api_singleton.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import '../../../components/models/sign_up.dart';
+import '../home_page.dart';
 import 'auth_page.dart';
 
 
@@ -40,15 +41,19 @@ class _RegistrationPageState extends State<RegistrationPage>{
                         color: Colors.white
                       ),
                     child: Container(
-                      margin: const EdgeInsets.all(8.0),
-                      padding: const EdgeInsets.all(12.0),
+                      margin: const EdgeInsets.symmetric(horizontal: 12.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
+                          const SizedBox(
+                            height: 9.0,
+                          ),
                           const Text('Регистрация | The Professional',
                             style: TextStyle(
                                 color: Color(0xFF009ED1),
+                                fontFamily: '.SF UI Display',
                                 fontSize: 14.0
                             ),
                           ),
@@ -58,8 +63,9 @@ class _RegistrationPageState extends State<RegistrationPage>{
                           const Text('Регистрация аккаунта',
                             style: TextStyle(
                               color: Color(0xFF3F4554),
+                              fontFamily: '.SF UI Display',
                               fontSize: 24.0,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
                           const SizedBox(
@@ -68,6 +74,18 @@ class _RegistrationPageState extends State<RegistrationPage>{
                           Container(
                               alignment: Alignment.center,
                               child: ToggleSwitch(
+                                customTextStyles: const [
+                                  TextStyle(
+                                    fontFamily: '.SF UI Display',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                  TextStyle(
+                                    fontFamily: '.SF UI Display',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ],
                                 inactiveBgColor: Colors.lightBlue,
                                 borderWidth: 1.2,
                                 activeBgColor: const [Colors.white],
@@ -79,13 +97,19 @@ class _RegistrationPageState extends State<RegistrationPage>{
                                 labels: const ['Работодатель','Соискатель'],
                               )
                           ),
+                          const SizedBox(
+                            height: 27.0,
+                          ),
                         ],
                       ),
                     ),
                   ),
+                  const SizedBox(
+                    height: 22.0,
+                  ),
                   Container(
-                    margin: const EdgeInsets.all(8.0),
-                    padding: const EdgeInsets.all(12.0),
+                    margin: const EdgeInsets.symmetric(horizontal: 12.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
                     height: 440,
                     child: ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
@@ -98,18 +122,21 @@ class _RegistrationPageState extends State<RegistrationPage>{
                                 textDirection: TextDirection.ltr,
                                 children: <Widget>[
                                   Text(_headers[i],
-                                    style: const TextStyle(
-                                      color: Colors.grey,
+                                    style: TextStyle(
+                                      fontFamily: '.SF UI Display',
+                                      color: Colors.black.withOpacity(0.5),
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.w400
                                       )
                                     ),
                                   const SizedBox(
-                                    height: 1.0,
+                                    height: 6.0,
                                   ),
                                   TextField(
                                     controller: _controllers[i],
                                     decoration: InputDecoration(
                                       enabledBorder:  OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(7.0),
+                                        borderRadius: BorderRadius.circular(10.0),
                                         borderSide: const BorderSide(color: Color(
                                             0xFFB6B6B6), width: 0.7),
                                       ),
@@ -117,13 +144,23 @@ class _RegistrationPageState extends State<RegistrationPage>{
                                     ),
                                   ),
                                   const SizedBox(
-                                    height: 7.0,
+                                    height: 10.0,
                                   ),
                                 ]
                             ),
                           );
                         }
                     )
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  Container(
+                    height: 2.0,
+                    decoration: const BoxDecoration(color: Color(0xfff6f4f3)),
+                  ),
+                  const SizedBox(
+                    height: 35,
                   ),
                   Center(
                     child: Column(
@@ -133,19 +170,25 @@ class _RegistrationPageState extends State<RegistrationPage>{
                           child: DecoratedBox(
                               decoration: BoxDecoration(
                                   color: const Color(0xFF009ED1),
-                                  borderRadius: BorderRadius.circular(5.0)
+                                  borderRadius: BorderRadius.circular(10.0)
                               ),
                               child: TextButton(
                                 onPressed: () async{
                                   SignUpData data = SignUpData(
                                       orgName: _controllers[0].text,
-                                      email: _controllers[1].text,
-                                      password: _controllers[2].text,
-                                      phone: _controllers[3].text);
-                                  if( await _api.signUp(data) == 'ok'){
-                                    _api.auth(_controllers[1].text, _controllers[2].text);
-                                    Navigator.push(context, MaterialPageRoute(
-                                        builder: (context) => const AuthPage()));
+                                      email: _controllers[2].text,
+                                      password: _controllers[3].text,
+                                      phone: _controllers[1].text);
+                                  if(_controllers[4].text == _controllers[3].text){
+                                    if (await _api.signUp(data) == 'ok') {
+                                      if (await _api.auth(_controllers[2].text,
+                                          _controllers[3].text) == 200) {
+                                        Navigator.popUntil(context, (route) => route.isFirst);
+                                        Navigator.pushReplacement(
+                                            context, MaterialPageRoute(
+                                            builder: (context) => const HomePage()));
+                                      }
+                                    }
                                   }
                                 },
                                 child: SizedBox(
@@ -154,6 +197,9 @@ class _RegistrationPageState extends State<RegistrationPage>{
                                     'Зарегестрироваться',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      fontFamily: '.SF UI Display',
                                       color: Colors.white,
                                     ),
                                   ),
@@ -162,14 +208,14 @@ class _RegistrationPageState extends State<RegistrationPage>{
                           ),
                         ),
                         const SizedBox(
-                            height: 7
+                            height: 13
                         ),
                         Container(
                           alignment: Alignment.center,
                           child: DecoratedBox(
                               decoration: BoxDecoration(
                                   color: const Color(0xFFE9EEF1),
-                                  borderRadius: BorderRadius.circular(5.0)
+                                  borderRadius: BorderRadius.circular(10.0)
                               ),
                               child: TextButton(
                                 onPressed: null,
@@ -179,6 +225,9 @@ class _RegistrationPageState extends State<RegistrationPage>{
                                     'Заполнить все поля',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      fontFamily: '.SF UI Display',
                                       color: Color(0xFF617088),
                                     ),
                                   ),
@@ -186,18 +235,35 @@ class _RegistrationPageState extends State<RegistrationPage>{
                               )
                           ),
                         ),
+                        const SizedBox(
+                            height: 8
+                        ),
+                      Text(
+                        '(Необязательно при регистрации)',
+                          style: TextStyle(
+                              fontFamily: '.SF UI Display',
+                              color: Colors.black.withOpacity(0.5),
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.w400
+                          )
+                      ),
+                        const SizedBox(
+                          height: 25,
+                        ),
                       const TextButton(
                         onPressed: null,
                         child: Text(
-                          'Забыли пароль?',
+                          'У вас уже есть аккаунт? Войти',
                           style: TextStyle(
-                            color: Color(0xFF617088),
+                            fontSize: 13,
+                            fontFamily: '.SF UI Display',
+                            color: Color(0xFF009ED1),
                           ),
                         ),
                       ),
                       const SizedBox(
-                        height: 25,
-                      )
+                        height: 54,
+                      ),
                       ],
                     ),
                   )

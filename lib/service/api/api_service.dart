@@ -56,12 +56,12 @@ import '../../components/models/sign_up.dart';
 
   Future<String?> signUp(SignUpData signUpData) async {
     var response = await _api.post('$_url/employer/register',
-      options:
-      Options(
-        headers: {
-          "Content-Type": "application/json"
-        },
-      ),
+        options:
+          Options(
+            headers: {
+              "Content-Type": "application/json"
+            }
+        ),
       data:signUpData,
     );
     return response.data['msg'];
