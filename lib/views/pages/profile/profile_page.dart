@@ -1,11 +1,8 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'package:flutter/material.dart';
-import 'package:test_app/views/pages/profile_update_page.dart';
-import '../../components/models/employer.dart';
-import '../../service/api/api_singleton.dart';
-import '../../service/icons.dart';
-import 'login/auth_page.dart';
+import '../../../components/models/employer.dart';
+import '../../../service/api/api_singleton.dart';
+import '../../forms/profile/profile_page_form.dart';
+import '../login/auth_page.dart';
 
 class ProfilePage extends StatefulWidget{
   const ProfilePage({Key? key}) : super(key: key);
@@ -16,18 +13,6 @@ class ProfilePage extends StatefulWidget{
 
 class _ProfilePageState extends State<ProfilePage>{
   final _api = ApiSingleTon.instance;
-  final _headers = ['Dashboard', 'Настройки профиля', 'Мои документы', 'Рейтинги', 'Тестирование','Поиск вакансий', 'Мои отклики', 'Рекомендации', 'Тарифы', 'FAQ'];
-  final List<AssetImage> _tabImages = const [AssetImage('assets/menu_icons/DashBoard.png'),
-    AssetImage('assets/menu_icons/Settings.png'),
-    AssetImage('assets/menu_icons/Documents.png'),
-    AssetImage('assets/menu_icons/Rating.png'),
-    AssetImage('assets/menu_icons/Tests.png'),
-    AssetImage('assets/menu_icons/Vacancies.png'),
-    AssetImage('assets/menu_icons/Replies.png'),
-    AssetImage('assets/menu_icons/Recs.png'),
-    AssetImage('assets/menu_icons/Fees.png'),
-    AssetImage('assets/menu_icons/Faq.png'),
-  ];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -133,60 +118,7 @@ class _ProfilePageState extends State<ProfilePage>{
                   const SizedBox(
                     height: 21,
                   ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 11.0),
-                    height: 45.0 * _headers.length,
-                    child: ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: _headers.length,
-                      itemBuilder: (BuildContext context, int index){
-                        return SizedBox(
-                          height: 45,
-                          child: InkWell(
-                            onTap: (){
-                              if(_headers[index] == 'Настройки профиля'){
-                                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const ProfilePageUpdate()));
-                              }
-                            },
-                            child: Column(
-                              children: <Widget>[
-                                const SizedBox(
-                                  height: 9.0,
-                                ),
-                                Row(children: <Widget>[
-                                  Container(
-                                    height: 22,
-                                    width: 22,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: _tabImages[index],
-                                        fit: BoxFit.fill
-                                      )
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 23.0,
-                                  ),
-                                  Text(_headers[index],
-                                  style: const TextStyle(
-                                    color: Color(0xFF44444F),
-                                    fontFamily: '.SF UI Display',
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 15,
-                                  )
-                                  ),
-                                ],
-                                ),
-                                const SizedBox(
-                                  height: 8.0,
-                                )
-                              ],
-                            ),
-                          )
-                        );
-                      }
-                      )
-                  ),
+                  const ProfilePageForm(),
                   const SizedBox(
                     height: 50.0,
                   ),
@@ -265,3 +197,4 @@ class _ProfilePageState extends State<ProfilePage>{
     );
   }
 }
+

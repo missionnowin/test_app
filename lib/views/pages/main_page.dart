@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/service/icons.dart';
 import 'package:test_app/views/pages/home_page.dart';
-import 'package:test_app/views/pages/profile_page.dart';
+import 'package:test_app/views/pages/profile/profile_page.dart';
 
 
 class MainPage extends StatefulWidget{
