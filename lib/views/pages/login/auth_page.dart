@@ -18,19 +18,7 @@ class AuthPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        body: BlocProvider<SignInBloc>(
-         create: (_) => SignInBloc(),
-         child: BlocListener<SignInBloc, SignInState>(
-             listener: (context, state){
-                if(state is SignInSuccess){
-                  Navigator.popUntil(context, (route) => route.isFirst);
-                  AutoRouter.of(context).replace(const MainPageRoute());
-                }
-                if(state is SignInError){
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Wrong password and/or e-mail'),));
-                }
-             },
-             child:ListView(
+        body: ListView(
               physics: const NeverScrollableScrollPhysics(),
               padding: EdgeInsets.zero,
               children: <Widget>[
@@ -141,33 +129,48 @@ class AuthPage extends StatelessWidget{
                 const SizedBox(
                   height: 55,
                 ),
-                Container(
-                  alignment: Alignment.center,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF009ED1),
-                      borderRadius: BorderRadius.circular(10.0)
-                    ),
-                    child: TextButton(
-                      onPressed: (){
-                          context
-                            .read<SignInBloc>()
-                            .add(SignInEvent(SignInFormModel(email: _userNameController.text, password: _passwordController.text)));
-                      },
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width - 64,
-                        child: const Text(
-                          'Войти в аккаунт',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: '.SF UI Display',
-                            color: Colors.white,
+                BlocProvider<SignInBloc>(
+                  create: (_) => SignInBloc(),
+                  child: BlocListener<SignInBloc, SignInState>(
+                    listener: (context, state){
+                      if(state is SignInSuccess){
+                        AutoRouter.of(context).replace(const MainPageRoute());
+                      }
+                      if(state is SignInError){
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Wrong password and/or e-mail'),));
+                      }
+                    },
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF009ED1),
+                            borderRadius: BorderRadius.circular(10.0)
                           ),
+                          child: BlocBuilder<SignInBloc, SignInState>(
+                              builder: (context, state) {
+                                return TextButton(
+                                  onPressed: (){
+                                    context.read<SignInBloc>().add(SignInEvent(SignInFormModel(email: _userNameController.text, password: _passwordController.text)));
+                                  },
+                                  child: SizedBox(
+                                    width: MediaQuery.of(context).size.width - 64,
+                                    child: const Text(
+                                      'Войти в аккаунт',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily: '.SF UI Display',
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            )
                         ),
                       ),
-                    )
                   ),
                 ),
                 const SizedBox(
@@ -217,8 +220,6 @@ class AuthPage extends StatelessWidget{
                 ),
               ],
             ),
-          )
-        )
-      );
+          );
   }
 }

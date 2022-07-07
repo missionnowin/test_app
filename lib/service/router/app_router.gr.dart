@@ -29,7 +29,7 @@ class _$AppRouter extends RootStackRouter {
     },
     RegistrationRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
-          routeData: routeData, child: const RegistrationPage());
+          routeData: routeData, child: RegistrationPage());
     },
     EmptyRouterRoute.name: (routeData) {
       return MaterialPageX<dynamic>(

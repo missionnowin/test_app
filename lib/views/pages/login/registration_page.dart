@@ -8,19 +8,13 @@ import 'package:test_app/logic/components/models/sign_up_form_model.dart';
 import 'package:test_app/service/api/api_service.dart';
 import 'package:test_app/service/router/app_router.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-import '../main_pages/main_page.dart';
 
-
-class RegistrationPage extends StatefulWidget{
-  const RegistrationPage({Key? key}) : super(key: key);
-  @override
-  _RegistrationPageState createState() => _RegistrationPageState();
-}
-
-class _RegistrationPageState extends State<RegistrationPage>{
+class RegistrationPage extends StatelessWidget{
   final _headers = ['Наименование организации', 'Номер телефона', 'E-mail', 'Пароль', 'Подтвердить пароль'];
   final List<TextEditingController> _controllers = List.generate(5, (i) => TextEditingController());
   final ApiService _api = ApiService();
+
+  RegistrationPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
