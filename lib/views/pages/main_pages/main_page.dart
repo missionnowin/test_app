@@ -37,7 +37,7 @@ class _MainPageState extends State<MainPage> {
         HomeRoute(),
         HomeRoute(),
         HomeRoute(),
-        ProfilePageRoute(),
+        const ProfileRoute(),
       ],
       builder: (context, child, animation) {
         final tabsRouter = AutoTabsRouter.of(context);
