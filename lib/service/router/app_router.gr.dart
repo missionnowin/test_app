@@ -51,7 +51,7 @@ class _$AppRouter extends RootStackRouter {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: HomePage(key: args.key));
     },
-    ProfilePage.name: (routeData) {
+    ProfileRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const EmptyRouterPage());
     },
@@ -97,19 +97,19 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(MainPageRoute.name, path: '/main_pages', children: [
           RouteConfig(HomeRoute.name,
               path: 'home_page', parent: MainPageRoute.name),
-          RouteConfig(ProfilePage.name,
+          RouteConfig(ProfileRoute.name,
               path: 'profile',
               parent: MainPageRoute.name,
               children: [
                 RouteConfig('#redirect',
                     path: '',
-                    parent: ProfilePage.name,
+                    parent: ProfileRoute.name,
                     redirectTo: 'profile_page',
                     fullMatch: true),
                 RouteConfig(ProfilePageRoute.name,
-                    path: 'profile_page', parent: ProfilePage.name),
+                    path: 'profile_page', parent: ProfileRoute.name),
                 RouteConfig(ProfileUpdatePageRoute.name,
-                    path: 'profile_update_page', parent: ProfilePage.name)
+                    path: 'profile_update_page', parent: ProfileRoute.name)
               ])
         ])
       ];
@@ -217,11 +217,11 @@ class HomeRouteArgs {
 
 /// generated route for
 /// [EmptyRouterPage]
-class ProfilePage extends PageRouteInfo<void> {
-  const ProfilePage({List<PageRouteInfo>? children})
-      : super(ProfilePage.name, path: 'profile', initialChildren: children);
+class ProfileRoute extends PageRouteInfo<void> {
+  const ProfileRoute({List<PageRouteInfo>? children})
+      : super(ProfileRoute.name, path: 'profile', initialChildren: children);
 
-  static const String name = 'ProfilePage';
+  static const String name = 'ProfileRoute';
 }
 
 /// generated route for

@@ -59,7 +59,7 @@ part 'app_router.gr.dart';
         ),
         AutoRoute(
             page: EmptyRouterPage,
-            name: 'ProfilePage',
+            name: 'ProfileRoute',
             path: 'profile',
             children: [
               AutoRoute(
