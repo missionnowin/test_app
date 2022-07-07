@@ -17,7 +17,7 @@ class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    InitPageRoute.name: (routeData) {
+    InitRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const InitPage());
     },
@@ -36,37 +36,42 @@ class _$AppRouter extends RootStackRouter {
           routeData: routeData, child: AuthPage(key: args.key));
     },
     RegistrationPageRoute.name: (routeData) {
-      final args = routeData.argsAs<RegistrationPageRouteArgs>(
-          orElse: () => const RegistrationPageRouteArgs());
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const EmptyRouterPage());
+    },
+    EmployerRegistration.name: (routeData) {
+      final args = routeData.argsAs<EmployerRegistrationArgs>(
+          orElse: () => const EmployerRegistrationArgs());
       return MaterialPageX<dynamic>(
           routeData: routeData, child: RegistrationPage(key: args.key));
     },
-    EmptyRouterRoute.name: (routeData) {
-      return MaterialPageX<dynamic>(
-          routeData: routeData, child: const EmptyRouterPage());
-    },
-    ProfileRoutes.name: (routeData) {
-      return MaterialPageX<dynamic>(
-          routeData: routeData, child: const EmptyRouterPage());
-    },
     HomeRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<HomeRouteArgs>(orElse: () => const HomeRouteArgs());
       return MaterialPageX<dynamic>(
-          routeData: routeData, child: HomePage());
+          routeData: routeData, child: HomePage(key: args.key));
     },
-    ProfilePageRoutes.name: (routeData) {
+    ProfilePage.name: (routeData) {
       return MaterialPageX<dynamic>(
-          routeData: routeData, child: ProfilePage());
+          routeData: routeData, child: const EmptyRouterPage());
     },
-    ProfileUpdatePageRoutes.name: (routeData) {
+    ProfilePageRoute.name: (routeData) {
+      final args = routeData.argsAs<ProfilePageRouteArgs>(
+          orElse: () => const ProfilePageRouteArgs());
       return MaterialPageX<dynamic>(
-          routeData: routeData, child: const ProfilePageUpdate());
+          routeData: routeData, child: ProfilePage(key: args.key));
+    },
+    ProfileUpdatePageRoute.name: (routeData) {
+      final args = routeData.argsAs<ProfileUpdatePageRouteArgs>(
+          orElse: () => const ProfileUpdatePageRouteArgs());
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: ProfilePageUpdate(key: args.key));
     }
   };
 
   @override
   List<RouteConfig> get routes => [
-        RouteConfig('/#redirect', path: '/', redirectTo: '', fullMatch: true),
-        RouteConfig(InitPageRoute.name, path: ''),
+        RouteConfig(InitRoute.name, path: '/'),
         RouteConfig(LoginPages.name, path: '/login', children: [
           RouteConfig('#redirect',
               path: '',
@@ -76,28 +81,35 @@ class _$AppRouter extends RootStackRouter {
           RouteConfig(AuthPageRoute.name,
               path: 'auth_page', parent: LoginPages.name),
           RouteConfig(RegistrationPageRoute.name,
-              path: 'registration_page', parent: LoginPages.name)
+              path: 'empty-router-page',
+              parent: LoginPages.name,
+              children: [
+                RouteConfig('#redirect',
+                    path: '',
+                    parent: RegistrationPageRoute.name,
+                    redirectTo: 'registration_page',
+                    fullMatch: true),
+                RouteConfig(EmployerRegistration.name,
+                    path: 'registration_page',
+                    parent: RegistrationPageRoute.name)
+              ])
         ]),
         RouteConfig(MainPageRoute.name, path: '/main_pages', children: [
-          RouteConfig(EmptyRouterRoute.name,
-              path: 'home',
-              parent: MainPageRoute.name,
-              children: [
-                RouteConfig(HomeRoute.name,
-                    path: 'home_page', parent: EmptyRouterRoute.name)
-              ]),
-          RouteConfig(ProfileRoutes.name,
+          RouteConfig(HomeRoute.name,
+              path: 'home_page', parent: MainPageRoute.name),
+          RouteConfig(ProfilePage.name,
               path: 'profile',
               parent: MainPageRoute.name,
               children: [
-                RouteConfig(ProfilePageRoutes.name,
-                    path: 'profile_page',
-                    parent: ProfileRoutes.name,
-                    children: [
-                      RouteConfig(ProfileUpdatePageRoutes.name,
-                          path: 'profile_update_page',
-                          parent: ProfilePageRoutes.name)
-                    ])
+                RouteConfig('#redirect',
+                    path: '',
+                    parent: ProfilePage.name,
+                    redirectTo: 'profile_page',
+                    fullMatch: true),
+                RouteConfig(ProfilePageRoute.name,
+                    path: 'profile_page', parent: ProfilePage.name),
+                RouteConfig(ProfileUpdatePageRoute.name,
+                    path: 'profile_update_page', parent: ProfilePage.name)
               ])
         ])
       ];
@@ -105,10 +117,10 @@ class _$AppRouter extends RootStackRouter {
 
 /// generated route for
 /// [InitPage]
-class InitPageRoute extends PageRouteInfo<void> {
-  const InitPageRoute() : super(InitPageRoute.name, path: '');
+class InitRoute extends PageRouteInfo<void> {
+  const InitRoute() : super(InitRoute.name, path: '/');
 
-  static const String name = 'InitPageRoute';
+  static const String name = 'InitRoute';
 }
 
 /// generated route for
@@ -152,68 +164,105 @@ class AuthPageRouteArgs {
 }
 
 /// generated route for
-/// [RegistrationPage]
-class RegistrationPageRoute extends PageRouteInfo<RegistrationPageRouteArgs> {
-  RegistrationPageRoute({Key? key})
+/// [EmptyRouterPage]
+class RegistrationPageRoute extends PageRouteInfo<void> {
+  const RegistrationPageRoute({List<PageRouteInfo>? children})
       : super(RegistrationPageRoute.name,
-            path: 'registration_page',
-            args: RegistrationPageRouteArgs(key: key));
+            path: 'empty-router-page', initialChildren: children);
 
   static const String name = 'RegistrationPageRoute';
 }
 
-class RegistrationPageRouteArgs {
-  const RegistrationPageRouteArgs({this.key});
+/// generated route for
+/// [RegistrationPage]
+class EmployerRegistration extends PageRouteInfo<EmployerRegistrationArgs> {
+  EmployerRegistration({Key? key})
+      : super(EmployerRegistration.name,
+            path: 'registration_page',
+            args: EmployerRegistrationArgs(key: key));
+
+  static const String name = 'EmployerRegistration';
+}
+
+class EmployerRegistrationArgs {
+  const EmployerRegistrationArgs({this.key});
 
   final Key? key;
 
   @override
   String toString() {
-    return 'RegistrationPageRouteArgs{key: $key}';
+    return 'EmployerRegistrationArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [HomePage]
+class HomeRoute extends PageRouteInfo<HomeRouteArgs> {
+  HomeRoute({Key? key})
+      : super(HomeRoute.name, path: 'home_page', args: HomeRouteArgs(key: key));
+
+  static const String name = 'HomeRoute';
+}
+
+class HomeRouteArgs {
+  const HomeRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'HomeRouteArgs{key: $key}';
   }
 }
 
 /// generated route for
 /// [EmptyRouterPage]
-class EmptyRouterRoute extends PageRouteInfo<void> {
-  const EmptyRouterRoute({List<PageRouteInfo>? children})
-      : super(EmptyRouterRoute.name, path: 'home', initialChildren: children);
+class ProfilePage extends PageRouteInfo<void> {
+  const ProfilePage({List<PageRouteInfo>? children})
+      : super(ProfilePage.name, path: 'profile', initialChildren: children);
 
-  static const String name = 'EmptyRouterRoute';
-}
-
-/// generated route for
-/// [EmptyRouterPage]
-class ProfileRoutes extends PageRouteInfo<void> {
-  const ProfileRoutes({List<PageRouteInfo>? children})
-      : super(ProfileRoutes.name, path: 'profile', initialChildren: children);
-
-  static const String name = 'ProfileRoutes';
-}
-
-/// generated route for
-/// [HomePage]
-class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute() : super(HomeRoute.name, path: 'home_page');
-
-  static const String name = 'HomeRoute';
+  static const String name = 'ProfilePage';
 }
 
 /// generated route for
 /// [ProfilePage]
-class ProfilePageRoutes extends PageRouteInfo<void> {
-  const ProfilePageRoutes({List<PageRouteInfo>? children})
-      : super(ProfilePageRoutes.name,
-            path: 'profile_page', initialChildren: children);
+class ProfilePageRoute extends PageRouteInfo<ProfilePageRouteArgs> {
+  ProfilePageRoute({Key? key})
+      : super(ProfilePageRoute.name,
+            path: 'profile_page', args: ProfilePageRouteArgs(key: key));
 
-  static const String name = 'ProfilePageRoutes';
+  static const String name = 'ProfilePageRoute';
+}
+
+class ProfilePageRouteArgs {
+  const ProfilePageRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'ProfilePageRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for
 /// [ProfilePageUpdate]
-class ProfileUpdatePageRoutes extends PageRouteInfo<void> {
-  const ProfileUpdatePageRoutes()
-      : super(ProfileUpdatePageRoutes.name, path: 'profile_update_page');
+class ProfileUpdatePageRoute extends PageRouteInfo<ProfileUpdatePageRouteArgs> {
+  ProfileUpdatePageRoute({Key? key})
+      : super(ProfileUpdatePageRoute.name,
+            path: 'profile_update_page',
+            args: ProfileUpdatePageRouteArgs(key: key));
 
-  static const String name = 'ProfileUpdatePageRoutes';
+  static const String name = 'ProfileUpdatePageRoute';
+}
+
+class ProfileUpdatePageRouteArgs {
+  const ProfileUpdatePageRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'ProfileUpdatePageRouteArgs{key: $key}';
+  }
 }

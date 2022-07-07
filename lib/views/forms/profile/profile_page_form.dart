@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:test_app/service/router/app_router.dart';
 
 import '../../pages/main_pages/profile/profile_update_page.dart';
 
@@ -33,7 +35,7 @@ class ProfilePageForm extends StatelessWidget{
                   child: InkWell(
                     onTap: (){
                       if(_headers[index] == 'Настройки профиля'){
-                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const ProfilePageUpdate()));
+                        AutoRouter.of(context).navigate(ProfileUpdatePageRoute());
                       }
                     },
                     child: Column(

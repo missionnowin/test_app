@@ -23,7 +23,10 @@ class InitPage extends StatelessWidget{
             }
           },
           builder: (context, state) {
-            return const CircularProgressIndicator();
+            return const Scaffold(
+            backgroundColor: Colors.white,
+            body: Center(
+                child: CircularProgressIndicator()));
           },
         )
       ],

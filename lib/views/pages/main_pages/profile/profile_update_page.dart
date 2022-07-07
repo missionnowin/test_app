@@ -1,19 +1,15 @@
 // ignore_for_file: library_private_types_in_public_api
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:test_app/logic/components/models/employer_update_form_model.dart';
 import 'package:test_app/service/api/api_service.dart';
 
-class ProfilePageUpdate extends StatefulWidget{
-  const ProfilePageUpdate({Key? key}) : super(key: key);
-
-  @override
-  _ProfilePageUpdateState createState() => _ProfilePageUpdateState();
-}
-
-class _ProfilePageUpdateState extends State<ProfilePageUpdate>{
+class ProfilePageUpdate extends StatelessWidget{
   final _api = ApiService();
   final _headers = ['ФИО', 'Названия организации', 'E-mail', 'Юридический адрес', 'Фактический адрес', 'О компании', 'Должность'];
   final List<TextEditingController> _controllers = List.generate(7, (i) => TextEditingController());
+
+  ProfilePageUpdate({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -247,7 +243,7 @@ class _ProfilePageUpdateState extends State<ProfilePageUpdate>{
                                               ),
                                               child: TextButton(
                                                 onPressed: (){
-                                                  Navigator.of(context).pop();
+                                                  AutoRouter.of(context).pop();
                                                 },
                                                 child: SizedBox(
                                                   width: MediaQuery.of(context).size.width - 50,

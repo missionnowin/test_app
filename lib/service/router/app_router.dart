@@ -15,9 +15,7 @@ part 'app_router.gr.dart';
   routes: <AutoRoute>[
     //Начальная
     AutoRoute(
-      path: '/',
       page: InitPage,
-      name: 'InitPageRoute',
       initial: true
     ),
 
@@ -25,6 +23,7 @@ part 'app_router.gr.dart';
     AutoRoute(
       path: '/login',
       name: 'LoginPages',
+      page: EmptyRouterPage,
       children: [
         AutoRoute(
           path: 'auth_page',
@@ -33,10 +32,17 @@ part 'app_router.gr.dart';
           initial: true,
         ),
         AutoRoute(
-          name: 'RegistrationPageRoute',
-          path: 'registration_page',
-          page: RegistrationPage,
-        ),
+            name: 'RegistrationPageRoute',
+            page: EmptyRouterPage,
+            children: [
+              AutoRoute(
+                name: 'EmployerRegistration',
+                path: 'registration_page',
+                page: RegistrationPage,
+                initial: true
+              ),
+            ]
+        )
       ],
     ),
 
@@ -47,34 +53,27 @@ part 'app_router.gr.dart';
       page: MainPage,
       children: [
         AutoRoute(
-          path: 'home',
-          page: EmptyRouterPage,
-          children: [
-            AutoRoute(
-              name: 'HomeRoute',
-              path: 'home_page',
-              page: HomePage,
-            ),
-          ],
+          name: 'HomeRoute',
+          path: 'home_page',
+          page: HomePage,
         ),
         AutoRoute(
-          path: 'profile',
-          name: 'ProfileRoutes',
-          page: EmptyRouterPage,
-          children: [
-            AutoRoute(
-              path: 'profile_page',
-              name: 'ProfilePageRoutes',
-              page: ProfilePage,
-              children: [
-                AutoRoute(
-                  path: 'profile_update_page',
-                  name: 'ProfileUpdatePageRoutes',
-                  page: ProfilePageUpdate,
-                )
-              ]
-            )
-          ]
+            page: EmptyRouterPage,
+            name: 'ProfilePage',
+            path: 'profile',
+            children: [
+              AutoRoute(
+                path: 'profile_page',
+                name: 'ProfilePageRoute',
+                initial: true,
+                page: ProfilePage,
+              ),
+              AutoRoute(
+                path: 'profile_update_page',
+                name: 'ProfileUpdatePageRoute',
+                page: ProfilePageUpdate,
+              )
+            ]
         )
       ],
     ),
