@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../pages/profile/profile_update_page.dart';
+import '../../pages/main_pages/profile/profile_update_page.dart';
 
 class ProfilePageForm extends StatelessWidget{
 

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../components/models/employer.dart';
-import '../../../service/api/api_singleton.dart';
-import '../../forms/profile/profile_page_form.dart';
-import '../login/auth_page.dart';
+import 'package:test_app/logic/components/models/employer_update_form_model.dart';
+import 'package:test_app/service/api/api_service.dart';
+
+import '../../../forms/profile/profile_page_form.dart';
+import '../../login/auth_page.dart';
 
 class ProfilePage extends StatefulWidget{
   const ProfilePage({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class ProfilePage extends StatefulWidget{
 }
 
 class _ProfilePageState extends State<ProfilePage>{
-  final _api = ApiSingleTon.instance;
+  final _api = ApiService();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -29,11 +30,11 @@ class _ProfilePageState extends State<ProfilePage>{
                       height: 106,
                       child: Row(
                         children: <Widget>[
-                          FutureBuilder<Employer>(
+                          FutureBuilder<EmployerUpdateModel>(
                             future: _api.getData(),
                             builder: (context, snapshot){
                               if(snapshot.hasData) {
-                                Employer? employer = snapshot.data;
+                                EmployerUpdateModel? employer = snapshot.data;
                                 return Container(
                                     margin: const EdgeInsets.all(12.0),
                                     padding: const EdgeInsets.all(8.0),
@@ -161,7 +162,7 @@ class _ProfilePageState extends State<ProfilePage>{
                             _api.logout();
                             Navigator.popUntil(context, (route) => route.isFirst);
                             Navigator.pushReplacement(context,
-                                MaterialPageRoute(builder: (BuildContext context) => const AuthPage()));
+                                MaterialPageRoute(builder: (BuildContext context) => AuthPage()));
                           },
                           child: SizedBox(
                             width: MediaQuery.of(context).size.width - 50,

@@ -1,7 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 import 'package:flutter/material.dart';
-import '../../../components/models/employer.dart';
-import '../../../service/api/api_singleton.dart';
+import 'package:test_app/logic/components/models/employer_update_form_model.dart';
+import 'package:test_app/service/api/api_service.dart';
 
 class ProfilePageUpdate extends StatefulWidget{
   const ProfilePageUpdate({Key? key}) : super(key: key);
@@ -11,7 +11,7 @@ class ProfilePageUpdate extends StatefulWidget{
 }
 
 class _ProfilePageUpdateState extends State<ProfilePageUpdate>{
-  final _api = ApiSingleTon.instance;
+  final _api = ApiService();
   final _headers = ['ФИО', 'Названия организации', 'E-mail', 'Юридический адрес', 'Фактический адрес', 'О компании', 'Должность'];
   final List<TextEditingController> _controllers = List.generate(7, (i) => TextEditingController());
 
@@ -20,11 +20,11 @@ class _ProfilePageUpdateState extends State<ProfilePageUpdate>{
     return SafeArea(
         top: false,
         bottom: true,
-        child: FutureBuilder<Employer>(
+        child: FutureBuilder<EmployerUpdateModel>(
           future: _api.getData(),
           builder: (context, snapshot){
             if(snapshot.hasData) {
-              Employer employer = snapshot.data!;
+              EmployerUpdateModel employer = snapshot.data!;
               var s = [employer.name, employer.orgName, employer.email, employer.legalAddress, employer.actualAddress, employer.companyDescription, employer.post];
               return Scaffold(
                   backgroundColor: const Color(0xFFFAFAFB),

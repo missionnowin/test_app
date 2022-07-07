@@ -1,4 +1,4 @@
-class Employer{
+class EmployerUpdateModel{
   String id;
   String orgName;
   String email;
@@ -13,7 +13,7 @@ class Employer{
   String companyDescription;
   int companyRate;
 
-  Employer({
+  EmployerUpdateModel({
     required this.id,
     required this.orgName,
     required this.email,
@@ -29,8 +29,8 @@ class Employer{
     required this.companyRate,
   });
 
-  factory Employer.fromJson(Map<String, dynamic> json){
-    return Employer(
+  factory EmployerUpdateModel.fromJson(Map<String, dynamic> json){
+    return EmployerUpdateModel(
         id: (json['id']) as String,
         orgName: (json['orgName']) as String,
         email: (json['email']) as String,

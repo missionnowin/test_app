@@ -1,51 +1,52 @@
 import 'package:dio/dio.dart';
-import '../../components/models/employer.dart';
-import '../../components/models/sign_up.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:test_app/logic/components/models/sign_in_form_model.dart';
+import 'package:test_app/logic/components/models/sign_up_form_model.dart';
+import '../../logic/components/models/employer_update_form_model.dart';
+
 
  class  ApiService{
   final Dio _api = Dio();
-  String? _accessToken;
   final String _url = 'http://80.78.245.111:8085/staging/api';
 
-  Future<int?> auth(String username, String password) async{
+  Future<String> auth(SignInFormModel signInFormModel) async{
     var response = await _api.post('$_url/employer/login',
         data: {
-          "email": username,
-          "password": password,
+          "email": signInFormModel.email,
+          "password": signInFormModel.password,
         },
         options: Options(
          headers: {"Content-Type": "application/json"},
         )
     );
-    if(response.statusCode == 200){
-      Map<String, dynamic> json = response.data;
-      _accessToken = json['data']['token'] as String;
-    }
-    return response.statusCode;
+    return response.data['data']['token'];
+
   }
 
-  Future<Employer> getData() async{
+  Future<EmployerUpdateModel> getData() async{
     // ignore: prefer_typing_uninitialized_variables
     var employer;
+    String accessToken = await const FlutterSecureStorage().read(key: 'token') as String;
     var response = await _api.get('$_url/employer/data',
     options:
       Options(
-        headers: {'X-Auth-Token' : _accessToken},
+        headers: {'X-Auth-Token' : accessToken},
       )
     );
     if(response.statusCode == 200){
       Map<String, dynamic> json = response.data;
-      employer = Employer.fromJson(json['data']);
+      employer = EmployerUpdateModel.fromJson(json['data']);
     }
     return employer;
   }
 
-  Future<int?> saveData(Employer employer) async{
+  Future<int?> saveData(EmployerUpdateModel employer) async{
+    String accessToken = await const FlutterSecureStorage().read(key: 'token') as String;
     var response = await _api.post('$_url/employer/update',
         options:
           Options(
             headers: {
-              'X-Auth-Token' : _accessToken,
+              'X-Auth-Token' : accessToken,
               "Content-Type": "application/json"
             },
           ),
@@ -54,7 +55,7 @@ import '../../components/models/sign_up.dart';
     return response.statusCode;
   }
 
-  Future<String?> signUp(SignUpData signUpData) async {
+  Future<String?> signUp(SignUpFormModel signUpData) async {
     var response = await _api.post('$_url/employer/register',
         options:
           Options(
@@ -67,8 +68,9 @@ import '../../components/models/sign_up.dart';
     return response.data['msg'];
   }
 
-  void logout() {
-    _accessToken = null;
+  Future<void> logout() async {
+    print(await const FlutterSecureStorage().read(key: 'token'));
+    await const FlutterSecureStorage().deleteAll();
   }
 }
 

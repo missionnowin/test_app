@@ -1,9 +1,11 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:test_app/service/icons.dart';
-import 'package:test_app/views/pages/home_page.dart';
-import 'package:test_app/views/pages/profile/profile_page.dart';
+import 'package:test_app/service/icons/icons.dart';
+import 'package:test_app/views/pages/main_pages/profile/profile_page.dart';
+
+
+import 'home/home_page.dart';
 
 
 class MainPage extends StatefulWidget{

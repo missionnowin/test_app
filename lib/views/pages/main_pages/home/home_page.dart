@@ -1,8 +1,8 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import '../../components/models/employer.dart';
-import '../../service/api/api_singleton.dart';
+import 'package:test_app/logic/components/models/employer_update_form_model.dart';
+import 'package:test_app/service/api/api_service.dart';
 
 class HomePage extends StatefulWidget{
   const HomePage({Key? key}) : super(key: key);
@@ -12,16 +12,16 @@ class HomePage extends StatefulWidget{
 }
 
 class _HomePageState extends State<HomePage> {
-  final _api = ApiSingleTon.instance;
+  final _api = ApiService();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: FutureBuilder<Employer>(
+        body: FutureBuilder<EmployerUpdateModel>(
             future: _api.getData(),
             builder: (context, snapshot){
               if(snapshot.hasData) {
-                Employer employer = snapshot.data!;
+                EmployerUpdateModel employer = snapshot.data!;
                 return Scaffold(
                     backgroundColor: Colors.white,
                     body: Container(
