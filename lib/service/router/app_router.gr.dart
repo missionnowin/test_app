@@ -17,19 +17,29 @@ class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    AuthRoute.name: (routeData) {
-      final args =
-          routeData.argsAs<AuthRouteArgs>(orElse: () => const AuthRouteArgs());
+    InitPageRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
-          routeData: routeData, child: AuthPage(key: args.key));
+          routeData: routeData, child: const InitPage());
+    },
+    LoginPages.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const EmptyRouterPage());
     },
     MainPageRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const MainPage());
     },
-    RegistrationRoute.name: (routeData) {
+    AuthPageRoute.name: (routeData) {
+      final args = routeData.argsAs<AuthPageRouteArgs>(
+          orElse: () => const AuthPageRouteArgs());
       return MaterialPageX<dynamic>(
-          routeData: routeData, child: RegistrationPage());
+          routeData: routeData, child: AuthPage(key: args.key));
+    },
+    RegistrationPageRoute.name: (routeData) {
+      final args = routeData.argsAs<RegistrationPageRouteArgs>(
+          orElse: () => const RegistrationPageRouteArgs());
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: RegistrationPage(key: args.key));
     },
     EmptyRouterRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
@@ -41,11 +51,11 @@ class _$AppRouter extends RootStackRouter {
     },
     HomeRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
-          routeData: routeData, child: const HomePage());
+          routeData: routeData, child: HomePage());
     },
     ProfilePageRoutes.name: (routeData) {
       return MaterialPageX<dynamic>(
-          routeData: routeData, child: const ProfilePage());
+          routeData: routeData, child: ProfilePage());
     },
     ProfileUpdatePageRoutes.name: (routeData) {
       return MaterialPageX<dynamic>(
@@ -55,11 +65,18 @@ class _$AppRouter extends RootStackRouter {
 
   @override
   List<RouteConfig> get routes => [
-        RouteConfig('/#redirect',
-            path: '/', redirectTo: '/login', fullMatch: true),
-        RouteConfig(AuthRoute.name, path: '/login', children: [
-          RouteConfig(RegistrationRoute.name,
-              path: 'registration_page', parent: AuthRoute.name)
+        RouteConfig('/#redirect', path: '/', redirectTo: '', fullMatch: true),
+        RouteConfig(InitPageRoute.name, path: ''),
+        RouteConfig(LoginPages.name, path: '/login', children: [
+          RouteConfig('#redirect',
+              path: '',
+              parent: LoginPages.name,
+              redirectTo: 'auth_page',
+              fullMatch: true),
+          RouteConfig(AuthPageRoute.name,
+              path: 'auth_page', parent: LoginPages.name),
+          RouteConfig(RegistrationPageRoute.name,
+              path: 'registration_page', parent: LoginPages.name)
         ]),
         RouteConfig(MainPageRoute.name, path: '/main_pages', children: [
           RouteConfig(EmptyRouterRoute.name,
@@ -87,26 +104,20 @@ class _$AppRouter extends RootStackRouter {
 }
 
 /// generated route for
-/// [AuthPage]
-class AuthRoute extends PageRouteInfo<AuthRouteArgs> {
-  AuthRoute({Key? key, List<PageRouteInfo>? children})
-      : super(AuthRoute.name,
-            path: '/login',
-            args: AuthRouteArgs(key: key),
-            initialChildren: children);
+/// [InitPage]
+class InitPageRoute extends PageRouteInfo<void> {
+  const InitPageRoute() : super(InitPageRoute.name, path: '');
 
-  static const String name = 'AuthRoute';
+  static const String name = 'InitPageRoute';
 }
 
-class AuthRouteArgs {
-  const AuthRouteArgs({this.key});
+/// generated route for
+/// [EmptyRouterPage]
+class LoginPages extends PageRouteInfo<void> {
+  const LoginPages({List<PageRouteInfo>? children})
+      : super(LoginPages.name, path: '/login', initialChildren: children);
 
-  final Key? key;
-
-  @override
-  String toString() {
-    return 'AuthRouteArgs{key: $key}';
-  }
+  static const String name = 'LoginPages';
 }
 
 /// generated route for
@@ -120,12 +131,46 @@ class MainPageRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [RegistrationPage]
-class RegistrationRoute extends PageRouteInfo<void> {
-  const RegistrationRoute()
-      : super(RegistrationRoute.name, path: 'registration_page');
+/// [AuthPage]
+class AuthPageRoute extends PageRouteInfo<AuthPageRouteArgs> {
+  AuthPageRoute({Key? key})
+      : super(AuthPageRoute.name,
+            path: 'auth_page', args: AuthPageRouteArgs(key: key));
 
-  static const String name = 'RegistrationRoute';
+  static const String name = 'AuthPageRoute';
+}
+
+class AuthPageRouteArgs {
+  const AuthPageRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'AuthPageRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [RegistrationPage]
+class RegistrationPageRoute extends PageRouteInfo<RegistrationPageRouteArgs> {
+  RegistrationPageRoute({Key? key})
+      : super(RegistrationPageRoute.name,
+            path: 'registration_page',
+            args: RegistrationPageRouteArgs(key: key));
+
+  static const String name = 'RegistrationPageRoute';
+}
+
+class RegistrationPageRouteArgs {
+  const RegistrationPageRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'RegistrationPageRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for

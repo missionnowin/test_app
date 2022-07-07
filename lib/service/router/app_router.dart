@@ -1,6 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:test_app/views/pages/init_page.dart';
 import 'package:test_app/views/pages/login/registration_page.dart';
 import 'package:test_app/views/pages/main_pages/profile/profile_update_page.dart';
 import '../../views/pages/login/auth_page.dart';
@@ -12,20 +13,34 @@ part 'app_router.gr.dart';
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
+    //Начальная
+    AutoRoute(
+      path: '/',
+      page: InitPage,
+      name: 'InitPageRoute',
+      initial: true
+    ),
+
+    //Авторизация
     AutoRoute(
       path: '/login',
-      page: AuthPage,
-      name: 'AuthRoute',
-      initial: true,
+      name: 'LoginPages',
       children: [
         AutoRoute(
-          name: 'RegistrationRoute',
+          path: 'auth_page',
+          page: AuthPage,
+          name: 'AuthPageRoute',
+          initial: true,
+        ),
+        AutoRoute(
+          name: 'RegistrationPageRoute',
           path: 'registration_page',
           page: RegistrationPage,
         ),
       ],
     ),
 
+    //Основные страницы
     AutoRoute(
       path: '/main_pages',
       name: 'MainPageRoute',

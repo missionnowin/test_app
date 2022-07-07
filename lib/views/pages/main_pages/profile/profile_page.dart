@@ -1,19 +1,17 @@
+import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:test_app/logic/components/models/employer_update_form_model.dart';
 import 'package:test_app/service/api/api_service.dart';
 
+import '../../../../service/router/app_router.dart';
 import '../../../forms/profile/profile_page_form.dart';
 import '../../login/auth_page.dart';
 
-class ProfilePage extends StatefulWidget{
-  const ProfilePage({Key? key}) : super(key: key);
-
-  @override
-  _ProfilePageState createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage>{
+class ProfilePage extends StatelessWidget{
   final _api = ApiService();
+
+  ProfilePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -160,9 +158,8 @@ class _ProfilePageState extends State<ProfilePage>{
                         child: TextButton(
                           onPressed: (){
                             _api.logout();
-                            Navigator.popUntil(context, (route) => route.isFirst);
-                            Navigator.pushReplacement(context,
-                                MaterialPageRoute(builder: (BuildContext context) => AuthPage()));
+                            AutoRouter.of(context).popUntil((route) => route.isFirst);
+                            AutoRouter.of(context).replace(const LoginPages());
                           },
                           child: SizedBox(
                             width: MediaQuery.of(context).size.width - 50,

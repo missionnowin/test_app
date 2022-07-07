@@ -185,7 +185,7 @@ class AuthPage extends StatelessWidget{
                   ),
                       child: TextButton(
                         onPressed: (){
-                            AutoRouter.of(context).push(const RegistrationRoute());
+                            AutoRouter.of(context).push(RegistrationPageRoute());
                           },
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width - 64,

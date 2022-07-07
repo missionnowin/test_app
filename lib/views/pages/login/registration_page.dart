@@ -182,31 +182,36 @@ class RegistrationPage extends StatelessWidget{
                                         color: const Color(0xFF009ED1),
                                         borderRadius: BorderRadius.circular(10.0)
                                     ),
-                                    child: TextButton(
-                                      onPressed: () async{
-                                        SignUpFormModel data = SignUpFormModel(
-                                            orgName: _controllers[0].text,
-                                            email: _controllers[2].text,
-                                            password: _controllers[3].text,
-                                            phone: _controllers[1].text);
+                                    child: BlocBuilder<SignUpBloc, SignUpState>(
+                                      builder: (context, state) {
+                                        return TextButton(
+                                          onPressed: () async{
+                                            SignUpFormModel data = SignUpFormModel(
+                                                orgName: _controllers[0].text,
+                                                email: _controllers[2].text,
+                                                password: _controllers[3].text,
+                                                phone: _controllers[1].text);
                                             context
-                                                    .read<SignUpBloc>()
-                                                    .add(SignUpEvent(data));
-                                      },
-                                      child: SizedBox(
-                                        width: MediaQuery.of(context).size.width - 50,
-                                        child: const Text(
-                                          'Зарегестрироваться',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily: '.SF UI Display',
-                                            color: Colors.white,
+                                                .read<SignUpBloc>()
+                                                .add(SignUpEvent(data));
+                                          },
+                                          child: SizedBox(
+                                            width: MediaQuery.of(context).size.width - 50,
+                                            child: const Text(
+                                              'Зарегестрироваться',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w600,
+                                                fontFamily: '.SF UI Display',
+                                                color: Colors.white,
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                      ),
+                                        );
+                                      },
                                     )
+
                                 ),
                               ),
                               const SizedBox(

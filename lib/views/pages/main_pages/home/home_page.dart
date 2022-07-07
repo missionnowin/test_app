@@ -4,15 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:test_app/logic/components/models/employer_update_form_model.dart';
 import 'package:test_app/service/api/api_service.dart';
 
-class HomePage extends StatefulWidget{
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
+class HomePage extends StatelessWidget {
   final _api = ApiService();
+
+  HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -19,11 +19,11 @@ class _MainPageState extends State<MainPage> {
   int currentIndex = 0;
 
   final pages = [
-    const HomePage(),
-    const HomePage(),
-    const HomePage(),
-    const HomePage(),
-    const ProfilePage(),
+    HomePage(),
+    HomePage(),
+    HomePage(),
+    HomePage(),
+    ProfilePage(),
   ];
 
   @override
