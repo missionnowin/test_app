@@ -2,6 +2,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:test_app/logic/blocs/profile_update_bloc/profile_update_bloc.dart';
 import 'package:test_app/logic/components/models/employer_model.dart';
 import 'package:test_app/service/api/api_service.dart';
@@ -126,6 +127,13 @@ class ProfilePageUpdate extends StatelessWidget{
                                           ),
                                           child: TextButton(
                                             onPressed: () async{
+                                                final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+                                                if (image != null) {
+                                                  final fileSizeMB = await image.length() / (1024 * 1024);
+                                                  if(fileSizeMB < 40){
+                                                    employer.logoPath = await _api.uploadFile(image.path);
+                                                  }
+                                                }
                                             },
                                             child: SizedBox(
                                               width: MediaQuery.of(context).size.width * 2/3,

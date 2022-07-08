@@ -1,3 +1,4 @@
+import 'package:cross_file/src/types/interface.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:test_app/logic/components/models/sign_in_model.dart';
@@ -70,6 +71,19 @@ import '../../logic/components/models/employer_model.dart';
 
   Future<void> logout() async {
     await const FlutterSecureStorage().deleteAll();
+  }
+
+  Future<String> uploadFile(String imagePath) async {
+    final multipartFile = await MultipartFile.fromFile(
+      imagePath,
+      filename: imagePath.split('/').last,
+    );
+    final formData = FormData.fromMap({
+      "file": multipartFile,
+    });
+    var response = await _api.post('$_url/file/upload',
+      data: formData);
+    return response.data['data']['url'];
   }
 }
 

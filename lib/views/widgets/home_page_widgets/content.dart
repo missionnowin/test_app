@@ -7,6 +7,7 @@ class ContentWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.all(12.0),
       height: 410,
       width: MediaQuery.of(context).size.width - 40,
       decoration: BoxDecoration(
@@ -23,10 +24,14 @@ class ContentWidget extends StatelessWidget{
             margin: const EdgeInsets.all(15.0),
             child: Row(
               children: [
-                const Text('1/6'),
+                const SizedBox(width: 10),
+                const Text('1/6',
+                style: TextStyle(
+                  color: Colors.white,
+                ),),
                 const SizedBox(width: 10,),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width - 120,
+                  width: MediaQuery.of(context).size.width - 160,
                     child:
                     const LinearProgressIndicator(
                       value: 1/6,
