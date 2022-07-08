@@ -1,12 +1,10 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:test_app/logic/components/models/employer_update_form_model.dart';
+import 'package:test_app/logic/components/models/employer_model.dart';
 import 'package:test_app/service/api/api_service.dart';
-
 import '../../../../service/router/app_router.dart';
 import '../../../forms/profile/profile_page_form.dart';
-import '../../login/auth_page.dart';
+
 
 class ProfilePage extends StatelessWidget{
   final _api = ApiService();
@@ -28,11 +26,11 @@ class ProfilePage extends StatelessWidget{
                       height: 106,
                       child: Row(
                         children: <Widget>[
-                          FutureBuilder<EmployerUpdateModel>(
+                          FutureBuilder<EmployerModel>(
                             future: _api.getData(),
                             builder: (context, snapshot){
                               if(snapshot.hasData) {
-                                EmployerUpdateModel? employer = snapshot.data;
+                                EmployerModel? employer = snapshot.data;
                                 return Container(
                                     margin: const EdgeInsets.all(12.0),
                                     padding: const EdgeInsets.all(8.0),
@@ -59,7 +57,7 @@ class ProfilePage extends StatelessWidget{
                                             const SizedBox(
                                               height: 3,
                                             ),
-                                            Text(employer.name,
+                                            Text(employer.name!,
                                               style: const TextStyle(
                                                 color: Color(0xFF3F4554),
                                                 fontFamily: '.SF UI Display',

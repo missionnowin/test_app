@@ -1,7 +1,9 @@
 // ignore_for_file: library_private_types_in_public_api
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:test_app/logic/components/models/employer_update_form_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_app/logic/blocs/profile_update_bloc/profile_update_bloc.dart';
+import 'package:test_app/logic/components/models/employer_model.dart';
 import 'package:test_app/service/api/api_service.dart';
 
 class ProfilePageUpdate extends StatelessWidget{
@@ -16,11 +18,11 @@ class ProfilePageUpdate extends StatelessWidget{
     return SafeArea(
         top: false,
         bottom: true,
-        child: FutureBuilder<EmployerUpdateModel>(
+        child: FutureBuilder<EmployerModel>(
           future: _api.getData(),
           builder: (context, snapshot){
             if(snapshot.hasData) {
-              EmployerUpdateModel employer = snapshot.data!;
+              EmployerModel employer = snapshot.data!;
               var s = [employer.name, employer.orgName, employer.email, employer.legalAddress, employer.actualAddress, employer.companyDescription, employer.post];
               return Scaffold(
                   backgroundColor: const Color(0xFFFAFAFB),
@@ -98,7 +100,7 @@ class ProfilePageUpdate extends StatelessWidget{
                                     const SizedBox(
                                       height: 7,
                                     ),
-                                    Text(employer.name,
+                                    Text(employer.name.toString(),
                                       style: const TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold,
@@ -169,8 +171,10 @@ class ProfilePageUpdate extends StatelessWidget{
                                                   height: 6.0,
                                                 ),
                                                 TextFormField(
-                                                  controller: _controllers[i],
-                                                  //initialValue: s[i],
+                                                  controller: _controllers[i]..text = s[i]!,
+                                                  onEditingComplete: ()  {
+
+                                                  },
                                                   decoration: InputDecoration(
                                                     enabledBorder:  OutlineInputBorder(
                                                       borderRadius: BorderRadius.circular(10.0),
@@ -193,86 +197,101 @@ class ProfilePageUpdate extends StatelessWidget{
                                 height: 40,
                               ),
                               Center(
-                                  child: Column(
-                                      children: <Widget>[
-                                        Container(
-                                          alignment: Alignment.center,
-                                          child: DecoratedBox(
-                                              decoration: BoxDecoration(
-                                                  color: const Color(0xFF009ED1),
-                                                  borderRadius: BorderRadius.circular(10.0)
-                                              ),
-                                              child: TextButton(
-                                                onPressed: () async{
-                                                  employer.update(
-                                                      orgName: _controllers[1].text,
-                                                      name: _controllers[0].text,
-                                                      email: _controllers[2].text,
-                                                      legalAddress: _controllers[3].text,
-                                                      actualAddress: _controllers[4].text,
-                                                      companyDescription: _controllers[5].text,
-                                                      post: _controllers[6].text
-                                                  );
-                                                  if(await _api.saveData(employer) == 200){
-                                                    Navigator.of(context).pop();
-                                                  }
-                                                },
-                                                child: SizedBox(
-                                                  width: MediaQuery.of(context).size.width - 50,
-                                                  child: const Text(
-                                                    'Сохранить',
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                      fontFamily: '.SF UI Display',
-                                                      color: Colors.white,
-                                                    ),
+                                child: BlocProvider(
+                                    create: (_) => ProfileUpdateBloc(),
+                                    child: BlocListener<ProfileUpdateBloc, ProfileUpdateState>(
+                                      listener: (context, state){
+                                        if(state is ProFileUpdateSuccess){
+                                          AutoRouter.of(context).navigateBack();
+                                        }
+                                        if(state is ProfileUpdateError){
+                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Something went wrong')));
+                                        }
+                                      },
+                                      child: Column(
+                                          children: <Widget>[
+                                            Container(
+                                              alignment: Alignment.center,
+                                              child: DecoratedBox(
+                                                  decoration: BoxDecoration(
+                                                      color: const Color(0xFF009ED1),
+                                                      borderRadius: BorderRadius.circular(10.0)
                                                   ),
-                                                ),
-                                              )
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                            height: 13
-                                        ),
-                                        Container(
-                                          alignment: Alignment.center,
-                                          child: DecoratedBox(
-                                              decoration: BoxDecoration(
-                                                  color: const Color(0xFFE9EEF1),
-                                                  borderRadius: BorderRadius.circular(10.0)
+                                                  child: BlocBuilder<ProfileUpdateBloc, ProfileUpdateState>(
+                                                    builder: (context, state) {
+                                                      return TextButton(
+                                                        onPressed: () {
+                                                          employer.update(
+                                                              orgName: _controllers[1].text,
+                                                              name: _controllers[0].text,
+                                                              email: _controllers[2].text,
+                                                              legalAddress: _controllers[3].text,
+                                                              actualAddress: _controllers[4].text,
+                                                              companyDescription: _controllers[5].text,
+                                                              post: _controllers[6].text
+                                                          );
+                                                          context.read<ProfileUpdateBloc>().add(ProfileUpdateEvent(employer));
+                                                        },
+                                                        child: SizedBox(
+                                                          width: MediaQuery.of(context).size.width - 50,
+                                                          child: const Text(
+                                                            'Сохранить',
+                                                            textAlign: TextAlign.center,
+                                                            style: TextStyle(
+                                                              fontFamily: '.SF UI Display',
+                                                              color: Colors.white,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  )
                                               ),
-                                              child: TextButton(
-                                                onPressed: (){
-                                                  AutoRouter.of(context).pop();
-                                                },
-                                                child: SizedBox(
-                                                  width: MediaQuery.of(context).size.width - 50,
-                                                  child: const Text(
-                                                    'Отменить',
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                      fontFamily: '.SF UI Display',
-                                                      color: Color(0xFF617088),
-                                                    ),
+                                            ),
+                                            const SizedBox(
+                                                height: 13
+                                            ),
+                                            Container(
+                                              alignment: Alignment.center,
+                                              child: DecoratedBox(
+                                                  decoration: BoxDecoration(
+                                                      color: const Color(0xFFE9EEF1),
+                                                      borderRadius: BorderRadius.circular(10.0)
                                                   ),
-                                                ),
-                                              )
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                            height: 45
-                                        ),
-                                      ]
+                                                  child: TextButton(
+                                                    onPressed: (){
+                                                      AutoRouter.of(context).pop();
+                                                    },
+                                                    child: SizedBox(
+                                                      width: MediaQuery.of(context).size.width - 50,
+                                                      child: const Text(
+                                                        'Отменить',
+                                                        textAlign: TextAlign.center,
+                                                        style: TextStyle(
+                                                          fontFamily: '.SF UI Display',
+                                                          color: Color(0xFF617088),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  )
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                                height: 45
+                                            ),
+                                          ]
+                                      )
                                   )
+                              ),
                               )
                             ],
                           ),
                         )
-                        ],
+                        ]
                       )
                     ]
                   )
-              );
+            );
             }
             return const Center(
               child: CircularProgressIndicator()

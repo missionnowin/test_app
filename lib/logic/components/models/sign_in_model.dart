@@ -1,8 +1,8 @@
-class SignInFormModel{
+class SignInModel{
   String email;
   String password;
 
-  SignInFormModel({
+  SignInModel({
     required this.email,
     required this.password,
   });

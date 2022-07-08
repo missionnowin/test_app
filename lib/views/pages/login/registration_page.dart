@@ -4,7 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_app/logic/blocs/sign_up_bloc/sign_up_bloc.dart';
-import 'package:test_app/logic/components/models/sign_up_form_model.dart';
+import 'package:test_app/logic/components/models/sign_up_model.dart';
 import 'package:test_app/service/api/api_service.dart';
 import 'package:test_app/service/router/app_router.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -186,7 +186,7 @@ class RegistrationPage extends StatelessWidget{
                                       builder: (context, state) {
                                         return TextButton(
                                           onPressed: () async{
-                                            SignUpFormModel data = SignUpFormModel(
+                                            SignUpModel data = SignUpModel(
                                                 orgName: _controllers[0].text,
                                                 email: _controllers[2].text,
                                                 password: _controllers[3].text,

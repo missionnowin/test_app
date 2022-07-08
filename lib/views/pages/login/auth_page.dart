@@ -3,7 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_app/logic/blocs/sign_in_bloc/sign_in_bloc.dart';
-import 'package:test_app/logic/components/models/sign_in_form_model.dart';
+import 'package:test_app/logic/components/models/sign_in_model.dart';
 import 'package:test_app/views/pages/login/registration_page.dart';
 
 import '../../../service/router/app_router.dart';
@@ -151,7 +151,7 @@ class AuthPage extends StatelessWidget{
                               builder: (context, state) {
                                 return TextButton(
                                   onPressed: (){
-                                    context.read<SignInBloc>().add(SignInEvent(SignInFormModel(email: _userNameController.text, password: _passwordController.text)));
+                                    context.read<SignInBloc>().add(SignInEvent(SignInModel(email: _userNameController.text, password: _passwordController.text)));
                                   },
                                   child: SizedBox(
                                     width: MediaQuery.of(context).size.width - 64,

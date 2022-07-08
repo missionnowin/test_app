@@ -1,8 +1,11 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:test_app/logic/components/models/employer_update_form_model.dart';
+import 'package:test_app/logic/components/models/employer_model.dart';
 import 'package:test_app/service/api/api_service.dart';
+import 'package:test_app/views/widgets/home_page_widgets/content.dart';
+
+import '../../../widgets/home_page_widgets/custom_switch.dart';
 
 class HomePage extends StatelessWidget {
   final _api = ApiService();
@@ -12,11 +15,11 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: FutureBuilder<EmployerUpdateModel>(
+        body: FutureBuilder<EmployerModel>(
             future: _api.getData(),
             builder: (context, snapshot){
               if(snapshot.hasData) {
-                EmployerUpdateModel employer = snapshot.data!;
+                EmployerModel employer = snapshot.data!;
                 return Scaffold(
                     backgroundColor: Colors.white,
                     body: Container(
@@ -61,8 +64,8 @@ class HomePage extends StatelessWidget {
                                     margin: const EdgeInsets.all(12.0),
                                     child: Row(
                                       children: <Widget>[
-                                        Container(
-                                            width: 167,
+                                        SizedBox(
+                                            width: 160,
                                             child: Column(
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: const <Widget>[
@@ -127,20 +130,16 @@ class HomePage extends StatelessWidget {
                                 height: 20,
                               ),
                               Container(
-                                height: 1300,
-                                alignment: Alignment.topCenter,
-                                decoration: const BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(15),
-                                        topRight: Radius.circular(15),
-                                        bottomLeft: Radius.circular(15),
-                                        bottomRight: Radius.circular(15)
-                                    ),
-                                    image: DecorationImage(
-                                      image : AssetImage('assets/stats.png'),
-                                      fit: BoxFit.fill,
-                                    )
-                                ),
+                                alignment: Alignment.centerLeft,
+                                child: const Text('Статистика'),
+                              ),
+                              Container(
+                                  alignment: Alignment.center,
+                                  child: const CustomSwitch(),
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                child: const ContentWidget(),
                               ),
                             ]
                         )

@@ -1,10 +1,10 @@
-class SignUpFormModel{
+class SignUpModel{
   String email;
   String password;
   String phone;
   String orgName;
 
-  SignUpFormModel({
+  SignUpModel({
     required this.orgName,
     required this.email,
     required this.password,

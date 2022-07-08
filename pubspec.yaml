@@ -70,7 +70,9 @@ flutter:
   assets:
      - assets/intro.jpg
      - assets/stats.png
+     - assets/background.png
      - assets/menu_icons/
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

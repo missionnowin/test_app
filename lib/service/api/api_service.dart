@@ -1,15 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:test_app/logic/components/models/sign_in_form_model.dart';
-import 'package:test_app/logic/components/models/sign_up_form_model.dart';
-import '../../logic/components/models/employer_update_form_model.dart';
+import 'package:test_app/logic/components/models/sign_in_model.dart';
+import 'package:test_app/logic/components/models/sign_up_model.dart';
+import '../../logic/components/models/employer_model.dart';
 
 
  class  ApiService{
   final Dio _api = Dio();
   final String _url = 'http://80.78.245.111:8085/staging/api';
 
-  Future<String> auth(SignInFormModel signInFormModel) async{
+  Future<String> auth(SignInModel signInFormModel) async{
     var response = await _api.post('$_url/employer/login',
         data: {
           "email": signInFormModel.email,
@@ -23,7 +23,7 @@ import '../../logic/components/models/employer_update_form_model.dart';
 
   }
 
-  Future<EmployerUpdateModel> getData() async{
+  Future<EmployerModel> getData() async{
     // ignore: prefer_typing_uninitialized_variables
     var employer;
     String accessToken = await const FlutterSecureStorage().read(key: 'token') as String;
@@ -35,12 +35,12 @@ import '../../logic/components/models/employer_update_form_model.dart';
     );
     if(response.statusCode == 200){
       Map<String, dynamic> json = response.data;
-      employer = EmployerUpdateModel.fromJson(json['data']);
+      employer = EmployerModel.fromJson(json['data']);
     }
     return employer;
   }
 
-  Future<int?> saveData(EmployerUpdateModel employer) async{
+  Future<int?> saveData(EmployerModel employer) async{
     String accessToken = await const FlutterSecureStorage().read(key: 'token') as String;
     var response = await _api.post('$_url/employer/update',
         options:
@@ -55,7 +55,7 @@ import '../../logic/components/models/employer_update_form_model.dart';
     return response.statusCode;
   }
 
-  Future<String?> signUp(SignUpFormModel signUpData) async {
+  Future<String?> signUp(SignUpModel signUpData) async {
     var response = await _api.post('$_url/employer/register',
         options:
           Options(
@@ -69,7 +69,6 @@ import '../../logic/components/models/employer_update_form_model.dart';
   }
 
   Future<void> logout() async {
-    print(await const FlutterSecureStorage().read(key: 'token'));
     await const FlutterSecureStorage().deleteAll();
   }
 }
