@@ -277,6 +277,7 @@ class ProfilePageUpdate extends StatelessWidget{
                                                   ),
                                                   child: TextButton(
                                                     onPressed: (){
+                                                      context.read<UserBloc>().add(RollBackUser());
                                                       AutoRouter.of(context).pop();
                                                     },
                                                     child: SizedBox(
