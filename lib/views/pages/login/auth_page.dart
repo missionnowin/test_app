@@ -8,6 +8,7 @@ import 'package:test_app/views/pages/login/registration_page.dart';
 
 import '../../../logic/blocs/user_bloc/user_bloc.dart';
 import '../../../service/router/app_router.dart';
+import '../../widgets/auth_pages_widgets/password_field.dart';
 import '../main_pages/main_page.dart';
 
 class AuthPage extends StatelessWidget{
@@ -120,8 +121,8 @@ class AuthPage extends StatelessWidget{
                           enabledBorder:  OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                             borderSide: const BorderSide(color: Color(0xFF009ED1), width: 0.5),
-                            ),
-                            border: const OutlineInputBorder(),
+                          ),
+                          border: const OutlineInputBorder(),
                         ),
                       ),
                     ),
