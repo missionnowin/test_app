@@ -15,6 +15,3 @@ class UpdateUserImage extends UserEvent {
   final String logoPath;
   UpdateUserImage(this.logoPath);
 }
-
-class RollBackUser extends UserEvent{
-}

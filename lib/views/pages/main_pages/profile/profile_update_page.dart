@@ -214,8 +214,8 @@ class ProfilePageUpdate extends StatelessWidget{
                               ),
                               Center(
                                 child: BlocProvider(
-                                    create: (_) => ProfileUpdateBloc(),
-                                    child: BlocListener<ProfileUpdateBloc, ProfileUpdateState>(
+                                        create: (_) => ProfileUpdateBloc(),
+                                  child: BlocListener<ProfileUpdateBloc, ProfileUpdateState>(
                                       listener: (context, state){
                                         if(state is ProFileUpdateSuccess){
                                           context.read<UserBloc>().add(UpdateUser(employerModel: employer));
@@ -223,6 +223,9 @@ class ProfilePageUpdate extends StatelessWidget{
                                         }
                                         if(state is ProfileUpdateError){
                                           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Something went wrong')));
+                                        }
+                                        if(state is ProfileRollBack){
+                                          context.read<UserBloc>().add(UpdateUserImage(state.employerModel.logoPath));
                                         }
                                       },
                                       child: Column(
@@ -247,7 +250,7 @@ class ProfilePageUpdate extends StatelessWidget{
                                                               companyDescription: _controllers[5].text,
                                                               post: _controllers[6].text
                                                           );
-                                                          context.read<ProfileUpdateBloc>().add(ProfileUpdateEvent(employer));
+                                                          context.read<ProfileUpdateBloc>().add(ProfileSaveUpdatesEvent(employer));
                                                         },
                                                         child: SizedBox(
                                                           width: MediaQuery.of(context).size.width - 50,
@@ -275,22 +278,26 @@ class ProfilePageUpdate extends StatelessWidget{
                                                       color: const Color(0xFFE9EEF1),
                                                       borderRadius: BorderRadius.circular(10.0)
                                                   ),
-                                                  child: TextButton(
-                                                    onPressed: (){
-                                                      context.read<UserBloc>().add(RollBackUser());
-                                                      AutoRouter.of(context).pop();
-                                                    },
-                                                    child: SizedBox(
-                                                      width: MediaQuery.of(context).size.width - 50,
-                                                      child: const Text(
-                                                        'Отменить',
-                                                        textAlign: TextAlign.center,
-                                                        style: TextStyle(
-                                                          fontFamily: '.SF UI Display',
-                                                          color: Color(0xFF617088),
-                                                        ),
-                                                      ),
-                                                    ),
+                                                  child: BlocBuilder<ProfileUpdateBloc, ProfileUpdateState>(
+                                                      builder: (context, state) {
+                                                        return TextButton(
+                                                          onPressed: (){
+                                                            context.read<ProfileUpdateBloc>().add(ProfileRollBackEvent());
+                                                            AutoRouter.of(context).pop();
+                                                          },
+                                                          child: SizedBox(
+                                                            width: MediaQuery.of(context).size.width - 50,
+                                                            child: const Text(
+                                                              'Отменить',
+                                                              textAlign: TextAlign.center,
+                                                              style: TextStyle(
+                                                                fontFamily: '.SF UI Display',
+                                                                color: Color(0xFF617088),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }
                                                   )
                                               ),
                                             ),

@@ -12,7 +12,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserLogout>(_onLogout);
     on<UpdateUser>(_onUpdate);
     on<UpdateUserImage>(_onUpdateImage);
-    on<RollBackUser>(_onRollBack);
+
   }
 
   Future<void> _onUpdate(UpdateUser event, emit) async {
@@ -26,11 +26,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   Future<void> _onLogout(UserEvent event, emit) async {
     await const FlutterSecureStorage().delete(key: 'token');
     emit(UserInitial());
-  }
-  Future<void> _onRollBack(RollBackUser event, emit) async {
-    ApiService apiService = ApiService();
-    EmployerModel employerModel = await apiService.getData();
-    emit(UserInitiated(employerModel));
   }
 }
 
