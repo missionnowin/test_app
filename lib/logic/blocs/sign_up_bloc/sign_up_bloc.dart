@@ -23,7 +23,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       String token = await apiService.auth(SignInModel(email: event.signUpFormModel.email, password: event.signUpFormModel.password));
       await const FlutterSecureStorage().write(key: 'token', value: token);
       emit(SignUpSuccess());
-    } on DioError catch (e){
+    } on DioError{
       emit(SignUpError());
     }
   }

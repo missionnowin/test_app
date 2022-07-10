@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_app/logic/blocs/init_bloc/init_cubit.dart';
 
+import '../../logic/blocs/user_bloc/user_bloc.dart';
 import '../../service/router/app_router.dart';
 
 class InitPage extends StatelessWidget{
@@ -19,6 +20,7 @@ class InitPage extends StatelessWidget{
               AutoRouter.of(context).replace(const LoginPages());
             }
             if (state is IsAuthorized) {
+              context.read<UserBloc>().add(UpdateUser(employerModel: state.employerModel));
               AutoRouter.of(context).replace(const MainPageRoute());
             }
           },

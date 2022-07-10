@@ -6,11 +6,13 @@ import 'package:test_app/logic/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:test_app/logic/components/models/sign_in_model.dart';
 import 'package:test_app/views/pages/login/registration_page.dart';
 
+import '../../../logic/blocs/user_bloc/user_bloc.dart';
 import '../../../service/router/app_router.dart';
 import '../main_pages/main_page.dart';
 
 class AuthPage extends StatelessWidget{
    AuthPage({Key? key}) : super(key: key);
+
   final _userNameController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -134,6 +136,7 @@ class AuthPage extends StatelessWidget{
                   child: BlocListener<SignInBloc, SignInState>(
                     listener: (context, state){
                       if(state is SignInSuccess){
+                        context.read<UserBloc>().add(UpdateUser(employerModel: state.employerModel));
                         AutoRouter.of(context).replace(const MainPageRoute());
                       }
                       if(state is SignInError){

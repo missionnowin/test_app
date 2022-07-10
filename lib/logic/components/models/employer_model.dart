@@ -62,6 +62,7 @@ class EmployerModel{
         'companyDescription' : companyDescription,
         'companyRate' : companyRate,
       };
+
   void update({required String orgName, required String name, required String email, required String legalAddress,required String actualAddress, required String companyDescription, required String post})
   {
     this.name = (name == '') ?  this.name : name;
@@ -71,5 +72,10 @@ class EmployerModel{
     this.actualAddress = (actualAddress == '') ? this.actualAddress : actualAddress;
     this.post = (post == '') ? this.post: post;
     this.orgName = (orgName == '') ? this.orgName : orgName;
+  }
+
+  EmployerModel updateImage(String logoPath){
+    this.logoPath = logoPath;
+    return this;
   }
 }

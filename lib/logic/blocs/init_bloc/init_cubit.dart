@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:meta/meta.dart';
+import 'package:test_app/logic/components/models/employer_model.dart';
 import 'package:test_app/service/api/api_service.dart';
 
 part 'init_state.dart';
@@ -16,8 +16,9 @@ class InitCubit extends Cubit<InitState> {
     }
     else{
       try{
-        ApiService().getData();
-        emit(IsAuthorized());
+        ApiService api = ApiService();
+        EmployerModel employerModel = await api.getData();
+        emit(IsAuthorized(employerModel));
       }catch (e){
         emit(IsNotAuthorized());
       }

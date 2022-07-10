@@ -1,101 +1,103 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_app/logic/components/models/employer_model.dart';
-import 'package:test_app/service/api/api_service.dart';
 import 'package:test_app/views/widgets/home_page_widgets/content.dart';
-
+import '../../../../logic/blocs/user_bloc/user_bloc.dart';
 import '../../../widgets/home_page_widgets/chart.dart';
-import '../../../widgets/home_page_widgets/custom_switch.dart';
+
 
 class HomePage extends StatelessWidget {
-  final _api = ApiService();
 
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: FutureBuilder<EmployerModel>(
-            future: _api.getData(),
-            builder: (context, snapshot){
-              if(snapshot.hasData) {
-                EmployerModel employer = snapshot.data!;
-                return Scaffold(
-                    backgroundColor: Colors.white,
-                    body: Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: const EdgeInsets.all(10.0),
-                        padding: const EdgeInsets.all(10.0),
-                        child: ListView(
-                            children:<Widget>[
-                              const Text('Профиль работодателя',
-                                style: TextStyle(
-                                  color: Color(0xFF009ED1),
-                                  fontSize: 14,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 6,
-                              ),
-                              const Text('Личный рейтинг',
-                                style:
-                                TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
+      body: BlocBuilder<UserBloc, UserState>(
+          builder: (context, state) {
+            EmployerModel employer = state.employerModel!;
+            return Scaffold(
+                backgroundColor: Colors.white,
+                body: Container(
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width,
+                    margin: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
+                    child: ListView(
+                        children: <Widget>[
+                          const Text('Профиль работодателя',
+                            style: TextStyle(
+                              color: Color(0xFF009ED1),
+                              fontSize: 14,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 6,
+                          ),
+                          const Text('Личный рейтинг',
+                            style:
+                            TextStyle(
+                              color: Colors.black,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
 
-                              DecoratedBox(
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.grey,
-                                      style: BorderStyle.solid,
-                                      width: 0.4
-                                  ),
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  color: Colors.white,
+                          DecoratedBox(
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey,
+                                    style: BorderStyle.solid,
+                                    width: 0.4
                                 ),
-                                child: Container(
-                                    height: 118,
-                                    padding: const EdgeInsets.all(12.0),
-                                    margin: const EdgeInsets.all(12.0),
-                                    child: Row(
+                                borderRadius: BorderRadius.circular(15.0),
+                                color: Colors.white,
+                              ),
+                              child: Container(
+                                  height: 118,
+                                  padding: const EdgeInsets.all(12.0),
+                                  margin: const EdgeInsets.all(12.0),
+                                  child: Row(
                                       children: <Widget>[
                                         SizedBox(
                                             width: 160,
                                             child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: const <Widget>[
-                                                Text('Рейтинг'),
-                                                SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text('Положительный',
-                                                  style: TextStyle(
-                                                      color: Colors.greenAccent,
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 20
+                                                crossAxisAlignment: CrossAxisAlignment
+                                                    .start,
+                                                children: const <Widget>[
+                                                  Text('Рейтинг'),
+                                                  SizedBox(
+                                                    height: 5,
                                                   ),
-                                                ),
-                                                SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor ur. ',
-                                                  maxLines: 3,
-                                                  style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 11,
+                                                  Text('Положительный',
+                                                    style: TextStyle(
+                                                        color: Colors
+                                                            .greenAccent,
+                                                        fontWeight: FontWeight
+                                                            .bold,
+                                                        fontSize: 20
+                                                    ),
                                                   ),
-                                                )
-                                              ]
+                                                  SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Text(
+                                                    'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor ur. ',
+                                                    maxLines: 3,
+                                                    style: TextStyle(
+                                                      color: Colors.grey,
+                                                      fontSize: 11,
+                                                    ),
+                                                  )
+                                                ]
                                             )
                                         ),
                                         const SizedBox(
-                                          width: 30
+                                            width: 30
                                         ),
                                         SizedBox(
                                           width: 103,
@@ -108,11 +110,13 @@ class HomePage extends StatelessWidget {
                                                   height: 103.0,
                                                   child: CircularProgressIndicator(
                                                     strokeWidth: 5,
-                                                    value: employer.companyRate * 0.01,
+                                                    value: employer
+                                                        .companyRate * 0.01,
                                                   ),
                                                 ),
                                               ),
-                                              Center(child: Text(employer.companyRate.toString(),
+                                              Center(child: Text(
+                                                employer.companyRate.toString(),
                                                 style: const TextStyle(
                                                   color: Colors.greenAccent,
                                                   fontSize: 39,
@@ -124,48 +128,46 @@ class HomePage extends StatelessWidget {
                                           ),
                                         ),
                                       ]
-                                    )
-                                )
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              ChartWidget(),
-                              Container(
-                                margin: const EdgeInsets.all(12.0),
-                                child: Column(
-                                  children: const [
-                                    Text('Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua...',
-                                      maxLines: 3,
-                                      style: TextStyle(
-                                        fontSize: 22.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),),
-                                    SizedBox(height: 10.0,),
-                                    Text('Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua psum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua',
-                                      maxLines: 6,
-                                      style: TextStyle(
-                                          fontSize: 14.0,
-                                        color: Color(0xFF696974),
-                                      ),),
-                                  ],
-                                ),
-                              ),
+                                  )
+                              )
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          ChartWidget(),
+                          Container(
+                            margin: const EdgeInsets.all(12.0),
+                            child: Column(
+                              children: const [
+                                Text(
+                                  'Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua...',
+                                  maxLines: 3,
+                                  style: TextStyle(
+                                    fontSize: 22.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),),
+                                SizedBox(height: 10.0,),
+                                Text(
+                                  'Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua psum dolor sit amet, consectetur incididunt ut labore et dolore magna aliqua',
+                                  maxLines: 6,
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    color: Color(0xFF696974),
+                                  ),),
+                              ],
+                            ),
+                          ),
 
-                              Container(
-                                alignment: Alignment.center,
-                                child: const ContentWidget(),
-                              ),
-                            ]
-                        )
+                          Container(
+                            alignment: Alignment.center,
+                            child: const ContentWidget(),
+                          ),
+                        ]
                     )
-                );
-              }
-              return const Center(
-                  child: CircularProgressIndicator()
-              );
-            }
-        ),
+                )
+            );
+          }
+      ),
     );
   }
 }

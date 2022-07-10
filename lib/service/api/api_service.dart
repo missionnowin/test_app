@@ -70,7 +70,7 @@ import '../../logic/components/models/employer_model.dart';
   }
 
   Future<void> logout() async {
-    await const FlutterSecureStorage().deleteAll();
+    await const FlutterSecureStorage().delete(key: 'token');
   }
 
   Future<String> uploadFile(String imagePath) async {
@@ -81,8 +81,7 @@ import '../../logic/components/models/employer_model.dart';
     final formData = FormData.fromMap({
       "file": multipartFile,
     });
-    var response = await _api.post('$_url/file/upload',
-      data: formData);
+    var response = await _api.post('$_url/file/upload', data: formData);
     return response.data['data']['url'];
   }
 }

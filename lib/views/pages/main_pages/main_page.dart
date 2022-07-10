@@ -2,10 +2,12 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_app/service/icons/icons.dart';
 import 'package:test_app/views/pages/main_pages/profile/profile_page.dart';
 
 
+import '../../../logic/blocs/user_bloc/user_bloc.dart';
 import '../../../service/router/app_router.dart';
 import '../../widgets/bottom_navigation_bar.dart';
 import 'home/home_page.dart';
@@ -22,35 +24,51 @@ class _MainPageState extends State<MainPage> {
   int currentIndex = 0;
 
   final pages = [
-    HomePage(),
-    HomePage(),
-    HomePage(),
-    HomePage(),
+    const HomePage(),
+    const HomePage(),
+    const HomePage(),
+    const HomePage(),
     ProfilePageRoute(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return AutoTabsRouter(
-      routes: [
-        HomeRoute(),
-        HomeRoute(),
-        HomeRoute(),
-        HomeRoute(),
-        const ProfileRoute(),
-      ],
-      builder: (context, child, animation) {
-        final tabsRouter = AutoTabsRouter.of(context);
-        return Scaffold(
-          body: child,
-          bottomNavigationBar: CustomBottomNavigationBar(
-            tabsRouter: tabsRouter,
-            onTap: (index) {
-              tabsRouter.setActiveIndex(index);
-            },
-          ),
-        );
+    return BlocConsumer<UserBloc, UserState>(
+      listener: (context, state) {
+        if (state is UserInitial) {
+          AutoRouter.of(context).replace(const LoginPages());
+        }
       },
+      builder: (context, state) {
+        if (state is UserInitial) {
+          return const Scaffold(
+          body: Center(
+          child: CircularProgressIndicator(),
+          ),
+          );
+        }
+        return AutoTabsRouter(
+          routes: [
+            HomeRoute(),
+            HomeRoute(),
+            HomeRoute(),
+            HomeRoute(),
+            const ProfileRoute(),
+          ],
+          builder: (context, child, animation) {
+            final tabsRouter = AutoTabsRouter.of(context);
+            return Scaffold(
+              body: child,
+              bottomNavigationBar: CustomBottomNavigationBar(
+                tabsRouter: tabsRouter,
+                onTap: (index) {
+                  tabsRouter.setActiveIndex(index);
+                },
+              ),
+            );
+          },
+        );
+      }
     );
   }
 }

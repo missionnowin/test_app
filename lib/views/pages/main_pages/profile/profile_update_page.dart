@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:test_app/logic/blocs/profile_update_bloc/profile_update_bloc.dart';
+import 'package:test_app/logic/blocs/user_bloc/user_bloc.dart';
 import 'package:test_app/logic/components/models/employer_model.dart';
 import 'package:test_app/service/api/api_service.dart';
 
+import '../../../../logic/blocs/update_image_bloc/update_image_bloc.dart';
+
 class ProfilePageUpdate extends StatelessWidget{
-  final _api = ApiService();
   final _headers = ['ФИО', 'Названия организации', 'E-mail', 'Юридический адрес', 'Фактический адрес', 'О компании', 'Должность'];
   final List<TextEditingController> _controllers = List.generate(7, (i) => TextEditingController());
 
@@ -19,11 +21,9 @@ class ProfilePageUpdate extends StatelessWidget{
     return SafeArea(
         top: false,
         bottom: true,
-        child: FutureBuilder<EmployerModel>(
-          future: _api.getData(),
-          builder: (context, snapshot){
-            if(snapshot.hasData) {
-              EmployerModel employer = snapshot.data!;
+        child: BlocBuilder<UserBloc, UserState>(
+          builder: (context, state){
+              EmployerModel employer = state.employerModel!;
               var s = [employer.name, employer.orgName, employer.email, employer.legalAddress, employer.actualAddress, employer.companyDescription, employer.post];
               return Scaffold(
                   backgroundColor: const Color(0xFFFAFAFB),
@@ -118,36 +118,44 @@ class ProfilePageUpdate extends StatelessWidget{
                                     const SizedBox(
                                       height: 17.0,
                                     ),
-                                    Container(
-                                      alignment: Alignment.center,
-                                      child: DecoratedBox(
-                                          decoration: BoxDecoration(
-                                            color: const Color(0xFF009ED1),
-                                            borderRadius: BorderRadius.circular(10.0),
-                                          ),
-                                          child: TextButton(
-                                            onPressed: () async{
-                                                final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-                                                if (image != null) {
-                                                  final fileSizeMB = await image.length() / (1024 * 1024);
-                                                  if(fileSizeMB < 40){
-                                                    employer.logoPath = await _api.uploadFile(image.path);
-                                                  }
-                                                }
-                                            },
-                                            child: SizedBox(
-                                              width: MediaQuery.of(context).size.width * 2/3,
-                                              child: const Text(
-                                                'Изменить фотографию',
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  fontFamily: '.SF UI Display',
-                                                  color: Colors.white,
+                                    BlocProvider<UpdateImageBloc>(
+                                      create: (_) => UpdateImageBloc(),
+                                      child: BlocListener<UpdateImageBloc, UpdateImageState>(
+                                        listener: (context, state) {
+                                          if(state is UpdateImageSuccess){
+                                            context.read<UserBloc>().add(UpdateUserImage(state.employerUpdateModel.logoPath));
+                                          }
+                                        },
+                                          child: Container(
+                                          alignment: Alignment.center,
+                                            child: DecoratedBox(
+                                                decoration: BoxDecoration(
+                                                  color: const Color(0xFF009ED1),
+                                                  borderRadius: BorderRadius.circular(10.0),
                                                 ),
-                                              ),
-                                            ),
-                                          )
-                                      ),
+                                                   child: BlocBuilder<UpdateImageBloc, UpdateImageState>(
+                                                     builder: (context, state) {
+                                                        return TextButton(
+                                                          onPressed: () {
+                                                              context.read<UpdateImageBloc>().add(UpdateImageEvent(context.read<UserBloc>().state.employerModel!));
+                                                          },
+                                                          child: SizedBox(
+                                                            width: MediaQuery.of(context).size.width * 2/3,
+                                                            child: const Text(
+                                                              'Изменить фотографию',
+                                                              textAlign: TextAlign.center,
+                                                              style: TextStyle(
+                                                                fontFamily: '.SF UI Display',
+                                                                color: Colors.white,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }
+                                                    )
+                                                )
+                                          ),
+                                      )
                                     ),
                                   ],
                                 ),
@@ -210,6 +218,7 @@ class ProfilePageUpdate extends StatelessWidget{
                                     child: BlocListener<ProfileUpdateBloc, ProfileUpdateState>(
                                       listener: (context, state){
                                         if(state is ProFileUpdateSuccess){
+                                          context.read<UserBloc>().add(UpdateUser(employerModel: employer));
                                           AutoRouter.of(context).navigateBack();
                                         }
                                         if(state is ProfileUpdateError){
@@ -299,10 +308,6 @@ class ProfilePageUpdate extends StatelessWidget{
                       )
                     ]
                   )
-            );
-            }
-            return const Center(
-              child: CircularProgressIndicator()
             );
           }
         ),
