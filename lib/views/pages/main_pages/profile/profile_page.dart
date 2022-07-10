@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_app/logic/components/models/employer_model.dart';
 import '../../../../logic/blocs/user_bloc/user_bloc.dart';
 import '../../../../service/router/app_router.dart';
-import '../../../forms/profile/profile_page_form.dart';
+import '../../../widgets/forms/profile/profile_page_form.dart';
 
 
 class ProfilePage extends StatelessWidget{

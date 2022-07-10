@@ -2,23 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class PasswordField extends StatefulWidget{
-  TextEditingController _passwordController;
-  PasswordField(this._passwordController, {Key? key}) : super(key: key);
+  PasswordField({Key? key}) : super(key: key);
 
   @override
-  State<PasswordField> createState() => _PasswordFieldState(_passwordController);
+  State<PasswordField> createState() => _PasswordFieldState();
 }
 
 class _PasswordFieldState extends State<PasswordField>{
-  _PasswordFieldState(this._passwordController);
-
   bool _isHidden = true;
-  TextEditingController _passwordController;
 
   @override
-  Widget build(BuildContext context){
-    return FormBuildeFrTextField(
-
-    )
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
   }
 }

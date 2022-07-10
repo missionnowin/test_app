@@ -2,8 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:test_app/service/router/app_router.dart';
 
-import '../../pages/main_pages/profile/profile_update_page.dart';
-
 class ProfilePageForm extends StatelessWidget{
 
   final _headers = const ['Dashboard', 'Настройки профиля', 'Мои документы', 'Рейтинги', 'Тестирование','Поиск вакансий', 'Мои отклики', 'Рекомендации', 'Тарифы', 'FAQ'];
