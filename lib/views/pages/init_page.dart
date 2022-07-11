@@ -20,7 +20,7 @@ class InitPage extends StatelessWidget{
               AutoRouter.of(context).replace(const LoginPages());
             }
             if (state is IsAuthorized) {
-              context.read<UserBloc>().add(UpdateUser(employerModel: state.employerModel));
+              context.read<UserBloc>().add(UpdateUser(state.employerModel));
               AutoRouter.of(context).replace(const MainPageRoute());
             }
           },

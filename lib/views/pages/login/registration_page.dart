@@ -29,7 +29,7 @@ class RegistrationPage extends StatelessWidget{
               child: BlocListener<SignUpBloc, SignUpState>(
                 listener: (context, state){
                   if(state is SignUpSuccess){
-                    context.read<UserBloc>().add(UpdateUser(employerModel: state.employerModel));
+                    context.read<UserBloc>().add(UpdateUser(state.employerModel));
                     AutoRouter.of(context).replace(const MainPageRoute());
                   }
                   if(state is SignUpError){

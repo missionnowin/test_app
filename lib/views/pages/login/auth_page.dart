@@ -137,7 +137,7 @@ class AuthPage extends StatelessWidget{
                   child: BlocListener<SignInBloc, SignInState>(
                     listener: (context, state){
                       if(state is SignInSuccess){
-                        context.read<UserBloc>().add(UpdateUser(employerModel: state.employerModel));
+                        context.read<UserBloc>().add(UpdateUser(state.employerModel));
                         AutoRouter.of(context).replace(const MainPageRoute());
                       }
                       if(state is SignInError){

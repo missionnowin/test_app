@@ -23,7 +23,7 @@ class ProfilePageUpdate extends StatelessWidget{
         bottom: true,
         child: BlocBuilder<UserBloc, UserState>(
           builder: (context, state){
-              EmployerModel employer = state.employerModel!;
+              EmployerModel employer = EmployerModel.copyWith(state.employerModel!);
               var s = [employer.name, employer.orgName, employer.email, employer.legalAddress, employer.actualAddress, employer.companyDescription, employer.post];
               return Scaffold(
                   backgroundColor: const Color(0xFFFAFAFB),
@@ -87,55 +87,56 @@ class ProfilePageUpdate extends StatelessWidget{
                                   borderRadius: BorderRadius.circular(15.0),
                                   color: Colors.white,
                                 ),
-                                child: Column(
-                                  children: <Widget>[
-                                    Container(
-                                        height: 100,
-                                        width: 100,
-                                        alignment: Alignment.topCenter,
-                                        child: CircleAvatar(
-                                          backgroundImage: NetworkImage(employer.logoPath),
-                                          radius: 55,
-                                        )
-                                    ),
-                                    const SizedBox(
-                                      height: 7,
-                                    ),
-                                    Text(employer.name.toString(),
-                                      style: const TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                                    const Text('Работодатель',
-                                      style: TextStyle(
-                                          fontFamily: '.SF UI Display',
-                                          color: Color(0xFFB7C1D1),
-                                          fontSize: 15.0
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 17.0,
-                                    ),
-                                    BlocProvider<UpdateImageBloc>(
-                                      create: (_) => UpdateImageBloc(),
-                                      child: BlocListener<UpdateImageBloc, UpdateImageState>(
-                                        listener: (context, state) {
-                                          if(state is UpdateImageSuccess){
-                                            context.read<UserBloc>().add(UpdateUserImage(state.employerUpdateModel.logoPath));
-                                          }
-                                        },
-                                          child: Container(
+                                child:  BlocProvider<UpdateImageBloc>(
+                                  create: (_) => UpdateImageBloc(),
+                                  child: BlocListener<UpdateImageBloc, UpdateImageState>(
+                                    listener: (context, state) {
+                                      if(state is UpdateImageSuccess){
+                                        employer.updateImage(state.employerUpdateModel.logoPath);
+                                      }
+                                    },
+                                  child: BlocBuilder<UpdateImageBloc, UpdateImageState>(
+                                      builder: (context, state) {
+                                      return  Column(
+                                        children: <Widget>[
+                                          Container(
+                                              height: 100,
+                                              width: 100,
+                                              alignment: Alignment.topCenter,
+                                              child: CircleAvatar(
+                                                backgroundImage: NetworkImage(employer.logoPath),
+                                                radius: 55,
+                                              )
+                                          ),
+                                          const SizedBox(
+                                            height: 7,
+                                          ),
+                                          Text(employer.name.toString(),
+                                            style: const TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18,
+                                            ),
+                                          ),
+                                          const Text('Работодатель',
+                                            style: TextStyle(
+                                                fontFamily: '.SF UI Display',
+                                                color: Color(0xFFB7C1D1),
+                                                fontSize: 15.0
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 17.0,
+                                          ),
+                                         Container(
                                           alignment: Alignment.center,
                                             child: DecoratedBox(
                                                 decoration: BoxDecoration(
                                                   color: const Color(0xFF009ED1),
                                                   borderRadius: BorderRadius.circular(10.0),
                                                 ),
-                                                   child: BlocBuilder<UpdateImageBloc, UpdateImageState>(
-                                                     builder: (context, state) {
-                                                        return TextButton(
+                                                   child:
+                                                        TextButton(
                                                           onPressed: () {
                                                               context.read<UpdateImageBloc>().add(UpdateImageEvent(context.read<UserBloc>().state.employerModel!));
                                                           },
@@ -150,15 +151,14 @@ class ProfilePageUpdate extends StatelessWidget{
                                                               ),
                                                             ),
                                                           ),
-                                                        );
-                                                      }
-                                                    )
-                                                )
-                                          ),
-                                      )
-                                    ),
-                                  ],
-                                ),
+                                                        ),
+                                            )
+                                         ),
+                                        ],
+                                      );
+                                      }),
+                                  )
+                                )
                               ),
                               const SizedBox(
                                 height: 25,
@@ -218,14 +218,11 @@ class ProfilePageUpdate extends StatelessWidget{
                                   child: BlocListener<ProfileUpdateBloc, ProfileUpdateState>(
                                       listener: (context, state){
                                         if(state is ProFileUpdateSuccess){
-                                          context.read<UserBloc>().add(UpdateUser(employerModel: employer));
+                                          context.read<UserBloc>().add(UpdateUser(employer));
                                           AutoRouter.of(context).navigateBack();
                                         }
                                         if(state is ProfileUpdateError){
                                           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Something went wrong')));
-                                        }
-                                        if(state is ProfileRollBack){
-                                          context.read<UserBloc>().add(UpdateUserImage(state.employerModel.logoPath));
                                         }
                                       },
                                       child: Column(
@@ -282,7 +279,6 @@ class ProfilePageUpdate extends StatelessWidget{
                                                       builder: (context, state) {
                                                         return TextButton(
                                                           onPressed: (){
-                                                            context.read<ProfileUpdateBloc>().add(ProfileRollBackEvent());
                                                             AutoRouter.of(context).pop();
                                                           },
                                                           child: SizedBox(

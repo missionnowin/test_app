@@ -20,7 +20,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 
   Future<void> _onUpdateImage(UpdateUserImage event, emit) async {
-    emit(UserInitiated((state.employerModel as EmployerModel).updateImage(event.logoPath)));
+    state.employerModel!.updateImage(event.logoPath);
+    emit(UserInitiated(state.employerModel as EmployerModel));
   }
 
   Future<void> _onLogout(UserEvent event, emit) async {

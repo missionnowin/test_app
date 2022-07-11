@@ -74,8 +74,23 @@ class EmployerModel{
     this.orgName = (orgName == '') ? this.orgName : orgName;
   }
 
-  EmployerModel updateImage(String logoPath){
+  void updateImage(String logoPath){
     this.logoPath = logoPath;
-    return this;
+  }
+  factory EmployerModel.copyWith(EmployerModel employerModel){
+    return EmployerModel(
+        id: employerModel.id,
+        orgName: employerModel.orgName,
+        email: employerModel.email,
+        name: employerModel.name,
+        surname: employerModel.surname,
+        lastName: employerModel.lastName,
+        post: employerModel.post,
+        orgDetails: employerModel.orgDetails,
+        legalAddress: employerModel.legalAddress,
+        actualAddress: employerModel.actualAddress,
+        logoPath: employerModel.logoPath,
+        companyDescription: employerModel.companyDescription,
+        companyRate: employerModel.companyRate);
   }
 }
