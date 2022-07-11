@@ -12,17 +12,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc() : super(UserInitial()) {
     on<UserLogout>(_onLogout);
     on<UpdateUser>(_onUpdate);
-    on<UpdateUserImage>(_onUpdateImage);
 
   }
 
   Future<void> _onUpdate(UpdateUser event, emit) async {
     emit(UserInitiated(event.employerModel));
-  }
-
-  Future<void> _onUpdateImage(UpdateUserImage event, emit) async {
-    state.employerModel!.updateImage(event.logoPath);
-    emit(UserInitiated(state.employerModel as EmployerModel));
   }
 
   Future<void> _onLogout(UserEvent event, emit) async {

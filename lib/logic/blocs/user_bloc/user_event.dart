@@ -11,7 +11,3 @@ class UpdateUser extends UserEvent {
   UpdateUser(this.employerModel);
 }
 
-class UpdateUserImage extends UserEvent {
-  final String logoPath;
-  UpdateUserImage(this.logoPath);
-}
