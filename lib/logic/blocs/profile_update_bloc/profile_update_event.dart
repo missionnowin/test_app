@@ -6,7 +6,5 @@ class ProfileSaveUpdatesEvent extends ProfileUpdateEvent{
     ProfileSaveUpdatesEvent(this.employerUpdateModel);
 }
 
-class ProfileRollBackEvent extends ProfileUpdateEvent{
 
-}
 
