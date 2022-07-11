@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_app/logic/blocs/sign_up_bloc/sign_up_bloc.dart';
+import 'package:test_app/logic/blocs/user_bloc/user_bloc.dart';
 import 'package:test_app/logic/components/models/sign_up_model.dart';
 import 'package:test_app/service/api/api_service.dart';
 import 'package:test_app/service/router/app_router.dart';
@@ -28,6 +29,7 @@ class RegistrationPage extends StatelessWidget{
               child: BlocListener<SignUpBloc, SignUpState>(
                 listener: (context, state){
                   if(state is SignUpSuccess){
+                    context.read<UserBloc>().add(UpdateUser(employerModel: state.employerModel));
                     AutoRouter.of(context).replace(const MainPageRoute());
                   }
                   if(state is SignUpError){

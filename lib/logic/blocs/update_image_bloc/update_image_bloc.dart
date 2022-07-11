@@ -2,9 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:meta/meta.dart';
 import 'package:test_app/service/api/api_service.dart';
-
 import '../../components/models/employer_model.dart';
 
 part 'update_image_event.dart';
