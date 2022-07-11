@@ -6,14 +6,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_app/logic/blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'package:test_app/logic/blocs/user_bloc/user_bloc.dart';
 import 'package:test_app/logic/components/models/sign_up_model.dart';
-import 'package:test_app/service/api/api_service.dart';
 import 'package:test_app/service/router/app_router.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class RegistrationPage extends StatelessWidget{
   final _headers = ['Наименование организации', 'Номер телефона', 'E-mail', 'Пароль', 'Подтвердить пароль'];
   final List<TextEditingController> _controllers = List.generate(5, (i) => TextEditingController());
-  final ApiService _api = ApiService();
 
   RegistrationPage({Key? key}) : super(key: key);
 

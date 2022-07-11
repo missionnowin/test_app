@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'custom_switch.dart';
 
 class ChartWidget extends StatelessWidget{
-  final List<_ChartData> data = [
+  final data = [
     _ChartData('Jan', 50),
     _ChartData('Feb', 50),
     _ChartData('Mar', 50),

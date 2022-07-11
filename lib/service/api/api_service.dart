@@ -1,4 +1,3 @@
-import 'package:cross_file/src/types/interface.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:test_app/logic/components/models/sign_in_model.dart';

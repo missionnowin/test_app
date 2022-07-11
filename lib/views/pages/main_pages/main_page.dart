@@ -3,10 +3,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test_app/service/icons/icons.dart';
-import 'package:test_app/views/pages/main_pages/profile/profile_page.dart';
-
-
 import '../../../logic/blocs/user_bloc/user_bloc.dart';
 import '../../../service/router/app_router.dart';
 import '../../widgets/bottom_navigation_bar.dart';

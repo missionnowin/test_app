@@ -2,12 +2,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:test_app/logic/blocs/profile_update_bloc/profile_update_bloc.dart';
 import 'package:test_app/logic/blocs/user_bloc/user_bloc.dart';
 import 'package:test_app/logic/components/models/employer_model.dart';
-import 'package:test_app/service/api/api_service.dart';
-
 import '../../../../logic/blocs/update_image_bloc/update_image_bloc.dart';
 
 class ProfilePageUpdate extends StatelessWidget{
@@ -23,7 +20,7 @@ class ProfilePageUpdate extends StatelessWidget{
         bottom: true,
         child: BlocBuilder<UserBloc, UserState>(
           builder: (context, state){
-              EmployerModel employer = EmployerModel.copyWith(state.employerModel!);
+              EmployerModel employer = state.employerModel!;
               var s = [employer.name, employer.orgName, employer.email, employer.legalAddress, employer.actualAddress, employer.companyDescription, employer.post];
               return Scaffold(
                   backgroundColor: const Color(0xFFFAFAFB),
@@ -92,7 +89,7 @@ class ProfilePageUpdate extends StatelessWidget{
                                   child: BlocListener<UpdateImageBloc, UpdateImageState>(
                                     listener: (context, state) {
                                       if(state is UpdateImageSuccess){
-                                        employer.updateImage(state.employerUpdateModel.logoPath);
+                                        employer.updateImage(state.logoPath);
                                       }
                                     },
                                   child: BlocBuilder<UpdateImageBloc, UpdateImageState>(
@@ -138,7 +135,7 @@ class ProfilePageUpdate extends StatelessWidget{
                                                    child:
                                                         TextButton(
                                                           onPressed: () {
-                                                              context.read<UpdateImageBloc>().add(UpdateImageEvent(context.read<UserBloc>().state.employerModel!));
+                                                              context.read<UpdateImageBloc>().add(UpdateImageEvent(employer.logoPath));
                                                           },
                                                           child: SizedBox(
                                                             width: MediaQuery.of(context).size.width * 2/3,

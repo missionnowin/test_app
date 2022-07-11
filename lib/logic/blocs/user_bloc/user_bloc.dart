@@ -1,8 +1,9 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:test_app/service/api/api_service.dart';
 import '../../components/models/employer_model.dart';
 part 'user_event.dart';
 part 'user_state.dart';

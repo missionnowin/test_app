@@ -5,6 +5,6 @@ abstract class UpdateImageState {}
 class UpdateImageInitial extends UpdateImageState {}
 class UpdateImageError extends UpdateImageState {}
 class UpdateImageSuccess extends UpdateImageState {
-  final EmployerModel employerUpdateModel;
-  UpdateImageSuccess(this.employerUpdateModel);
+  final String logoPath;
+  UpdateImageSuccess(this.logoPath);
 }

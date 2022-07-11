@@ -1,10 +1,9 @@
-import 'dart:async';
+// ignore_for_file: depend_on_referenced_packages
 
+import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:test_app/service/api/api_service.dart';
-import '../../components/models/employer_model.dart';
-
 part 'update_image_event.dart';
 part 'update_image_state.dart';
 
@@ -20,8 +19,8 @@ class UpdateImageBloc extends Bloc<UpdateImageEvent, UpdateImageState> {
       if (image != null) {
         final fileSizeMB = await image.length() / (1024 * 1024);
         if(fileSizeMB < 40){
-          event.employerUpdateModel.logoPath = await ApiService().uploadFile(image.path);
-          emit(UpdateImageSuccess(event.employerUpdateModel));
+          event.logoPath = await ApiService().uploadFile(image.path);
+          emit(UpdateImageSuccess(event.logoPath));
         }
       }
     }catch (e){
