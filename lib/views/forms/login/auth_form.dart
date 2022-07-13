@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -9,10 +8,10 @@ import 'package:test_app/views/widgets/custom_text_field.dart';
 import '../../../service/router/app_router.dart';
 
 class AuthForm extends StatelessWidget{
-  AuthForm({Key? key, required this.onConfirm}) : super(key: key);
+  const AuthForm({Key? key, required this.onConfirm}) : super(key: key);
 
   final void Function(BuildContext, Map<String, dynamic>) onConfirm;
-  final _formKey = GlobalKey<FormBuilderState>();
+  static final _formKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +21,12 @@ class AuthForm extends StatelessWidget{
         children: <Widget>[
           CustomFormTextField(
               name: 'email',
-              label: 'E-mail / номер телефонра',
+              label: 'E-mail / Номер телефонра',
               validator: FormBuilderValidators.required(context, errorText: 'Необходимо заполнить поле'),
           ),
           const SizedBox(height: 6.0),
           const PasswordField(),
-          const SizedBox(height: 32),
+          const SizedBox(height: 60),
           Container(
             alignment: Alignment.center,
             child: DecoratedBox(

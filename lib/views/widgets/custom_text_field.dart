@@ -45,8 +45,11 @@ class CustomFormTextField extends StatelessWidget {
         FormBuilderTextField(
           name: name,
           initialValue: initialValue,
+          keyboardType: TextInputType.text,
           validator: validator,
-          obscureText: false,
+          minLines: isMultiline ? 20 : 1,
+          maxLines: isMultiline ? 20 : 1,
+          obscureText: obscureText,
           decoration: InputDecoration(
             suffixIcon: suffixIcon,
             hintText: hintText,
