@@ -18,6 +18,7 @@ class _PasswordFieldState extends State<PasswordField>{
     return CustomFormTextField(
       label: 'Пароль',
       name: 'password',
+      action: TextInputAction.done,
       validator: FormBuilderValidators.compose([
         FormBuilderValidators.required(context,
             errorText: 'Необходимо заполнить поле',

@@ -20,6 +20,7 @@ class AuthForm extends StatelessWidget{
       child: Column(
         children: <Widget>[
           CustomFormTextField(
+              action: TextInputAction.next,
               name: 'email',
               label: 'E-mail / Номер телефонра',
               validator: FormBuilderValidators.required(context, errorText: 'Необходимо заполнить поле'),

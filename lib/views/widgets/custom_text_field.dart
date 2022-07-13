@@ -6,6 +6,7 @@ class CustomFormTextField extends StatelessWidget {
     Key? key,
     required this.name,
     required this.label,
+    this.action,
     this.initialValue,
     this.validator,
     this.suffixIcon,
@@ -15,6 +16,7 @@ class CustomFormTextField extends StatelessWidget {
     this.isMultiline = false,
   }) : super(key: key);
 
+  final TextInputAction? action;
   final String name;
   final String label;
   final String? initialValue;
@@ -43,6 +45,7 @@ class CustomFormTextField extends StatelessWidget {
         ),
         const SizedBox(height: 6),
         FormBuilderTextField(
+          textInputAction: action,
           name: name,
           initialValue: initialValue,
           keyboardType: TextInputType.text,
