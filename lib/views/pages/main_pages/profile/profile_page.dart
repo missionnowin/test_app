@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../logic/blocs/user_bloc/user_bloc.dart';
 import '../../../../service/router/app_router.dart';
-import '../../../forms/profile/profile_page_form.dart';
+import '../../../widgets/profile_page_widgets/profile_menu.dart';
 
 
 class ProfilePage extends StatelessWidget{

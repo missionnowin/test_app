@@ -22,7 +22,7 @@ class AuthForm extends StatelessWidget{
           CustomFormTextField(
               action: TextInputAction.next,
               name: 'email',
-              label: 'E-mail / Номер телефонра',
+              label: 'E-mail / Номер телефона',
               validator: FormBuilderValidators.required(context, errorText: 'Необходимо заполнить поле'),
           ),
           const SizedBox(height: 6.0),

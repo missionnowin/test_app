@@ -24,11 +24,18 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         await const FlutterSecureStorage().write(key: 'token', value: token);
         EmployerModel employerModel = await apiService.getData();
         emit(SignUpSuccess(employerModel));
-      }else{
-      emit(SignUpError());
       }
-    } on DioError{
-      emit(SignUpError());
+    } on DioError catch (error){
+      String response = error.response?.data['msg'];
+      if (response == 'incorrect_email') {
+        emit(SignUpEmailError());
+      }
+      else if (response == 'incorrect_phone'){
+        emit(SignUpPhoneError());
+      }
+      else {
+        emit(SignUpError());
+      }
     }
   }
 }

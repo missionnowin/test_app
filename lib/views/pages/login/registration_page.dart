@@ -27,6 +27,12 @@ class RegistrationPage extends StatelessWidget{
                       context.read<UserBloc>().add(UpdateUser(state.employerModel));
                       AutoRouter.of(context).replace(const MainPageRoute());
                     }
+                    if(state is SignUpEmailError){
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('E-mail is already in use'),));
+                    }
+                    if(state is SignUpPhoneError){
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Phone is already in use'),));
+                    }
                     if(state is SignUpError){
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Something went wrong'),));
                     }
