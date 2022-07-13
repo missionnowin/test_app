@@ -63,7 +63,7 @@ import '../../logic/models/employer_model.dart';
               "Content-Type": "application/json"
             }
         ),
-      data:signUpData,
+      data:signUpData.toJson(),
     );
     return response.data['msg'];
   }

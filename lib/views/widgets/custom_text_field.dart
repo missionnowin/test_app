@@ -63,6 +63,7 @@ class CustomFormTextField extends StatelessWidget {
             border: const OutlineInputBorder(),
           ),
         ),
+        const SizedBox(height: 7),
       ],
     );
   }
