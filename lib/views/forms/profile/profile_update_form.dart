@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -7,11 +6,11 @@ import '../../../logic/models/employer_model.dart';
 import '../../widgets/custom_text_field.dart';
 
 class ProfileUpdateForm extends StatelessWidget{
-  ProfileUpdateForm({Key? key, required this.onConfirm, required this.employerModel}) : super(key: key);
+  const ProfileUpdateForm({Key? key, required this.onConfirm, required this.employerModel}) : super(key: key);
 
   final void Function(BuildContext, Map<String, dynamic>) onConfirm;
   static final _formKey = GlobalKey<FormBuilderState>();
-  EmployerModel employerModel;
+  final EmployerModel employerModel;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +80,6 @@ class ProfileUpdateForm extends StatelessWidget{
                             child: const Text('Сохранить',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontFamily: '.SF UI Display',
                                 color: Colors.white,
                               ),
                             ),

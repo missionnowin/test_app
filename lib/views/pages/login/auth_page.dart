@@ -45,7 +45,6 @@ class AuthPage extends StatelessWidget{
                       const Text(
                         ('Авторизация'),
                         style: TextStyle(
-                          fontFamily: '.SF UI Display',
                           color: Color(0xFF009ED1),
                           fontSize: 14,
                         ),
@@ -57,7 +56,6 @@ class AuthPage extends StatelessWidget{
                         ('Войти в аккаунт'),
                         style: TextStyle(
                             color : Color(0xff3f4554),
-                            fontFamily: '.SF UI Display',
                             fontSize : 24,
                             fontWeight: FontWeight.bold
                         ),

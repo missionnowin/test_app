@@ -51,7 +51,6 @@ class AuthForm extends StatelessWidget{
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
-                            fontFamily: '.SF UI Display',
                             color: Colors.white,
                           ),
                         ),
@@ -80,7 +79,6 @@ class AuthForm extends StatelessWidget{
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 15,
-                        fontFamily: '.SF UI Display',
                         fontWeight: FontWeight.w600,
                         color: Color(0xFF617088),
                       ),
@@ -98,7 +96,6 @@ class AuthForm extends StatelessWidget{
                 'Забыли пароль?',
                   style: TextStyle(
                     fontSize: 15,
-                    fontFamily: '.SF UI Display',
                     color: Color(0xFF617088),
                     fontWeight: FontWeight.w500,
                   ),

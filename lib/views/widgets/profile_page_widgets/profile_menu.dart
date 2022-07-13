@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:test_app/service/router/app_router.dart';
 
-class ProfilePageForm extends StatelessWidget{
+class ProfilePageMenu extends StatelessWidget{
 
   final _headers = const ['Dashboard', 'Настройки профиля', 'Мои документы', 'Рейтинги', 'Тестирование','Поиск вакансий', 'Мои отклики', 'Рекомендации', 'Тарифы', 'FAQ'];
   final List<AssetImage> _tabImages = const [AssetImage('assets/menu_icons/DashBoard.png'),
@@ -17,7 +17,7 @@ class ProfilePageForm extends StatelessWidget{
     AssetImage('assets/menu_icons/Faq.png'),
   ];
 
-  const ProfilePageForm({Key? key}) : super(key: key);
+  const ProfilePageMenu({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,6 @@ class ProfilePageForm extends StatelessWidget{
                           Text(_headers[index],
                               style: const TextStyle(
                                 color: Color(0xFF44444F),
-                                fontFamily: '.SF UI Display',
                                 fontWeight: FontWeight.w600,
                                 fontSize: 15,
                               )

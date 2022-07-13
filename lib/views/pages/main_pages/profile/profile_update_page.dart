@@ -69,7 +69,6 @@ class ProfilePageUpdate extends StatelessWidget {
                                                     ),
                                                     Text('Профиль работодателя',
                                                       style: TextStyle(
-                                                        fontFamily: '.SF UI Display',
                                                         color: Color(0xFF009ED1),
                                                         fontSize: 15,
                                                       ),
@@ -80,7 +79,6 @@ class ProfilePageUpdate extends StatelessWidget {
                                                     Text('Настройки профиля',
                                                       style:
                                                       TextStyle(
-                                                        fontFamily: '.SF UI Display',
                                                         color: Colors.black,
                                                         fontSize: 24,
                                                         fontWeight: FontWeight.bold,
@@ -145,7 +143,6 @@ class ProfilePageUpdate extends StatelessWidget {
                                                     child: const Text('Отменить',
                                                       textAlign: TextAlign.center,
                                                       style: TextStyle(
-                                                        fontFamily: '.SF UI Display',
                                                         color: Color(0xFF617088),
                                                       ),
                                                     ),

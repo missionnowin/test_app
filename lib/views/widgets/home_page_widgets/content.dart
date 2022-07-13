@@ -73,7 +73,6 @@ class ContentWidget extends StatelessWidget{
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 15,
-                        fontFamily: '.SF UI Display',
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
                       ),

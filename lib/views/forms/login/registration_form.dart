@@ -84,7 +84,6 @@ class RegistrationForm extends StatelessWidget{
                                   style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600,
-                                    fontFamily: '.SF UI Display',
                                     color: Colors.white,
                                   ),
                                 ),
@@ -112,7 +111,6 @@ class RegistrationForm extends StatelessWidget{
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600,
-                                fontFamily: '.SF UI Display',
                                 color: Color(0xFF617088),
                               ),
                             ),
@@ -126,7 +124,6 @@ class RegistrationForm extends StatelessWidget{
                   Text(
                       '(Необязательно при регистрации)',
                       style: TextStyle(
-                          fontFamily: '.SF UI Display',
                           color: Colors.black.withOpacity(0.5),
                           fontSize: 12.0,
                           fontWeight: FontWeight.w400
@@ -143,7 +140,6 @@ class RegistrationForm extends StatelessWidget{
                       'У вас уже есть аккаунт? Войти',
                       style: TextStyle(
                         fontSize: 13,
-                        fontFamily: '.SF UI Display',
                         color: Color(0xFF009ED1),
                       ),
                     ),

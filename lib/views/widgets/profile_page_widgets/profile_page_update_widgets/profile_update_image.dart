@@ -60,7 +60,6 @@ class ProfileUpdateImage extends StatelessWidget{
                               const Text(
                                 'Работодатель',
                                 style: TextStyle(
-                                    fontFamily: '.SF UI Display',
                                     color: Color(0xFFB7C1D1),
                                     fontSize: 15.0
                                 ),
@@ -85,7 +84,6 @@ class ProfileUpdateImage extends StatelessWidget{
                                           'Изменить фотографию',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                            fontFamily: '.SF UI Display',
                                             color: Colors.white,
                                           ),
                                         ),

@@ -64,7 +64,6 @@ class RegistrationPage extends StatelessWidget{
                                     const Text('Регистрация | The Professional',
                                       style: TextStyle(
                                           color: Color(0xFF009ED1),
-                                          fontFamily: '.SF UI Display',
                                           fontSize: 14.0
                                       ),
                                     ),
@@ -74,7 +73,6 @@ class RegistrationPage extends StatelessWidget{
                                     const Text('Регистрация аккаунта',
                                       style: TextStyle(
                                         color: Color(0xFF3F4554),
-                                        fontFamily: '.SF UI Display',
                                         fontSize: 24.0,
                                         fontWeight: FontWeight.w700,
                                       ),

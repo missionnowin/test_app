@@ -19,9 +19,7 @@ class HomePage extends StatelessWidget {
             return Scaffold(
                 backgroundColor: Colors.white,
                 body: Container(
-                    width: MediaQuery
-                        .of(context)
-                        .size
+                    width: MediaQuery.of(context).size
                         .width,
                     margin: const EdgeInsets.all(10.0),
                     padding: const EdgeInsets.all(10.0),
@@ -64,7 +62,7 @@ class HomePage extends StatelessWidget {
                                   child: Row(
                                       children: <Widget>[
                                         SizedBox(
-                                            width: 160,
+                                            width: 170,
                                             child: Column(
                                                 crossAxisAlignment: CrossAxisAlignment
                                                     .start,

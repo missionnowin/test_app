@@ -38,7 +38,6 @@ class CustomFormTextField extends StatelessWidget {
           style: TextStyle(
             fontSize: 12.0,
             color: const Color(0xFF1D293F).withOpacity(0.5),
-            fontFamily: '.SF UI Display',
             fontWeight: FontWeight.w400,
             decorationStyle: TextDecorationStyle.dashed,
           ),

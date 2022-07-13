@@ -22,7 +22,7 @@ class ProfilePage extends StatelessWidget{
                       decoration: const BoxDecoration(
                         color: Colors.white
                       ),
-                      height: 106,
+                      height: 110,
                       child: Row(
                         children: <Widget>[
                           BlocBuilder<UserBloc, UserState>(
@@ -46,7 +46,6 @@ class ProfilePage extends StatelessWidget{
                                             const Text('Работодатель',
                                               style: TextStyle(
                                                 fontSize: 13.0,
-                                                fontFamily: '.SF UI Display',
                                                 color: Color(0xFF009ED1)
                                               ),
                                             ),
@@ -56,7 +55,6 @@ class ProfilePage extends StatelessWidget{
                                             Text(state.employerModel!.name.toString(),
                                               style: const TextStyle(
                                                 color: Color(0xFF3F4554),
-                                                fontFamily: '.SF UI Display',
                                                 fontWeight: FontWeight.w700,
                                                 fontSize: 18.0
                                               ),
@@ -107,7 +105,7 @@ class ProfilePage extends StatelessWidget{
                   const SizedBox(
                     height: 21,
                   ),
-                  const ProfilePageForm(),
+                  const ProfilePageMenu(),
                   const SizedBox(
                     height: 50.0,
                   ),

@@ -14,12 +14,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DefaultTextStyle.of(context).style.fontFamily;
     return MultiBlocProvider(providers: [
       BlocProvider<UserBloc>(create: (_) => UserBloc()),
     ],
       child: MaterialApp.router(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
+              fontFamily: 'SF UI Display',
               primaryColor: Colors.white,
             ),
             routerDelegate: _appRouter.delegate(),
