@@ -259,7 +259,7 @@ class RegistrationPage extends StatelessWidget{
                               ),
                             TextButton(
                               onPressed: (){
-                                AutoRouter.of(context).navigateBack();
+                                AutoRouter.of(context).pop();
                               },
                               child: const Text(
                                 'У вас уже есть аккаунт? Войти',

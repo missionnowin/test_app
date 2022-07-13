@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test_app/logic/models/employer_model.dart';
 import '../../../../logic/blocs/user_bloc/user_bloc.dart';
 import '../../../../service/router/app_router.dart';
 import '../../../forms/profile/profile_page_form.dart';
@@ -28,14 +27,13 @@ class ProfilePage extends StatelessWidget{
                         children: <Widget>[
                           BlocBuilder<UserBloc, UserState>(
                             builder: (context, state){
-                                EmployerModel employer = state.employerModel!;
                                 return Container(
                                     margin: const EdgeInsets.all(12.0),
                                     padding: const EdgeInsets.all(8.0),
                                     child: Row(
                                       children: <Widget>[
                                         CircleAvatar(
-                                          backgroundImage: NetworkImage(employer.logoPath),
+                                          backgroundImage: NetworkImage(state.employerModel!.logoPath),
                                           radius: 32,
                                         ),
                                         const SizedBox(
@@ -55,7 +53,7 @@ class ProfilePage extends StatelessWidget{
                                             const SizedBox(
                                               height: 3,
                                             ),
-                                            Text(employer.name!,
+                                            Text(state.employerModel!.name.toString(),
                                               style: const TextStyle(
                                                 color: Color(0xFF3F4554),
                                                 fontFamily: '.SF UI Display',
@@ -88,7 +86,7 @@ class ProfilePage extends StatelessWidget{
                                                     const SizedBox(
                                                       width: 4,
                                                     ),
-                                                    Text(employer.companyRate.toString(),
+                                                    Text(state.employerModel!.companyRate.toString(),
                                                     style: const TextStyle(
                                                       color: Color(0xFF14C686)),
                                                     ),
