@@ -22,22 +22,27 @@ class RegistrationForm extends StatelessWidget{
             CustomFormTextField(
               name: 'orgName',
               label: 'Наименование организации',
+              action: TextInputAction.next,
               validator: FormBuilderValidators.required(context, errorText: 'Необходимо заполнить поле')),
             CustomFormTextField(
               name: 'phone',
               label: 'Номер телефона',
+              action: TextInputAction.next,
               validator: FormBuilderValidators.required(context, errorText: 'Необходимо заполнить поле'),),
             CustomFormTextField(
               name: 'email',
               label: 'E-mail',
+              action: TextInputAction.next,
               validator: FormBuilderValidators.required(context, errorText: 'Необходимо заполнить поле'),),
             CustomFormTextField(
               name: 'password',
               label: 'Пароль',
+              action: TextInputAction.next,
               validator: FormBuilderValidators.required(context, errorText: 'Необходимо заполнить поле'),),
             CustomFormTextField(
               name: 'confirmPassword',
               label: 'Потвердить пароль',
+              action: TextInputAction.done,
               validator: FormBuilderValidators.compose([
                 FormBuilderValidators.required(context, errorText: 'Необходимо заполнить поле'),
                 (val) {
