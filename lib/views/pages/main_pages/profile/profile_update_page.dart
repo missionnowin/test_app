@@ -15,156 +15,160 @@ class ProfilePageUpdate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        top: false,
-        bottom: true,
-        child: BlocBuilder<UserBloc, UserState>(
-            builder: (context, state) {
-              EmployerModel employer = EmployerModel.copyWith(state.employerModel!);
-              return BlocProvider<UserUpdateBloc>(
-                create: (_) => UserUpdateBloc(employer),
-                child: BlocListener<UserUpdateBloc, UserUpdateState>(
-                    listener: (context, state) {
-                      if (state is UserUpToDateState) {
-                        context.read<UserBloc>().add(
-                            UpdateUser(state.employerModel!));
-                      }
-                      if (state is UserCancelState) {
-                        state.employerModel = EmployerModel.copyWith(context.read<UserBloc>().state.employerModel!);
-                      }
-                    },
-                    child: BlocBuilder<UserUpdateBloc, UserUpdateState>(
-                      builder: (context, state) {
-                          return WillPopScope(
-                            onWillPop: () async
-                            {
-                              context.read<UserUpdateBloc>().add(CancelUpdateEvent());
-                              return Future.value(true);
-                            },
-                            child: Scaffold(
-                                backgroundColor: const Color(0xFFFAFAFB),
-                                body: SingleChildScrollView(
-                                    child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          const SizedBox(
-                                            height: 50,
-                                          ),
-                                          Container(
-                                              width: MediaQuery.of(context).size.width,
-                                              alignment: Alignment.centerLeft,
-                                              color: Colors.white,
-                                              child: Container(
-                                                height: 80,
-                                                margin: const EdgeInsets.symmetric(
-                                                    horizontal: 12.0),
-                                                padding: const EdgeInsets.symmetric(
-                                                    horizontal: 12.0),
-                                                child: Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: const <Widget>[
-                                                    SizedBox(
-                                                      height: 13,
-                                                    ),
-                                                    Text('Профиль работодателя',
-                                                      style: TextStyle(
-                                                        color: Color(0xFF009ED1),
-                                                        fontSize: 15,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      onVerticalDragEnd: (DragEndDetails details) => FocusScope.of(context).unfocus(),
+      child: SafeArea(
+          top: false,
+          bottom: true,
+          child: BlocBuilder<UserBloc, UserState>(
+              builder: (context, state) {
+                EmployerModel employer = EmployerModel.copyWith(state.employerModel!);
+                return BlocProvider<UserUpdateBloc>(
+                  create: (_) => UserUpdateBloc(employer),
+                  child: BlocListener<UserUpdateBloc, UserUpdateState>(
+                      listener: (context, state) {
+                        if (state is UserUpToDateState) {
+                          context.read<UserBloc>().add(
+                              UpdateUser(state.employerModel!));
+                        }
+                        if (state is UserCancelState) {
+                          state.employerModel = EmployerModel.copyWith(context.read<UserBloc>().state.employerModel!);
+                        }
+                      },
+                      child: BlocBuilder<UserUpdateBloc, UserUpdateState>(
+                        builder: (context, state) {
+                            return WillPopScope(
+                              onWillPop: () async
+                              {
+                                context.read<UserUpdateBloc>().add(CancelUpdateEvent());
+                                return Future.value(true);
+                              },
+                              child: Scaffold(
+                                  backgroundColor: const Color(0xFFFAFAFB),
+                                  body: SingleChildScrollView(
+                                      child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            const SizedBox(
+                                              height: 50,
+                                            ),
+                                            Container(
+                                                width: MediaQuery.of(context).size.width,
+                                                alignment: Alignment.centerLeft,
+                                                color: Colors.white,
+                                                child: Container(
+                                                  height: 80,
+                                                  margin: const EdgeInsets.symmetric(
+                                                      horizontal: 12.0),
+                                                  padding: const EdgeInsets.symmetric(
+                                                      horizontal: 12.0),
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: const <Widget>[
+                                                      SizedBox(
+                                                        height: 13,
                                                       ),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 6,
-                                                    ),
-                                                    Text('Настройки профиля',
-                                                      style:
-                                                      TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 24,
-                                                        fontWeight: FontWeight.bold,
+                                                      Text('Профиль работодателя',
+                                                        style: TextStyle(
+                                                          color: Color(0xFF009ED1),
+                                                          fontSize: 15,
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              )
-                                          ),
-                                          Container(
-                                            height: 25,
-                                          ),
-                                          Container(
-                                            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                                            margin: const EdgeInsets.symmetric(horizontal: 12.0),
-                                            child: const ProfileUpdateImage(),
-                                          ),
-                                          const SizedBox(
-                                            height: 25,
-                                          ),
-                                          BlocProvider<ProfileUpdateBloc>(
-                                            create: (_) => ProfileUpdateBloc(),
-                                            child: BlocListener<ProfileUpdateBloc, ProfileUpdateState>(
-                                              listener: (context, state){
-                                                if (state is ProFileUpdateSuccess) {
-                                                  context.read<UserUpdateBloc>().add(UpdateUserEvent(employer));
-                                                  AutoRouter.of(context).replace(ProfilePageRoute());
-                                                }
-                                                if (state is ProfileUpdateError) {
-                                                  ScaffoldMessenger.of(
-                                                      context).showSnackBar(
-                                                      const SnackBar(
-                                                          content: Text(
-                                                              'Something went wrong')));
-                                                }
-                                              },
-                                              child: ProfileUpdateForm(
-                                                  employerModel: employer,
-                                                  onConfirm: (context, formValue) {
-                                                    employer.update(formValue);
-                                                    context.read<ProfileUpdateBloc>().add(ProfileSaveUpdatesEvent(employer));
+                                                      SizedBox(
+                                                        height: 6,
+                                                      ),
+                                                      Text('Настройки профиля',
+                                                        style:
+                                                        TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 24,
+                                                          fontWeight: FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                            ),
+                                            Container(
+                                              height: 25,
+                                            ),
+                                            Container(
+                                              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                                              margin: const EdgeInsets.symmetric(horizontal: 12.0),
+                                              child: const ProfileUpdateImage(),
+                                            ),
+                                            const SizedBox(
+                                              height: 25,
+                                            ),
+                                            BlocProvider<ProfileUpdateBloc>(
+                                              create: (_) => ProfileUpdateBloc(),
+                                              child: BlocListener<ProfileUpdateBloc, ProfileUpdateState>(
+                                                listener: (context, state){
+                                                  if (state is ProFileUpdateSuccess) {
+                                                    context.read<UserUpdateBloc>().add(UpdateUserEvent(employer));
+                                                    AutoRouter.of(context).replace(ProfilePageRoute());
                                                   }
+                                                  if (state is ProfileUpdateError) {
+                                                    ScaffoldMessenger.of(
+                                                        context).showSnackBar(
+                                                        const SnackBar(
+                                                            content: Text(
+                                                                'Something went wrong')));
+                                                  }
+                                                },
+                                                child: ProfileUpdateForm(
+                                                    employerModel: employer,
+                                                    onConfirm: (context, formValue) {
+                                                      employer.update(formValue);
+                                                      context.read<ProfileUpdateBloc>().add(ProfileSaveUpdatesEvent(employer));
+                                                    }
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          Container(
-                                              margin: const EdgeInsets.symmetric(horizontal: 12.0),
-                                              padding: const EdgeInsets.all(12.0),
-                                              alignment: Alignment.center,
-                                              child: DecoratedBox(
-                                                decoration: BoxDecoration(
-                                                    color: const Color(0xFFE9EEF1),
-                                                    borderRadius: BorderRadius.circular(10.0)
-                                                ),
-                                                child: TextButton(
-                                                  onPressed: () {
-                                                    context.read<UserUpdateBloc>().add(CancelUpdateEvent());
-                                                    AutoRouter.of(context).pop();
-                                                  },
-                                                  child: SizedBox(
-                                                    width: MediaQuery.of(context).size.width - 50,
-                                                    child: const Text('Отменить',
-                                                      textAlign: TextAlign.center,
-                                                      style: TextStyle(
-                                                        color: Color(0xFF617088),
+                                            Container(
+                                                margin: const EdgeInsets.symmetric(horizontal: 12.0),
+                                                padding: const EdgeInsets.all(12.0),
+                                                alignment: Alignment.center,
+                                                child: DecoratedBox(
+                                                  decoration: BoxDecoration(
+                                                      color: const Color(0xFFE9EEF1),
+                                                      borderRadius: BorderRadius.circular(10.0)
+                                                  ),
+                                                  child: TextButton(
+                                                    onPressed: () {
+                                                      context.read<UserUpdateBloc>().add(CancelUpdateEvent());
+                                                      AutoRouter.of(context).pop();
+                                                    },
+                                                    child: SizedBox(
+                                                      width: MediaQuery.of(context).size.width - 50,
+                                                      child: const Text('Отменить',
+                                                        textAlign: TextAlign.center,
+                                                        style: TextStyle(
+                                                          color: Color(0xFF617088),
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
-                                                ),
 
-                                              )
-                                          ),
-                                          const SizedBox(
-                                              height: 45
-                                          ),
-                                        ]
-                                    )
-                                )
-                            ),
-                          );
-                        }
-                      ),
-                  )
-              );
-            }
-        )
+                                                )
+                                            ),
+                                            const SizedBox(
+                                                height: 45
+                                            ),
+                                          ]
+                                      )
+                                  )
+                              ),
+                            );
+                          }
+                        ),
+                    )
+                );
+              }
+          )
+      ),
     );
   }
 }
