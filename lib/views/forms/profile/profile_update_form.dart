@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
@@ -56,7 +57,38 @@ class ProfileUpdateForm extends StatelessWidget{
                   label: 'Наименование организации',
                   initialValue: employerModel.post,
                   validator: FormBuilderValidators.required(context, errorText: 'Необходимо заполнить поле')),
-
+              Container(
+                alignment: Alignment
+                    .center,
+                child: DecoratedBox(
+                    decoration: BoxDecoration(
+                        color: const Color(
+                            0xFF009ED1),
+                        borderRadius: BorderRadius
+                            .circular(
+                            10.0)
+                    ),
+                    child: TextButton(
+                          onPressed: () {
+                            final formState = _formKey.currentState!;
+                            formState.save();
+                            if (formState.validate()) {
+                              onConfirm(context, formState.value);
+                            }
+                          },
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width - 50,
+                            child: const Text('Сохранить',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: '.SF UI Display',
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        )
+                    )
+                ),
             ]
           )
         )

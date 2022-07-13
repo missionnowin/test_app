@@ -63,7 +63,7 @@ class EmployerModel{
         'companyRate' : companyRate,
       };
 
-  void update({required String orgName, required String name, required String email, required String legalAddress,required String actualAddress, required String companyDescription, required String post})
+  void update({required String orgName, required String? name, required String? email, required String? legalAddress,required String? actualAddress, required String? companyDescription, required String? post})
   {
     this.name = (name == '') ?  this.name : name;
     this.companyDescription = (companyDescription == '') ? this.companyDescription : companyDescription;
