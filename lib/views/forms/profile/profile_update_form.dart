@@ -18,8 +18,8 @@ class ProfileUpdateForm extends StatelessWidget{
     return FormBuilder(
       key: _formKey,
       child: Container(
-          margin: const EdgeInsets.all(12.0),
-          padding: const EdgeInsets.all(12.0),
+          margin: const EdgeInsets.symmetric(horizontal: 12.0),
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Column(
             children: <Widget>[
               CustomFormTextField(
@@ -36,7 +36,10 @@ class ProfileUpdateForm extends StatelessWidget{
                   name: 'email',
                   label: 'E-mail',
                   initialValue: employerModel.email,
-                  validator: FormBuilderValidators.required(context, errorText: 'Необходимо заполнить поле')),
+                  validator: FormBuilderValidators.compose([
+                    FormBuilderValidators.required(context, errorText: 'Необходимо заполнить поле'),
+                    FormBuilderValidators.email(context, errorText: 'Необходим действительный e-mail')
+                  ])),
               CustomFormTextField(
                   name: 'legalAddress',
                   label: 'Юридический адрес',
@@ -57,16 +60,13 @@ class ProfileUpdateForm extends StatelessWidget{
                   label: 'Наименование организации',
                   initialValue: employerModel.post,
                   validator: FormBuilderValidators.required(context, errorText: 'Необходимо заполнить поле')),
+              const SizedBox(height: 40),
               Container(
-                alignment: Alignment
-                    .center,
+                alignment: Alignment.center,
                 child: DecoratedBox(
                     decoration: BoxDecoration(
-                        color: const Color(
-                            0xFF009ED1),
-                        borderRadius: BorderRadius
-                            .circular(
-                            10.0)
+                        color: const Color(0xFF009ED1),
+                        borderRadius: BorderRadius.circular(15.0)
                     ),
                     child: TextButton(
                           onPressed: () {

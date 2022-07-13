@@ -4,8 +4,8 @@ import 'package:test_app/logic/blocs/update_image_bloc/update_image_bloc.dart';
 import 'package:test_app/logic/blocs/user_update_bloc/user_update_bloc.dart';
 import 'package:test_app/logic/models/employer_model.dart';
 
-class ProfileUpdateImageForm extends StatelessWidget{
-  const ProfileUpdateImageForm({Key? key}) : super(key: key);
+class ProfileUpdateImage extends StatelessWidget{
+  const ProfileUpdateImage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

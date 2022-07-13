@@ -63,15 +63,15 @@ class EmployerModel{
         'companyRate' : companyRate,
       };
 
-  void update({required String orgName, required String? name, required String? email, required String? legalAddress,required String? actualAddress, required String? companyDescription, required String? post})
+  void update(Map<String, dynamic> json)
   {
-    this.name = (name == '') ?  this.name : name;
-    this.companyDescription = (companyDescription == '') ? this.companyDescription : companyDescription;
-    this.email = (email == '') ? this.email : email;
-    this.legalAddress = (legalAddress == '') ? this.legalAddress : legalAddress ;
-    this.actualAddress = (actualAddress == '') ? this.actualAddress : actualAddress;
-    this.post = (post == '') ? this.post: post;
-    this.orgName = (orgName == '') ? this.orgName : orgName;
+    name = json['name'];
+    companyDescription = json['companyDescription'];
+    email = json['email'];
+    legalAddress = json['legalAddress'];
+    actualAddress = json['actualAddress'];
+    post = json['post'];
+    orgName = json['orgName'];
   }
 
   void updateImage(String logoPath){
