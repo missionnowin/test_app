@@ -4,7 +4,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import '../../components/models/employer_model.dart';
+import '../../models/employer_model.dart';
 part 'user_event.dart';
 part 'user_state.dart';
 

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
+
+import '../custom_text_field.dart';
 
 class PasswordField extends StatefulWidget{
   const PasswordField({Key? key}) : super(key: key);
@@ -8,11 +11,26 @@ class PasswordField extends StatefulWidget{
 }
 
 class _PasswordFieldState extends State<PasswordField>{
-  //bool _isHidden = true;
+  bool _isObscure= true;
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return CustomFormTextField(
+      label: 'Пароль',
+      name: 'password',
+      validator: FormBuilderValidators.compose([
+        FormBuilderValidators.required(context,
+            errorText: 'Необходимо заполнить поле',
+        )]),
+      obscureText: _isObscure,
+      suffixIcon: IconButton(
+        icon: Icon(_isObscure ? Icons.visibility : Icons.visibility_off),
+        onPressed: () {
+          setState((){
+            _isObscure = !_isObscure;
+          });
+        },
+      ),
+    );
   }
 }

@@ -12,4 +12,11 @@ class SignInModel{
         'email': email,
         'password' : password,
       };
+
+  factory SignInModel.fromJson(Map<String, dynamic> json){
+    return SignInModel(
+      email : json['email'] as String,
+      password: json['password'] as String,
+    );
+  }
 }

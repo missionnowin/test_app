@@ -2,7 +2,7 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:test_app/logic/components/models/employer_model.dart';
+import 'package:test_app/logic/models/employer_model.dart';
 import 'package:test_app/service/api/api_service.dart';
 
 part 'init_state.dart';

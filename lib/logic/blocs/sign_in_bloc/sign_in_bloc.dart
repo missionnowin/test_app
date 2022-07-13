@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:test_app/logic/components/models/employer_model.dart';
-import 'package:test_app/logic/components/models/sign_in_model.dart';
+import 'package:test_app/logic/models/employer_model.dart';
+import 'package:test_app/logic/models/sign_in_model.dart';
 import 'package:test_app/service/api/api_service.dart';
 
 

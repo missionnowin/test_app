@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_app/logic/blocs/profile_update_bloc/profile_update_bloc.dart';
 import 'package:test_app/logic/blocs/user_bloc/user_bloc.dart';
 import 'package:test_app/logic/blocs/user_update_bloc/user_update_bloc.dart';
-import 'package:test_app/logic/components/models/employer_model.dart';
+import 'package:test_app/logic/models/employer_model.dart';
 import '../../../../logic/blocs/update_image_bloc/update_image_bloc.dart';
 
 class ProfilePageUpdate extends StatelessWidget{
@@ -23,7 +23,7 @@ class ProfilePageUpdate extends StatelessWidget{
           builder: (context, state)
     {
       EmployerModel employer = EmployerModel.copyWith(state.employerModel!);
-      var s = [
+      var initialValue = [
         employer.name,
         employer.orgName,
         employer.email,
@@ -46,7 +46,7 @@ class ProfilePageUpdate extends StatelessWidget{
             child: BlocBuilder<UserUpdateBloc, UserUpdateState>(
                 builder: (context, state) {
                   return WillPopScope(
-                      onWillPop: ()
+                      onWillPop: () async
                       {
                         context.read<UserUpdateBloc>().add(CancelUpdateEvent());
                         return Future.value(true);
@@ -185,29 +185,16 @@ class ProfilePageUpdate extends StatelessWidget{
                                                                   child:
                                                                   TextButton(
                                                                     onPressed: () {
-                                                                      context
-                                                                          .read<
-                                                                          UpdateImageBloc>()
-                                                                          .add(
-                                                                          UpdateImageEvent(
-                                                                              employer
-                                                                                  .logoPath));
+                                                                      context.read<UpdateImageBloc>().add(UpdateImageEvent(employer.logoPath));
                                                                     },
                                                                     child: SizedBox(
-                                                                      width: MediaQuery
-                                                                          .of(
-                                                                          context)
-                                                                          .size
-                                                                          .width *
-                                                                          2 / 3,
+                                                                      width: MediaQuery.of(context).size.width * 2 / 3,
                                                                       child: const Text(
                                                                         'Изменить фотографию',
-                                                                        textAlign: TextAlign
-                                                                            .center,
+                                                                        textAlign: TextAlign.center,
                                                                         style: TextStyle(
                                                                           fontFamily: '.SF UI Display',
-                                                                          color: Colors
-                                                                              .white,
+                                                                          color: Colors.white,
                                                                         ),
                                                                       ),
                                                                     ),
@@ -257,7 +244,7 @@ class ProfilePageUpdate extends StatelessWidget{
                                                           ),
                                                           TextFormField(
                                                             controller: _controllers[i]
-                                                              ..text = s[i]!,
+                                                              ..text = initialValue[i]!,
                                                             onEditingComplete: () {
 
                                                             },

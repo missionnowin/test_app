@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import '../../../service/api/api_service.dart';
-import '../../components/models/employer_model.dart';
+import '../../models/employer_model.dart';
 part 'profile_update_event.dart';
 part 'profile_update_state.dart';
 

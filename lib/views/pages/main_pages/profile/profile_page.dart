@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test_app/logic/components/models/employer_model.dart';
+import 'package:test_app/logic/models/employer_model.dart';
 import '../../../../logic/blocs/user_bloc/user_bloc.dart';
 import '../../../../service/router/app_router.dart';
-import '../../../widgets/forms/profile/profile_page_form.dart';
+import '../../../forms/profile/profile_page_form.dart';
 
 
 class ProfilePage extends StatelessWidget{

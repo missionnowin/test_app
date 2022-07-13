@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test_app/logic/components/models/employer_model.dart';
+import 'package:test_app/logic/models/employer_model.dart';
 import 'package:test_app/views/widgets/home_page_widgets/content.dart';
 import '../../../../logic/blocs/user_bloc/user_bloc.dart';
 import '../../../widgets/home_page_widgets/chart.dart';
