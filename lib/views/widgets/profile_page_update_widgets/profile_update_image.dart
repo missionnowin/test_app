@@ -34,7 +34,7 @@ class ProfileUpdateImage extends StatelessWidget{
                               padding: const EdgeInsets.symmetric(horizontal: 24),
                               height: 221,
                               decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey,
+                                border: Border.all(color: const Color.fromRGBO(182, 182, 182, 0.3),
                                     style: BorderStyle.solid,
                                     width: 0.45
                                 ),

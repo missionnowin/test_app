@@ -27,17 +27,20 @@ class ProfileUpdateForm extends StatelessWidget{
               CustomFormTextField(
                   name: 'name',
                   label: 'ФИО',
+                  borderColor: const Color.fromRGBO(182, 182, 182, 0.3),
                   initialValue: employerModel.name,
                   validator: FormBuilderValidators.required(context, errorText: 'Необходимо заполнить поле')),
               CustomFormTextField(
                   name: 'orgName',
                   label: 'Наименование организации',
                   initialValue: employerModel.orgName,
+                  borderColor: const Color.fromRGBO(182, 182, 182, 0.3),
                   validator: FormBuilderValidators.required(context, errorText: 'Необходимо заполнить поле')),
               CustomFormTextField(
                   name: 'email',
                   label: 'E-mail',
                   initialValue: employerModel.email,
+                  borderColor: const Color.fromRGBO(182, 182, 182, 0.3),
                   validator: FormBuilderValidators.compose([
                     FormBuilderValidators.required(context, errorText: 'Необходимо заполнить поле'),
                     FormBuilderValidators.email(context, errorText: 'Необходим действительный e-mail')
@@ -46,28 +49,32 @@ class ProfileUpdateForm extends StatelessWidget{
                   name: 'legalAddress',
                   label: 'Юридический адрес',
                   initialValue: employerModel.legalAddress,
+                  borderColor: const Color.fromRGBO(182, 182, 182, 0.3),
                   validator: FormBuilderValidators.required(context, errorText: 'Необходимо заполнить поле')),
               CustomFormTextField(
                   name: 'actualAddress',
                   label: 'Фактический адрес',
                   initialValue: employerModel.actualAddress,
+                  borderColor: const Color.fromRGBO(182, 182, 182, 0.3),
                   validator: FormBuilderValidators.required(context, errorText: 'Необходимо заполнить поле')),
               CustomFormTextField(
                   name: 'companyDescription',
                   label: 'О компании',
+                  borderColor: const Color.fromRGBO(182, 182, 182, 0.3),
                   initialValue: employerModel.companyDescription,
                   validator: FormBuilderValidators.required(context, errorText: 'Необходимо заполнить поле')),
               CustomFormTextField(
                   name: 'post',
                   label: 'Наименование организации',
                   initialValue: employerModel.post,
+                  borderColor: const Color.fromRGBO(182, 182, 182, 0.3),
                   validator: FormBuilderValidators.required(context, errorText: 'Необходимо заполнить поле')),
               const SizedBox(height: 26),
               Container(
                 alignment: Alignment.center,
                 child: DecoratedBox(
                     decoration: BoxDecoration(
-                        color: const Color(0xFFB6B6B6),
+                        color: const Color(0xFF009ED1),
                         borderRadius: BorderRadius.circular(15.0)
                     ),
                     child: TextButton(
