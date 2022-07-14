@@ -5,26 +5,43 @@ class ChartHeader extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: const <Widget>[
-        Text('0',
-          style: TextStyle(
-            color: Color(0xFFB7C1D1)
-          ),),
-        Text('50',
-          style: TextStyle(
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 12.0),
+      child: Row(
+        children: const <Widget>[
+          Spacer(),
+          Text('0',
+            style: TextStyle(
               color: Color(0xFFB7C1D1)
-          ),),
-        Text('75',
-          style: TextStyle(
-              color: Color(0xFFB7C1D1)
-          ),),
-        Text('99+',
-          style: TextStyle(
-              color: Color(0xFFB7C1D1)
-          ),),
-      ],
+            ),),
+          Spacer(),
+          Text('50',
+            style: TextStyle(
+                color: Color(0xFFB7C1D1)
+            ),),
+          Spacer(),
+          Text('75',
+            style: TextStyle(
+                color: Color(0xFFB7C1D1)
+            ),),
+          Spacer(),
+          Text('99+',
+            style: TextStyle(
+                color: Color(0xFFB7C1D1)
+            ),),
+        ],
+      ),
     );
   }
   
+}
+class Spacer extends StatelessWidget{
+  const Spacer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const SizedBox(
+      width: 53,
+    );
+  }
 }

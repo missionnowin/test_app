@@ -33,7 +33,7 @@ class ProfilePageMenu extends StatelessWidget{
                   child: InkWell(
                     onTap: (){
                       if(_headers[index] == 'Настройки профиля'){
-                        AutoRouter.of(context).navigate(ProfileUpdatePageRoute());
+                        AutoRouter.of(context).navigate(const ProfileUpdatePageRoute());
                       }
                     },
                     child: Column(

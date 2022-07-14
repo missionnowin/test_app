@@ -8,15 +8,25 @@ class ChartBar extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 2.0),
+      padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 11),
       child: Row(
         children: <Widget>[
-          Text(label,),
-          const SizedBox(width: 5.0,),
-          LinearProgressIndicator(
-            value: data/100,
-            color: const Color(0xFF009ED1),
-            backgroundColor: const Color(0xFFE3F0FF),
+          Text(label,
+            style: const TextStyle(
+              color: Color(0xFFADBDD7)
+            ),),
+          const SizedBox(width: 14.0,),
+          SizedBox(
+            height: 12,
+            width: MediaQuery.of(context).size.width * 2 / 3 - 20,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+                child: LinearProgressIndicator(
+                  value: data/100,
+                  color: const Color(0xFF009ED1),
+                  backgroundColor: const Color(0xFFE3F0FF),
+              ),
+            )
           ),
         ],
       ),

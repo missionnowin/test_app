@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  const ChartWidget(),
+                  const Chart(),
                   const ArticleWidget(),
                   Container(
                     alignment: Alignment.center,

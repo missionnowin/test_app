@@ -73,7 +73,7 @@ class ProfilePageUpdate extends StatelessWidget {
                                                 listener: (context, state){
                                                   if (state is ProFileUpdateSuccess) {
                                                     context.read<UserUpdateBloc>().add(UpdateUserEvent(employer));
-                                                    AutoRouter.of(context).replace(ProfilePageRoute());
+                                                    AutoRouter.of(context).replace(const ProfilePageRoute());
                                                   }
                                                   if (state is ProfileUpdateError) {
                                                     ScaffoldMessenger.of(

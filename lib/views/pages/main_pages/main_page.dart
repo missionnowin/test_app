@@ -24,7 +24,7 @@ class _MainPageState extends State<MainPage> {
     const HomePage(),
     const HomePage(),
     const HomePage(),
-    ProfilePageRoute(),
+    const ProfilePageRoute(),
   ];
 
   @override
@@ -44,12 +44,12 @@ class _MainPageState extends State<MainPage> {
           );
         }
         return AutoTabsRouter(
-          routes: [
+          routes: const [
             HomeRoute(),
             HomeRoute(),
             HomeRoute(),
             HomeRoute(),
-            const ProfileRoute(),
+            ProfileRoute(),
           ],
           builder: (context, child, animation) {
             final tabsRouter = AutoTabsRouter.of(context);

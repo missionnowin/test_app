@@ -11,10 +11,18 @@ class ChartWidget extends StatelessWidget{
     return Column(
       children: const <Widget>[
         ChartHeader(),
-        ChartBar(label: 'Dec', data: 15,),
-        ChartBar(label: 'Nov', data: 55,),
-        ChartBar(label: 'Oct', data: 75,),
-        ChartBar(label: 'Sep', data: 25,),
+        SizedBox(height: 7,),
+        ChartBar(label: 'Jan', data: 15,),
+        ChartBar(label: 'Feb', data: 55,),
+        ChartBar(label: 'Mar', data: 75,),
+        ChartBar(label: 'Apr', data: 25,),
+        ChartBar(label: 'May', data: 45,),
+        ChartBar(label: 'Jun', data: 65,),
+        ChartBar(label: 'Jul', data: 35,),
+        ChartBar(label: 'Aug', data: 15,),
+        ChartBar(label: 'Sep', data: 5,),
+        ChartBar(label: 'Oct', data: 125,),
+        ChartBar(label: 'Nov', data: 235,),
       ],
     );
   }
