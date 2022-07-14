@@ -11,40 +11,36 @@ class Chart extends StatelessWidget{
   Widget build(BuildContext context) {
     return BlocProvider<CustomChartBloc>(
       create: (context) => CustomChartBloc(),
-      child: BlocConsumer<CustomChartBloc, CustomChartState>(
-        listener: (context, state) {
-
-        },
+      child: BlocBuilder<CustomChartBloc, CustomChartState>(
         builder: (context, state) {
           return Container(
-                  height: 575,
-                  margin: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 2.0),
-                  width: MediaQuery.of(context).size.width - 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    border: Border.all(color: Colors.grey,
-                        style: BorderStyle.solid,
-                        width: 0.4),
+            margin: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 2.0),
+            width: MediaQuery.of(context).size.width - 40,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15.0),
+              border: Border.all(color: Colors.grey,
+                  style: BorderStyle.solid,
+                  width: 0.4),
+            ),
+              child: Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(top: 21.0, left: 21.0, bottom: 6.0),
+                    alignment: Alignment.centerLeft,
+                    child: const Text('Статистика просмотров',
+                    style: TextStyle(
+                      fontFamily: 'Roboto'
+                    ),),
                   ),
-                  child: Column(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 12.0, left: 12.0, bottom: 6.0),
-                        alignment: Alignment.centerLeft,
-                        child: const Text('Статистика просмотров',
-                        style: TextStyle(
-                          fontFamily: 'Roboto'
-                        ),),
-                      ),
-                      Container(
-                        alignment: Alignment.center,
-                        child: const CustomSwitch(),
-                      ),
-                      const SizedBox(height: 12,),
-                      const ChartWidget(data: [],),
-                    ],
-                  )
-              );
+                  Container(
+                    alignment: Alignment.center,
+                    child: const CustomSwitch(),
+                  ),
+                  const SizedBox(height: 12,),
+                  ChartWidget(data: state.data!),
+                ],
+              ),
+            );
         },
       ),
     );

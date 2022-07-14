@@ -15,12 +15,14 @@ class ChartWidget extends StatelessWidget{
       children: <Widget>[
         const ChartHeader(),
         const SizedBox(height: 7,),
-        ListView.builder(
-          itemCount: data.length,
-          itemBuilder: (context, index) {
-            return ChartBar(label: data[index].label, data: data[index].value);
-          },
-        )
+       ListView.builder(
+        itemCount: data.length,
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          return ChartBar(label: data[index].label, data: data[index].value);
+        },
+      ),
+        const SizedBox(height: 25),
       ],
     );
   }

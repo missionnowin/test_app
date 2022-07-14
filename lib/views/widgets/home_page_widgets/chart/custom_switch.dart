@@ -1,6 +1,8 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_app/logic/blocs/custom_chart_bloc/custom_chart_bloc.dart';
 
 class CustomSwitch extends StatefulWidget{
   const CustomSwitch({Key? key}) : super(key: key);
@@ -12,6 +14,7 @@ class CustomSwitch extends StatefulWidget{
 class _CustomSwitchState extends State<CustomSwitch>{
   final List<bool> isSelected = [true, false, false];
   final _headers = ['Неделя','Месяц','Год'];
+  final _events = [SetWeek(), SetMonths(), SetYears()];
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +26,7 @@ class _CustomSwitchState extends State<CustomSwitch>{
           for (int buttonIndex = 0; buttonIndex < isSelected.length; buttonIndex++) {
             if (buttonIndex == index) {
               isSelected[buttonIndex] = true;
+              context.read<CustomChartBloc>().add(_events[index]);
             } else {
               isSelected[buttonIndex] = false;
             }

@@ -9,7 +9,14 @@ part 'custom_chart_event.dart';
 part 'custom_chart_state.dart';
 
 class CustomChartBloc extends Bloc<CustomChartEvent, CustomChartState> {
-  CustomChartBloc() : super(CustomChartInitial()) {
+  CustomChartBloc() : super(CustomChartWeek(
+      [
+        ChartData(label: '2019', value: 15),
+        ChartData(label: '2020', value: 25),
+        ChartData(label: '2021', value: 115),
+        ChartData(label: '2022', value: 5),
+      ]
+  )) {
     on<SetWeek>(_setWeek);
     on<SetYears>(_setYear);
     on<SetMonths>(_setMonths);

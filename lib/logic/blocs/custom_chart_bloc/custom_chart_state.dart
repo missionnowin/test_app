@@ -5,10 +5,6 @@ abstract class CustomChartState {
   CustomChartState(this.data);
 }
 
-class CustomChartInitial extends CustomChartState{
-  CustomChartInitial() : super(null);
-}
-
 class CustomChartWeek extends CustomChartState {
   CustomChartWeek(super.data);
 }
