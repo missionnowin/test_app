@@ -49,9 +49,11 @@ class ChartWidget extends StatelessWidget{
               child:SfCartesianChart(
                 primaryXAxis: CategoryAxis(),
                 primaryYAxis: NumericAxis(minimum: 0, maximum: 99, interval: 25),
-                tooltipBehavior: TooltipBehavior(enable: true),
+                tooltipBehavior: TooltipBehavior(enable: false),
                 series: <ChartSeries<_ChartData, String>>[
                   BarSeries<_ChartData, String>(
+                    borderRadius: BorderRadius.circular(15.0),
+                    color: const Color(0xFF009ED1),
                     dataSource: data,
                     xValueMapper: (_ChartData data, _) => data.x,
                     yValueMapper: (_ChartData data, _) => data.y,
