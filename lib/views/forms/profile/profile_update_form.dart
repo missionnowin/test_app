@@ -62,12 +62,12 @@ class ProfileUpdateForm extends StatelessWidget{
                   label: 'Наименование организации',
                   initialValue: employerModel.post,
                   validator: FormBuilderValidators.required(context, errorText: 'Необходимо заполнить поле')),
-              const SizedBox(height: 40),
+              const SizedBox(height: 26),
               Container(
                 alignment: Alignment.center,
                 child: DecoratedBox(
                     decoration: BoxDecoration(
-                        color: const Color(0xFF009ED1),
+                        color: const Color(0xFFB6B6B6),
                         borderRadius: BorderRadius.circular(15.0)
                     ),
                     child: TextButton(

@@ -11,12 +11,15 @@ class ChartBar extends StatelessWidget{
       padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 11),
       child: Row(
         children: <Widget>[
-          Text(label,
-            style: const TextStyle(
-              fontFamily: 'DM Sans',
-              color: Color(0xFFADBDD7)
-            ),),
-          const SizedBox(width: 14.0,),
+          SizedBox(
+            width: 40,
+            child: Text(label,
+              style: const TextStyle(
+                fontFamily: 'DM Sans',
+                color: Color(0xFFADBDD7)
+              ),
+            ),
+          ),
           SizedBox(
             height: 12,
             width: MediaQuery.of(context).size.width * 2 / 3 - 20,

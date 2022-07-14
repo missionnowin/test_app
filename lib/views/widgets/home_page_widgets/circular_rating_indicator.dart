@@ -15,23 +15,33 @@ class CircularRatingIndicator extends StatelessWidget{
           Center(
             child: SizedBox(
               width: 103,
-              height: 103.0,
+              height: 103,
               child: CircularProgressIndicator(
                 strokeWidth: 5,
-                value: employerModel
-                    .companyRate * 0.01,
+                value: employerModel.companyRate * 0.01,
               ),
             ),
           ),
-          Center(child: Text(
-            employerModel.companyRate.toString(),
-            style: const TextStyle(
-              color: Colors.greenAccent,
-              fontSize: 39,
-              fontWeight: FontWeight.bold,
+          Center(
+              child: Text(
+                employerModel.companyRate.toString(),
+                style: const TextStyle(
+                  color: Colors.greenAccent,
+                  fontSize: 39,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
             ),
+          Center(
+              child: Container(
+                width: 78,
+                height: 78,
+                decoration: BoxDecoration(
+                  color: const Color.fromRGBO(20, 198, 134, 0.1),
+                  borderRadius: BorderRadius.circular(105),
+                ),
+            )
           )
-          ),
         ],
       ),
     );

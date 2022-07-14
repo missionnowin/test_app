@@ -16,6 +16,7 @@ class ChartWidget extends StatelessWidget{
         const ChartHeader(),
         const SizedBox(height: 7,),
        ListView.builder(
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: data.length,
         shrinkWrap: true,
         itemBuilder: (context, index) {
