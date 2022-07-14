@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_app/views/widgets/auth_pages_widgets/auth_page_header.dart';
+import 'package:test_app/views/widgets/auth_pages_widgets/auth_page_logo.dart';
 import '../../../logic/blocs/sign_in_bloc/sign_in_bloc.dart';
 import '../../../logic/blocs/user_bloc/user_bloc.dart';
 import '../../../logic/models/sign_in_model.dart';
@@ -22,20 +24,7 @@ class AuthPage extends StatelessWidget{
               physics: const NeverScrollableScrollPhysics(),
               padding: EdgeInsets.zero,
               children: <Widget>[
-                Container(
-                  alignment: Alignment.topCenter,
-                  height: MediaQuery.of(context).size.height * 0.355,
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(15),
-                          bottomRight: Radius.circular(15)
-                      ),
-                      image: DecorationImage(
-                        image : AssetImage('assets/intro.jpg'),
-                        fit: BoxFit.fitHeight,
-                      )
-                  ),
-                ),
+                const AuthPageLogo(),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 12.0),
                   padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -45,24 +34,7 @@ class AuthPage extends StatelessWidget{
                         const SizedBox(
                           height: 32.0,
                         ),
-                        const Text(
-                          ('Авторизация'),
-                          style: TextStyle(
-                            color: Color(0xFF009ED1),
-                            fontSize: 14,
-                          ),
-                        ),
-                        const SizedBox(
-                          height:6.0,
-                        ),
-                        const Text(
-                          ('Войти в аккаунт'),
-                          style: TextStyle(
-                              color : Color(0xff3f4554),
-                              fontSize : 24,
-                              fontWeight: FontWeight.bold
-                          ),
-                        ),
+                        const AuthPaheHeader(),
                         const SizedBox(
                           height: 25,
                         ),

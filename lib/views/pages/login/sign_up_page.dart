@@ -6,6 +6,7 @@ import 'package:test_app/logic/blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'package:test_app/logic/blocs/user_bloc/user_bloc.dart';
 import 'package:test_app/logic/models/sign_up_model.dart';
 import 'package:test_app/service/router/app_router.dart';
+import 'package:test_app/views/widgets/sign_up_page_widgets/sign_up_page_header.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import '../../forms/login/registration_form.dart';
 
@@ -64,22 +65,7 @@ class RegistrationPage extends StatelessWidget{
                                       const SizedBox(
                                         height: 9.0,
                                       ),
-                                      const Text('Регистрация | The Professional',
-                                        style: TextStyle(
-                                            color: Color(0xFF009ED1),
-                                            fontSize: 14.0
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 6,
-                                      ),
-                                      const Text('Регистрация аккаунта',
-                                        style: TextStyle(
-                                          color: Color(0xFF3F4554),
-                                          fontSize: 24.0,
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                      ),
+                                      const SignUpPageHeader(),
                                       const SizedBox(
                                         height: 23.0,
                                       ),

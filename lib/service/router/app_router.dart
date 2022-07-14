@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:test_app/views/pages/init_page.dart';
-import 'package:test_app/views/pages/login/registration_page.dart';
+import 'package:test_app/views/pages/login/sign_up_page.dart';
 import 'package:test_app/views/pages/main_pages/profile/profile_update_page.dart';
 import '../../views/pages/login/auth_page.dart';
 import '../../views/pages/main_pages/home/home_page.dart';
