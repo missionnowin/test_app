@@ -13,6 +13,7 @@ class ChartBar extends StatelessWidget{
         children: <Widget>[
           Text(label,
             style: const TextStyle(
+              fontFamily: 'DM Sans',
               color: Color(0xFFADBDD7)
             ),),
           const SizedBox(width: 14.0,),

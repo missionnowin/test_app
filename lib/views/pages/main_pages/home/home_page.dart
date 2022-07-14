@@ -29,7 +29,13 @@ class HomePage extends StatelessWidget {
                     height: 20,
                   ),
                   const Chart(),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   const ArticleWidget(),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Container(
                     alignment: Alignment.center,
                     child: const ContentWidget(),

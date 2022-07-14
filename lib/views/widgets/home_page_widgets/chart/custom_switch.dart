@@ -45,6 +45,7 @@ class _CustomSwitchState extends State<CustomSwitch>{
               child:
                 Text(_headers[index],
                   style: const TextStyle(
+                    fontFamily: 'Roboto',
                     color: Colors.blue)
                 )
             )

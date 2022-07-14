@@ -42,8 +42,11 @@ class ProfilePageUpdate extends StatelessWidget {
                             return WillPopScope(
                               onWillPop: () async
                               {
-                                context.read<UserUpdateBloc>().add(CancelUpdateEvent());
-                                return Future.value(true);
+                                if(await _onBackPressed(context)){
+                                  context.read<UserUpdateBloc>().add(CancelUpdateEvent());
+                                  return true;
+                                }
+                                return false;
                               },
                               child: Scaffold(
                                   backgroundColor: const Color(0xFFFAFAFB),
@@ -108,5 +111,33 @@ class ProfilePageUpdate extends StatelessWidget {
           )
       ),
     );
+  }
+
+  Future<bool> _onBackPressed(BuildContext context) async{
+      bool result = false;
+      await showDialog(
+        context: context,
+        builder: (context){
+          return AlertDialog(
+            title: const Text('Выход'),
+            content: const Text('Вы уверены что хотите покинуть страницу изменения пользователя?'),
+            actions: <Widget>[
+              TextButton(
+                  onPressed: (){
+                    result = true;
+                    AutoRouter.of(context).pop();
+                  },
+                  child: const Text('Выйти')),
+              TextButton(
+                  onPressed: (){
+                    AutoRouter.of(context).pop();
+                  },
+                  child: const Text('Продолжить'))
+            ],
+          );
+        }
+      );
+      return Future.value(result);
+
   }
 }

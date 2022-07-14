@@ -12,21 +12,25 @@ class ChartHeader extends StatelessWidget{
           Spacer(),
           Text('0',
             style: TextStyle(
+              fontFamily: 'DM Sans',
               color: Color(0xFFB7C1D1)
             ),),
           Spacer(),
           Text('50',
             style: TextStyle(
+                fontFamily: 'DM Sans',
                 color: Color(0xFFB7C1D1)
             ),),
           Spacer(),
           Text('75',
             style: TextStyle(
+                fontFamily: 'DM Sans',
                 color: Color(0xFFB7C1D1)
             ),),
           Spacer(),
           Text('99+',
             style: TextStyle(
+                fontFamily: 'DM Sans',
                 color: Color(0xFFB7C1D1)
             ),),
         ],
