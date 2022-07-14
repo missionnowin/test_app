@@ -119,8 +119,8 @@ class ProfilePageUpdate extends StatelessWidget {
         context: context,
         builder: (context){
           return AlertDialog(
-            title: const Text('Выход'),
-            content: const Text('Вы уверены что хотите покинуть страницу изменения пользователя?'),
+            title: const Text('Подтверждение'),
+            content: const Text('Изменения будут удалены, Вы уверены что хотите выйти?'),
             actions: <Widget>[
               TextButton(
                   onPressed: (){
@@ -132,7 +132,7 @@ class ProfilePageUpdate extends StatelessWidget {
                   onPressed: (){
                     AutoRouter.of(context).pop();
                   },
-                  child: const Text('Продолжить'))
+                  child: const Text('Продолжить редактирование'))
             ],
           );
         }
