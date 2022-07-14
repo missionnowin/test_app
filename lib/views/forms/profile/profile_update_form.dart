@@ -1,7 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
+import '../../../logic/blocs/user_update_bloc/user_update_bloc.dart';
 import '../../../logic/models/employer_model.dart';
 import '../../widgets/custom_text_field.dart';
 
@@ -85,6 +88,32 @@ class ProfileUpdateForm extends StatelessWidget{
                             ),
                           ),
                         )
+                    )
+                ),
+                Container(
+                    padding: const EdgeInsets.symmetric(vertical: 12.0),
+                    alignment: Alignment.center,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                          color: const Color(0xFFE9EEF1),
+                          borderRadius: BorderRadius.circular(10.0)
+                      ),
+                      child: TextButton(
+                        onPressed: () {
+                          context.read<UserUpdateBloc>().add(CancelUpdateEvent());
+                          AutoRouter.of(context).pop();
+                        },
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width - 50,
+                          child: const Text('Отменить',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Color(0xFF617088),
+                            ),
+                          ),
+                        ),
+                      ),
+
                     )
                 ),
             ]

@@ -35,12 +35,13 @@ class _CustomSwitchState extends State<CustomSwitch>{
             padding: const EdgeInsets.all(8.0),
             child: Container(
               decoration: BoxDecoration(
+                color: isSelected[index] ? const Color(0xffe6f6fc) : Colors.white,
                 border: Border.all(color: Colors.blue),
                 borderRadius: BorderRadius.circular(10),
               ),
             padding: const EdgeInsets.all(5),
-            width: MediaQuery.of(context).size.width/3 - 32,
-            height: 40,
+            width: MediaQuery.of(context).size.width/3 - 37,
+            height: 35,
             alignment: Alignment.center,
               child:
                 Text(_headers[index],

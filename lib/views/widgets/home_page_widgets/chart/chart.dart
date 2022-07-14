@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'custom_switch.dart';
+import '../custom_switch.dart';
 
 class ChartWidget extends StatelessWidget{
-  final data = [
+  final data = const [
     _ChartData('Jan', 50),
     _ChartData('Feb', 50),
     _ChartData('Mar', 50),
@@ -18,12 +18,12 @@ class ChartWidget extends StatelessWidget{
     _ChartData('Dec', 50),
   ];
   
-  ChartWidget({Key? key}) : super(key: key);
+  const ChartWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 500,
+        height: 510,
         margin: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 2.0),
         width: MediaQuery.of(context).size.width - 40,
         decoration: BoxDecoration(
@@ -35,7 +35,7 @@ class ChartWidget extends StatelessWidget{
         child: Column(
           children: [
             Container(
-              margin: const EdgeInsets.only(top: 12.0, left: 12.0),
+              margin: const EdgeInsets.only(top: 12.0, left: 12.0, bottom: 6.0),
               alignment: Alignment.centerLeft,
               child: const Text('Статистика просмотров'),
             ),
@@ -43,6 +43,7 @@ class ChartWidget extends StatelessWidget{
               alignment: Alignment.center,
               child: const CustomSwitch(),
             ),
+            const SizedBox(height: 20,),
             SizedBox(
               height: 400,
               child:SfCartesianChart(
@@ -69,5 +70,5 @@ class ChartWidget extends StatelessWidget{
 class _ChartData{
   final String x;
   final int y;
-  _ChartData(this.x, this.y);
+  const _ChartData(this.x, this.y);
 }
