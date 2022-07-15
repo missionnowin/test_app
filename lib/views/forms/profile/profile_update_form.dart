@@ -6,6 +6,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 
 import '../../../logic/blocs/user_update_bloc/user_update_bloc.dart';
 import '../../../logic/models/employer_model.dart';
+import '../../../service/router/app_router.dart';
 import '../../widgets/custom_text_field.dart';
 
 class ProfileUpdateForm extends StatelessWidget{
@@ -107,8 +108,9 @@ class ProfileUpdateForm extends StatelessWidget{
                       ),
                       child: TextButton(
                         onPressed: () {
-                          context.read<UserUpdateBloc>().add(CancelUpdateEvent());
-                          AutoRouter.of(context).pop();
+                          //context.read<UserUpdateBloc>().add(CancelUpdateEvent());
+                          //AutoRouter.of(context).pop();
+                          AutoRouter.of(context).replace(const ProfilePageRoute());
                         },
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width - 50,

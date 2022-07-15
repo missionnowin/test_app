@@ -43,8 +43,9 @@ class ProfilePageUpdate extends StatelessWidget {
                               onWillPop: () async
                               {
                                 if(await _onBackPressed(context)){
-                                  context.read<UserUpdateBloc>().add(CancelUpdateEvent());
-                                  return true;
+                                  //context.read<UserUpdateBloc>().add(CancelUpdateEvent());
+                                  AutoRouter.of(context).replace(const ProfilePageRoute());
+                                  return false;
                                 }
                                 return false;
                               },
