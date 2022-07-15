@@ -108,8 +108,6 @@ class ProfileUpdateForm extends StatelessWidget{
                       ),
                       child: TextButton(
                         onPressed: () {
-                          //context.read<UserUpdateBloc>().add(CancelUpdateEvent());
-                          //AutoRouter.of(context).pop();
                           AutoRouter.of(context).replace(const ProfilePageRoute());
                         },
                         child: SizedBox(
