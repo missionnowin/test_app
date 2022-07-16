@@ -13,10 +13,10 @@ class UpdateImageBloc extends Bloc<UpdateImageEvent, UpdateImageState> {
   }
 
   Future<void> _onUpdate(UpdateImageEvent event,emit) async {
-    emit(UpdateImageInitial());
     try{
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (image != null) {
+        emit(UpdateImageInitial());
         final fileSizeMB = await image.length() / (1024 * 1024);
         if(fileSizeMB < 40){
           event.logoPath = await ApiService().uploadFile(image.path);

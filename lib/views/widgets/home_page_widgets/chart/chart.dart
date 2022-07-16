@@ -10,27 +10,29 @@ class Chart extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return BlocProvider<CustomChartBloc>(
-      create: (context) => CustomChartBloc(),
+      create: (context) => CustomChartBloc()..add(SetWeek()),
       child: BlocBuilder<CustomChartBloc, CustomChartState>(
         builder: (context, state) {
-          return Container(
-            margin: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 2.0),
-            width: MediaQuery.of(context).size.width - 40,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15.0),
-              border: Border.all(color: const Color.fromRGBO(182, 182, 182, 0.3),
-                  style: BorderStyle.solid,
-                  width: 0.4),
-            ),
+          if(state is !CustomChartInitial)
+          {
+            return Container(
+              margin: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 2.0),
+              width: MediaQuery.of(context).size.width - 40,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0),
+                border: Border.all(color: const Color.fromRGBO(182, 182, 182, 0.3),
+                    style: BorderStyle.solid,
+                    width: 0.4),
+              ),
               child: Column(
                 children: [
                   Container(
                     margin: const EdgeInsets.only(top: 21.0, left: 21.0, bottom: 6.0),
                     alignment: Alignment.centerLeft,
                     child: const Text('Статистика просмотров',
-                    style: TextStyle(
-                      fontFamily: 'Roboto'
-                    ),),
+                      style: TextStyle(
+                          fontFamily: 'Roboto'
+                      ),),
                   ),
                   Container(
                     alignment: Alignment.center,
@@ -41,9 +43,14 @@ class Chart extends StatelessWidget{
                 ],
               ),
             );
+          }
+          else{
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
         },
       ),
     );
   }
-
 }

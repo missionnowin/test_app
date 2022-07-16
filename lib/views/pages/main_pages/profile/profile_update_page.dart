@@ -37,9 +37,6 @@ class ProfilePageUpdate extends StatelessWidget {
                         if (state is UserCancelState) {
                           state.employerModel = EmployerModel.copyWith(context.read<UserBloc>().state.employerModel!);
                         }
-                        if (state is UpdateImageInitial) {
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Profile update error'),));
-                        }
                       },
                       child: BlocBuilder<UserUpdateBloc, UserUpdateState>(
                         builder: (context, state) {
@@ -86,8 +83,7 @@ class ProfilePageUpdate extends StatelessWidget {
                                                     ScaffoldMessenger.of(
                                                         context).showSnackBar(
                                                         const SnackBar(
-                                                            content: Text(
-                                                                'Something went wrong')));
+                                                            content: Text('Something went wrong')));
                                                   }
                                                 },
                                                 child: ProfileUpdateForm(

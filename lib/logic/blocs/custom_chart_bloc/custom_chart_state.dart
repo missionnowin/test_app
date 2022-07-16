@@ -4,6 +4,9 @@ abstract class CustomChartState {
   List<ChartData>? data;
   CustomChartState(this.data);
 }
+class CustomChartInitial extends CustomChartState{
+  CustomChartInitial()  : super(null);
+}
 
 class CustomChartWeek extends CustomChartState {
   CustomChartWeek(super.data);
