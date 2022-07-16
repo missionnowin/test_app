@@ -8,6 +8,7 @@ import 'package:test_app/logic/blocs/user_update_bloc/user_update_bloc.dart';
 import 'package:test_app/logic/models/employer_model.dart';
 import 'package:test_app/service/router/app_router.dart';
 import 'package:test_app/views/widgets/profile_page_update_widgets/profile_update_image.dart';
+import '../../../../logic/blocs/update_image_bloc/update_image_bloc.dart';
 import '../../../forms/profile/profile_update_form.dart';
 import '../../../widgets/profile_page_update_widgets/profile_update_page_header.dart';
 
@@ -35,6 +36,9 @@ class ProfilePageUpdate extends StatelessWidget {
                         }
                         if (state is UserCancelState) {
                           state.employerModel = EmployerModel.copyWith(context.read<UserBloc>().state.employerModel!);
+                        }
+                        if (state is UpdateImageInitial) {
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Profile update error'),));
                         }
                       },
                       child: BlocBuilder<UserUpdateBloc, UserUpdateState>(

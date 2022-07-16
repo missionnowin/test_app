@@ -20,6 +20,9 @@ class ProfileUpdateImage extends StatelessWidget{
                 if (state is UpdateImageSuccess) {
                   context.read<UserUpdateBloc>().add(UserUpdateImageEvent(state.logoPath));
                 }
+                if (state is UpdateImageInitial) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Upload image error'),));
+                }
               },
               builder: (context, _) {
                 EmployerModel employerModel = context.read<UserUpdateBloc>().state.employerModel!;

@@ -12,7 +12,7 @@ class ProfileRatingWidget extends StatelessWidget{
     EmployerModel employerModel = context.read<UserBloc>().state.employerModel!;
     return DecoratedBox(
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey,
+        border: Border.all(color: const Color.fromRGBO(182, 182, 182, 0.3),
             style: BorderStyle.solid,
             width: 0.4
         ),

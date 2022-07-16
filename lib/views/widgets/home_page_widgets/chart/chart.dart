@@ -18,7 +18,7 @@ class Chart extends StatelessWidget{
             width: MediaQuery.of(context).size.width - 40,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.0),
-              border: Border.all(color: Colors.grey,
+              border: Border.all(color: const Color.fromRGBO(182, 182, 182, 0.3),
                   style: BorderStyle.solid,
                   width: 0.4),
             ),

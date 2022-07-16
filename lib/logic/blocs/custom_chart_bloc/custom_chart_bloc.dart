@@ -28,10 +28,10 @@ class CustomChartBloc extends Bloc<CustomChartEvent, CustomChartState> {
   Future<void> _setYear(SetYears event, Emitter<CustomChartState> emit) async {
     emit(CustomChartYears(
       [
-        ChartData(label: '2019', value: 15),
-        ChartData(label: '2020', value: 25),
-        ChartData(label: '2021', value: 115),
-        ChartData(label: '2022', value: 5),
+        ChartData(label: '2019', value: 7),
+        ChartData(label: '2020', value: 35),
+        ChartData(label: '2021', value: 5),
+        ChartData(label: '2022', value: 510),
       ]
     ));
   }
@@ -39,12 +39,12 @@ class CustomChartBloc extends Bloc<CustomChartEvent, CustomChartState> {
   Future<void> _setMonths(SetMonths event, Emitter<CustomChartState> emit) async {
     emit(CustomChartMonths(
       [
-        ChartData(label: 'Jan', value: 15),
-        ChartData(label: 'Feb', value: 25),
-        ChartData(label: 'Mar', value: 115),
-        ChartData(label: 'Apr', value: 5),
-        ChartData(label: 'May', value: 45),
-        ChartData(label: 'Jun', value: 55),
+        ChartData(label: 'Jan', value: 1),
+        ChartData(label: 'Feb', value: 5),
+        ChartData(label: 'Mar', value: 15),
+        ChartData(label: 'Apr', value: 155),
+        ChartData(label: 'May', value: 75),
+        ChartData(label: 'Jun', value: 95),
         ChartData(label: 'Jul', value: 75),
         ChartData(label: 'Aug', value: 65),
         ChartData(label: 'Sep', value: 85),

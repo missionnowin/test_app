@@ -1,6 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:test_app/logic/models/employer_model.dart';
+import 'package:test_app/service/router/app_router.dart';
+import 'package:test_app/views/pages/main_pages/profile/profile_update_page.dart';
 import '../../../logic/blocs/user_bloc/user_bloc.dart';
 
 class ProfilePageHeader extends StatelessWidget{
@@ -80,7 +84,15 @@ class ProfilePageHeader extends StatelessWidget{
                     ),
                   ),
                 ],
-              )
+              ),
+              const SizedBox(
+                width: 75,
+              ),
+              IconButton(
+                  onPressed: (){
+                    AutoRouter.of(context).navigate(const ProfileUpdatePageRoute());
+                  },
+                  icon: SvgPicture.asset('assets/images/menu_icons/Vector.svg')),
             ]
         )
     );

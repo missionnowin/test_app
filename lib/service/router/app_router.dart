@@ -3,10 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:test_app/views/pages/init_page.dart';
 import 'package:test_app/views/pages/login/sign_up_page.dart';
 import 'package:test_app/views/pages/main_pages/profile/profile_update_page.dart';
+import 'package:test_app/views/pages/main_pages/vacancies/vacancies_page.dart';
 import '../../views/pages/login/auth_page.dart';
 import '../../views/pages/main_pages/home/home_page.dart';
 import '../../views/pages/main_pages/main_page.dart';
+import '../../views/pages/main_pages/news/news_page.dart';
 import '../../views/pages/main_pages/profile/profile_page.dart';
+import '../../views/pages/main_pages/tests/tests_page.dart';
 part 'app_router.gr.dart';
 
 @MaterialAutoRouter(
@@ -73,7 +76,22 @@ part 'app_router.gr.dart';
                 page: ProfilePageUpdate,
               )
             ]
-        )
+        ),
+        AutoRoute(
+          name: 'NewsRoute',
+          path: 'news_page',
+          page: NewsPage,
+        ),
+        AutoRoute(
+          name: 'VacanciesRoute',
+          path: 'vacancies_page',
+          page: VacanciesPage,
+        ),
+        AutoRoute(
+          name: 'TestsRoute',
+          path: 'tests_page',
+          page: TestsPage,
+        ),
       ],
     ),
   ],

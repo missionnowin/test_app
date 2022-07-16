@@ -49,6 +49,18 @@ class _$AppRouter extends RootStackRouter {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const EmptyRouterPage());
     },
+    NewsRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const NewsPage());
+    },
+    VacanciesRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const VacanciesPage());
+    },
+    TestsRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const TestsPage());
+    },
     ProfilePageRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const ProfilePage());
@@ -100,7 +112,13 @@ class _$AppRouter extends RootStackRouter {
                     path: 'profile_page', parent: ProfileRoute.name),
                 RouteConfig(ProfileUpdatePageRoute.name,
                     path: 'profile_update_page', parent: ProfileRoute.name)
-              ])
+              ]),
+          RouteConfig(NewsRoute.name,
+              path: 'news_page', parent: MainPageRoute.name),
+          RouteConfig(VacanciesRoute.name,
+              path: 'vacancies_page', parent: MainPageRoute.name),
+          RouteConfig(TestsRoute.name,
+              path: 'tests_page', parent: MainPageRoute.name)
         ])
       ];
 }
@@ -174,6 +192,30 @@ class ProfileRoute extends PageRouteInfo<void> {
       : super(ProfileRoute.name, path: 'profile', initialChildren: children);
 
   static const String name = 'ProfileRoute';
+}
+
+/// generated route for
+/// [NewsPage]
+class NewsRoute extends PageRouteInfo<void> {
+  const NewsRoute() : super(NewsRoute.name, path: 'news_page');
+
+  static const String name = 'NewsRoute';
+}
+
+/// generated route for
+/// [VacanciesPage]
+class VacanciesRoute extends PageRouteInfo<void> {
+  const VacanciesRoute() : super(VacanciesRoute.name, path: 'vacancies_page');
+
+  static const String name = 'VacanciesRoute';
+}
+
+/// generated route for
+/// [TestsPage]
+class TestsRoute extends PageRouteInfo<void> {
+  const TestsRoute() : super(TestsRoute.name, path: 'tests_page');
+
+  static const String name = 'TestsRoute';
 }
 
 /// generated route for

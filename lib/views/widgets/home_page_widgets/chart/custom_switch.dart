@@ -40,7 +40,7 @@ class _CustomSwitchState extends State<CustomSwitch>{
             child: Container(
               decoration: BoxDecoration(
                 color: isSelected[index] ? const Color(0xffe6f6fc) : Colors.white,
-                border: Border.all(color: Colors.blue),
+                border: Border.all(color: isSelected[index] ? Colors.white : Colors.blue),
                 borderRadius: BorderRadius.circular(10),
               ),
             width: 91,
