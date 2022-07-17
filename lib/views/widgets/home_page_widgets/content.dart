@@ -12,7 +12,7 @@ class ContentWidget extends StatelessWidget{
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.0),
         image: const DecorationImage(
-          image: AssetImage('assets/background.png'),
+          image: AssetImage('assets/images/backgrounds/background.png'),
           fit: BoxFit.cover,
         ),
       ),

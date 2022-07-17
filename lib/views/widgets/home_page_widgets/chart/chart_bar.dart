@@ -9,10 +9,12 @@ class ChartBar extends StatelessWidget{
   Widget build(BuildContext context) {
     return TweenAnimationBuilder(
       duration: const Duration(milliseconds: 700),
-      tween: Tween<double>(begin: 0, end: (data * 0.01)),
+      tween: Tween<double>(begin: 0, end: (data > 100) ? 1 : data * 0.01),
       builder: (context, double value, widget) {
         return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 11),
+          padding: const EdgeInsets.symmetric(
+              horizontal: 22.0,
+              vertical: 11),
           child: Row(
             children: <Widget>[
               SizedBox(

@@ -5,16 +5,17 @@ import 'package:test_app/service/router/app_router.dart';
 class ProfilePageMenu extends StatelessWidget{
 
   final _headers = const ['Dashboard', 'Настройки профиля', 'Мои документы', 'Рейтинги', 'Тестирование','Поиск вакансий', 'Мои отклики', 'Рекомендации', 'Тарифы', 'FAQ'];
-  final List<AssetImage> _tabImages = const [AssetImage('assets/menu_icons/DashBoard.png'),
-    AssetImage('assets/menu_icons/Settings.png'),
-    AssetImage('assets/menu_icons/Documents.png'),
-    AssetImage('assets/menu_icons/Rating.png'),
-    AssetImage('assets/menu_icons/Tests.png'),
-    AssetImage('assets/menu_icons/Vacancies.png'),
-    AssetImage('assets/menu_icons/Replies.png'),
-    AssetImage('assets/menu_icons/Recs.png'),
-    AssetImage('assets/menu_icons/Fees.png'),
-    AssetImage('assets/menu_icons/Faq.png'),
+  final List<AssetImage> _tabImages = const [
+    AssetImage('assets/images/menu_icons/DashBoard.png'),
+    AssetImage('assets/images/menu_icons/Settings.png'),
+    AssetImage('assets/images/menu_icons/Documents.png'),
+    AssetImage('assets/images/menu_icons/Rating.png'),
+    AssetImage('assets/images/menu_icons/Tests.png'),
+    AssetImage('assets/images/menu_icons/Vacancies.png'),
+    AssetImage('assets/images/menu_icons/Replies.png'),
+    AssetImage('assets/images/menu_icons/Recs.png'),
+    AssetImage('assets/images/menu_icons/Fees.png'),
+    AssetImage('assets/images/menu_icons/Faq.png'),
   ];
 
   const ProfilePageMenu({Key? key}) : super(key: key);

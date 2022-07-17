@@ -14,7 +14,7 @@ class AuthPageLogo extends StatelessWidget{
               bottomRight: Radius.circular(15)
           ),
           image: DecorationImage(
-            image : AssetImage('assets/intro.jpg'),
+            image : AssetImage('assets/images/backgrounds/intro.jpg'),
             fit: BoxFit.fitHeight,
           )
       ),
