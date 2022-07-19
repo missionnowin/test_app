@@ -1,0 +1,14 @@
+workflows:
+  default_workflow:
+    environment:
+      vars:
+        XCODE_WORKSPACE: 'Runner.xcworkspace'
+        XCODE_SCHEME: 'Runner'
+        BUNDLE_ID: 'YOUR_BUNDLE_ID_HERE'
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - name: Build for iOS        
+        script: |
+              flutter build ipa --debug \
