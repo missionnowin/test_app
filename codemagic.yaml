@@ -10,7 +10,7 @@ workflows:
           echo ${PROVISIONING_PROFILE?} | base64 --decode > "$PROFILES_HOME/$(uuidgen).mobileprovision"
       - name: Build ipa for distribution
         script: |
-          flutter build ipa --debug \
+          flutter build ipa --debug --no-codesign\
                    
     artifacts:
       - build/ios/ipa/*.ipa
